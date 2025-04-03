@@ -179,9 +179,12 @@ int main(int argc, char **argv)
     for(int i = 0; i < config.map_lines; i++)
     {
         printf("%s\n", config.map[i]);
-        free(config.map[i]);
+        //free(config.map[i]);
     }
-    free(config.map);
+
+    draw_minimap(&config);
+
+    //free(config.map);
     for (int i = 0; i < 4; i++)
         free(config.textures[i]);
     return EXIT_SUCCESS;

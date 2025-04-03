@@ -6,7 +6,7 @@
 #    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/04/03 14:11:43 by wel-safa         ###   ########.fr        #
+#    Updated: 2025/04/03 21:36:40 by wel-safa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MINILIBXDIR := lib/minilibx-linux
 LIBFT := $(LIBFTDIR)/libft.a
 LIBMLX := $(MINILIBXDIR)/libmlx_Linux.a
 #--- SOURCES ---
-SRCS := $(addprefix $(SRCDIR)/, map_validation.c parse.c)
+SRCS := $(addprefix $(SRCDIR)/, map_validation.c parse.c minimap.c)
 #--- OBJECTS ---
 OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 #--- HEADERS ---

@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include "libft.h"
+#include <mlx.h>
 
 typedef enum e_type
 {
@@ -26,7 +27,19 @@ typedef enum e_type
 } t_type;
 
 typedef struct s_config t_config;
+typedef struct s_game my_game;
+typedef struct s_ray t_ray;
+typedef enum e_type t_type;
+typedef struct s_img t_img;
 
+typedef struct s_img
+{
+    void    *img_ptr;
+    char    *addr;
+    int     bbp; // bits per pixel
+    int     line_length;
+    int     endian;
+} t_img;
 
 typedef struct s_game
 {
@@ -77,5 +90,7 @@ void add_map_line(char *line, t_config *config);
 void trim_whitespace(char *str);
 void validate_config(t_config *config);
 void free_config(t_config *config);
+
+void draw_minimap(t_config *config);
 
 #endif
