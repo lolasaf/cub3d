@@ -14,6 +14,7 @@
 #include <ctype.h>
 #include "libft.h"
 #include <mlx.h>
+#include <math.h>
 
 typedef enum e_type
 {
