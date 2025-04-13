@@ -1,0 +1,62 @@
+typedef struct s_data
+{
+    texture *my_txt;
+    color *my_colors;
+    char **map;
+}data;
+
+typedef struct s_texture
+{
+    char *identifier;
+    char *path;
+}texture;
+
+typedef struct s_color
+{
+    char *identifier;
+    int colors[3];
+}color;
+
+
+(MAIN)-->first arguement a scene description file with the .cub extension(1)
+(MAP)-->the map must be composed only of 0,1,N,S,E or W
+(MAP)-->the map must be closed surrounded by walls 
+(GENERAL)-->except for the map content each type of element can be separated by one 
+or more empty lines.
+(GENERAL)-->except for the map which always has to be last, each type of element
+can be set in any order in the file.(2)
+(GENERAL)-->except for the map each type of information from an element can be seperated
+by one or more spaces.
+(MAP)-->the map must be parsed as it looks in the file.Spaces are a valid part
+of the map and are up to you to handle. You must be able to parse
+any kind of map as long as it respects the rules of the map.
+(TEXT,COLORS)-->except for the map element each other one must begin with its 
+type identifier composed by one or two characters, followed by its specific
+in a strict order.
+
+
+MAP PARSING:
+see there is only one N, S, E, W
+include the spaces in the string 
+perfom floodfill to see if the map is enclosed by walls
+if most inside space from the beginning is surrounded by 1
+all surrounding spaces up to the outmost ones become 0 outmost ones become 1
+purpose of this is to first validate that the map is closed and then make any necessary 
+changes meaning that the space should be outside of walls to be considered a valid map
+
+TEXT,COLORS:
+-->create struct with attributes id, path
+-->
+
+
+
+
+
+
+
+----------------------------------------
+-                                      -----
+-                                           ------------
+-                                                      -
+-                                           ------------
+---------------------------------------------             
