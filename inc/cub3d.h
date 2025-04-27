@@ -1,10 +1,10 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#define TEXTURE_WIDTH 64
-#define TEXTURE_HEIGHT 64
-#define SCREEN_HEIGHT 600
-#define SCREEN_WIDTH 800
+//#define TEXTURE_WIDTH 64
+//#define TEXTURE_HEIGHT 64
+#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,32 +47,36 @@ typedef struct s_game
     void    *mlx;
     void    *win;
     void    *img;
-    void    *txt_img[4];
-    int     width;
-    int     height;
+    //void    *txt_img[4];
+    //int     width;
+    //int     height;
     t_config *conf;
-    double p_x;
-    double  p_y;
-    double  p_dir_x;
-    double  p_dir_y;
-    double plane_x;
-    double plane_y;
-    double *z_buffer;
+    double playerX;
+    double  playerY;
+    double  playerDirX;
+    double  playerDirY;
+    double planeX;
+    double planeY;
+    //double *z_buffer;
 } my_game;
 
 typedef struct s_ray
 {
-    double dir_x;
-    double dir_y;
-    double side_dist_x;
-    double side_dist_y;
-    double delta_dist_x;
-    double delta_dist_y;
-    double perp_wall;
-    int step_x;
-    int step_y;
+    double dirX;
+    double dirY;
+    int stepX;
+    int stepY;
+    float hitX;
+    float hitY;
     int hit;
     int side;
+    int mapX;
+    int mapY;
+    //double side_dist_x;
+    //double side_dist_y;
+    //double delta_dist_x;
+    //double delta_dist_y;
+    //double perp_wall;
 } t_ray;
 
 struct s_config
@@ -81,7 +85,8 @@ struct s_config
     int floor_color[3];
     int ceiling_color[3];
     char **map;
-    int map_lines;
+    int mapWidth;
+    int mapHeight;
 };
 
 void parse_file(const char *f_name, t_config *config);
@@ -92,6 +97,8 @@ void trim_whitespace(char *str);
 void validate_config(t_config *config);
 void free_config(t_config *config);
 
+
+// lola's functions
 void draw_minimap(t_config *config);
 
 #endif
