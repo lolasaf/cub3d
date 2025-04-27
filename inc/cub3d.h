@@ -46,32 +46,33 @@ typedef struct s_game
 {
     void    *mlx;
     void    *win;
-    void    *img;
+    t_img    *img;
     //void    *txt_img[4];
     //int     width;
     //int     height;
     t_config *conf;
-    double playerX;
-    double  playerY;
-    double  playerDirX;
-    double  playerDirY;
-    double planeX;
-    double planeY;
+    double player_x;
+    double  player_y;
+    double  player_dir_x;
+    double  player_dir_y;
+    double plane_x;
+    double plane_y;
     //double *z_buffer;
 } my_game;
 
 typedef struct s_ray
 {
-    double dirX;
-    double dirY;
-    int stepX;
-    int stepY;
-    float hitX;
-    float hitY;
+    double dir_x;
+    double dir_y;
+    int step_x;
+    int step_y;
+    float hit_x;
+    float hit_y;
     int hit;
     int side;
-    int mapX;
-    int mapY;
+    int map_x;
+    int map_y;
+    double  perp_distance;
     //double side_dist_x;
     //double side_dist_y;
     //double delta_dist_x;
@@ -85,8 +86,8 @@ struct s_config
     int floor_color[3];
     int ceiling_color[3];
     char **map;
-    int mapWidth;
-    int mapHeight;
+    int map_width;
+    int map_lines; // change to map_height
 };
 
 void parse_file(const char *f_name, t_config *config);
@@ -100,5 +101,7 @@ void free_config(t_config *config);
 
 // lola's functions
 void draw_minimap(t_config *config);
+void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color);
+void render_walls(my_game *game);
 
 #endif

@@ -182,8 +182,27 @@ int main(int argc, char **argv)
         //free(config.map[i]);
     }
 
-    draw_minimap(&config);
-
+    // Lola codes ... start
+    //draw_minimap(&config);
+    my_game game;
+    t_img   img;
+    game.img = &img;
+    game.conf = &config;
+    game.mlx = mlx_init();
+    game.win = mlx_new_window(game.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+    (game.img)->img_ptr = mlx_new_image(game.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+    (game.img)->addr = mlx_get_data_addr(game.img->img_ptr, &game.img->bbp, &game.img->line_length,
+		&game.img->endian);
+    game.player_x = 2.5;
+    game.player_y = 2.5;
+    game.player_dir_x = 1.0;
+    game.player_dir_y = 0.0;
+    game.plane_x = 0.0;
+    game.plane_y = 0.66;
+    game.conf->map_width = game.conf->map_lines;
+    render_walls(&game);
+    mlx_put_image_to_window(game.mlx, game.win, img.img_ptr, 0, 0);
+	mlx_loop(game.mlx);
     //free(config.map);
     for (int i = 0; i < 4; i++)
         free(config.textures[i]);
