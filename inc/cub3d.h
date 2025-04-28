@@ -64,10 +64,10 @@ typedef struct s_ray
 {
     double dir_x;
     double dir_y;
-    int step_x;
-    int step_y;
-    float hit_x;
-    float hit_y;
+    double step_x;
+    double step_y;
+    double hit_x;
+    double hit_y;
     int hit;
     int side;
     int map_x;

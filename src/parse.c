@@ -193,7 +193,7 @@ int main(int argc, char **argv)
     (game.img)->img_ptr = mlx_new_image(game.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
     (game.img)->addr = mlx_get_data_addr(game.img->img_ptr, &game.img->bbp, &game.img->line_length,
 		&game.img->endian);
-    game.player_x = 2.5;
+    game.player_x = 4;
     game.player_y = 2.5;
     game.player_dir_x = 1.0;
     game.player_dir_y = 0.0;

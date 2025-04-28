@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/04/27 22:20:20 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/04/28 22:52:29 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,51 @@ this function gives us the next intersection with a grid line of a given ray
 */
 void	next_intersection(t_ray *ray)
 {
-	if (ray->dir_x < 0) // dx < 0
-		ray->step_x = (floorf(ray->hit_x) - ray->hit_x) / ray->dir_x;
-	else if (ray->dir_x > 0) // dx > 0
-		ray->step_x = (ceilf(ray->hit_x) - ray->hit_x) / ray->dir_x;
-	else // dx = 0
-		ray->step_x = INFINITY;
-	if (ray->dir_y < 0) // dy < 0
-		ray->step_y = (floorf(ray->hit_y) - ray->hit_y) / ray->dir_y;
-	else if (ray->dir_y > 0) // dy > 0
-		ray->step_y = (ceilf(ray->hit_y) - ray->hit_y) / ray->dir_y;
-	else // dy = 0;
-		ray->step_y = INFINITY;
-	ray->hit_x += ray->dir_x * (fminf(ray->step_x, ray->step_y));
-	ray->hit_y += ray->dir_y * (fminf(ray->step_x, ray->step_y));
+	if (fabs(ray->hit_x - round(ray->hit_x)) < 1e-6)
+	{
+		// Already on gridline
+		if (ray->dir_x > 0)
+			ray->step_x = 1.0 / ray->dir_x;
+		else if (ray->dir_x < 0)
+			ray->step_x = 1.0 / -ray->dir_x;
+	}
+	else
+	{
+		//printf("hit_x = %f, ceil(hit_x) = %f\n", ray->hit_x, ceil(ray->hit_x));
+		if (ray->dir_x < 0) // dx < 0
+			ray->step_x = (floor(ray->hit_x) - ray->hit_x) / ray->dir_x;
+		else if (ray->dir_x > 0) // dx > 0
+			ray->step_x = (ceil(ray->hit_x) - ray->hit_x) / ray->dir_x;
+		else // dx = 0
+			ray->step_x = INFINITY;
+	}
+
+	// if (ray->dir_x < 0) // dx < 0
+	// 	ray->step_x = (floor(ray->hit_x) - ray->hit_x) / ray->dir_x;
+	// else if (ray->dir_x > 0) // dx > 0
+	// 	ray->step_x = (ceil(ray->hit_x) - ray->hit_x) / ray->dir_x;
+	// else // dx = 0
+	// 	ray->step_x = INFINITY;
+
+	if (fabs(ray->hit_y - round(ray->hit_y)) < 1e-6)
+	{
+		// Already on gridline
+		if (ray->dir_y > 0)
+			ray->step_y = 1.0 / ray->dir_y;
+		else if (ray->dir_y < 0)
+			ray->step_y = 1.0 / -ray->dir_y;
+	}
+	else
+	{
+		if (ray->dir_y < 0) // dy < 0
+			ray->step_y = (floor(ray->hit_y) - ray->hit_y) / ray->dir_y;
+		else if (ray->dir_y > 0) // dy > 0
+			ray->step_y = (ceill(ray->hit_y) - ray->hit_y) / ray->dir_y;
+		else // dy = 0;
+			ray->step_y = INFINITY;
+	}
+	ray->hit_x += ray->dir_x * (fmin(ray->step_x, ray->step_y));
+	ray->hit_y += ray->dir_y * (fmin(ray->step_x, ray->step_y));
 	ray->map_x = (int) ray->hit_x;
 	ray->map_y = (int) ray->hit_y;
 	if (ray->step_x < ray->step_y)
@@ -97,8 +128,7 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
 		put_pixel_to_img(game->mlx, game->img, col, draw_start, color);
 		draw_start++;
 	}
-	printf("Ray hit at (%.2f, %.2f) distance %.2f wall height %d\n", ray->hit_x, ray->hit_y, ray->perp_distance, wall_height);
-
+	//printf("Ray hit at (%.2f, %.2f) distance %.2f wall height %d\n ", ray->hit_x, ray->hit_y, ray->perp_distance, wall_height);
 }
 
 void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
@@ -110,6 +140,10 @@ void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
 	ray.dir_y = ray_dir_y;
 	ray.hit_x = game->player_x;
 	ray.hit_y = game->player_y;
+	ray.step_x = 0;
+	ray.step_y = 0;
+	ray.map_x = 0;
+	ray.map_y = 0;
 	while (!ray.hit)
 	{
 
@@ -121,7 +155,7 @@ void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
 		if (ray.map_x >= 0 && ray.map_x < game->conf->map_width &&
 				ray.map_y >= 0 && ray.map_y < game->conf->map_lines)
 		{
-			if (game->conf->map[ray.map_y][ray.map_x] > 0)
+			if (game->conf->map[ray.map_y][ray.map_x] == 1)
 				ray.hit = 1;
 		}
 		else
@@ -144,7 +178,7 @@ void render_walls(my_game *game)
 	while(++x < SCREEN_WIDTH)
 	{
 		// cast a ray for each column x on the screen for [0, screen_width -1]
-		cameraX = 2.0 * (double) x / (double) SCREEN_WIDTH - 1.0; // range [-1.0, 1.0]
+		cameraX = 2.0 * (double)x / (double)SCREEN_WIDTH - 1.0; // range [-1.0, 1.0]
 		ray_dir_x = game->player_dir_x + game->plane_x * cameraX;
 		ray_dir_y = game->player_dir_y + game->plane_y * cameraX;
 		cast_ray(game, ray_dir_x, ray_dir_y, x);
