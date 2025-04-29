@@ -1,191 +1,92 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 20:22:46 by kforfoli          #+#    #+#             */
+/*   Updated: 2025/04/29 20:23:13 by kforfoli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
-void trim(char *str)
-{
-    char *start = str;
-    char *end;
-    
-    while(*start && isspace((unsigned char)*start))
-        start++;
-    
-    if (start != str)
-        memmove(str, start, strlen(start) + 1);
-    end = str + strlen(str) - 1;
-    while(end >= str && isspace((unsigned char)*end))
-        *end-- = '\0';
-}
 
-void    ft_parse_texture(char *line, t_type type, t_config *config)
+void ft_parse_tandc(const char *line, t_data *data)
 {
-    char *path = line + 2;
-    while(*path && isspace((unsigned char)*path))
-        path++;
-    char *end = path;
-    while(*end && !isspace((unsigned char)*end))
-        end++;
-    size_t len = end - path;
-    char *texture_path = malloc(len + 1);
-    if (!texture_path)
+    const char *p = line;
+    const char *another = line;
+    while(*p)
     {
-        perror("malloc failed");
-        exit(EXIT_FAILURE);
-    }
-    strncpy(texture_path, path, len);
-    texture_path[len] = '\0';
-    if (type == NO_TEXTURE)
-        config->textures[0] = texture_path;
-    else if (type == SO_TEXTURE)
-        config->textures[1] = texture_path;
-    else if (type == WE_TEXTURE)
-        config->textures[2] = texture_path;
-    else if (type == EA_TEXTURE)
-        config->textures[3] = texture_path;
-}
-
-void ft_parse_color(char *line, t_type type, t_config *config)
-{
-    char *ptr = line + 1;
-    while (*ptr && isspace((unsigned char)*ptr))
-        ptr++;
-    int color[3];
-    for(int i = 0; i < 3; i++)
-    {
-        color[i] = atoi(ptr);
-        while(*ptr && *ptr != ',')
-            ptr++;
-        if (*ptr == ',')
-            ptr++;
-    }
-    if (type == FLOOR_COLOR)
-    {
-        for (int i = 0; i < 3; i++)
-            config->floor_color[i] = color[i];
-    }
-    else if(type == CEILING_COLOR)
-    {
-        for(int i = 0; i < 3; i++)
-            config->ceiling_color[i] = color[i];
+        while(*p && isspace((unsigned char)*p))
+            p++;
+        if (!*p)
+            break;
+        const char *token_start = p;
+        while (*p && !isspace((unsigned char)*p))
+            p++;
+        int token_len = p - token_start;
+        char *token = malloc(token_len + 1);
+        if (!token)
+            err_msg("Memory allocation failure");
+        strncpy(token, token_start, token_len);
+        token[token_len] = '\0';
+        if (strncmp(token, "NO", 2) == 0 || strncmp(token, "SO", 2) == 0 || strncmp(token, "WE", 2) == 0 || strncmp(token, "EA", 2) == 0)
+            ft_parse_texture((char *)another, data);
+        if (token[0] == 'F' || token[0] == 'C')
+            parse_color_tok((char *)another ,data);
+        free(token);
     }
 }
 
-void add_map_line(char *line, t_config *config)
+void add_map_line(t_build *assemble, const char *line, t_data *data)
 {
-    trim(line);
-    config->map_lines++;
-    config->map = realloc(config->map, sizeof(char*) * config->map_lines);
-    if (!config->map)
+    char *cpy = (char *)line;
+    if (*cpy == '\n' && *(cpy + 1) != '\0')
     {
-        perror("realloc failed");
-        exit(EXIT_FAILURE);
+        printf("cpy + 1: ||%c||", cpy[1]);
+        printf("this is a new line");
+        data->is_last++;
+        return;
     }
-    config->map[config->map_lines - 1] = strdup(line);
-    if (!config->map[config->map_lines - 1])
+    // if (cpy[0] == '\n' && cpy[1] != '\0')
+    // {
+    //     printf("cpy + 1: ||%c||", cpy[1]);
+    //     if (cpy[1] == '\n')
+    //         printf("this is a new line");
+    //     data->is_last++;
+    //     return;
+    // }
+    if (assemble->count >= MAX_LINES)
+        err_msg("Too many lines");
+    if (strchr(cpy, '\n') != NULL)
     {
-        perror("strdup failed");
-        exit(EXIT_FAILURE);
+        int distance = strchr(cpy, '\n') - cpy;
+        cpy[distance] = '\0';
     }
+    assemble->map_lines[assemble->count] = strdup(cpy);
+    if (!assemble->map_lines[assemble->count])
+        err_msg("Strdup failed");
+    assemble->count++;
 }
 
-// void    validate_config(t_config *config)
-// {
-//     for (int i = 0; i < 4; i++)
-//     {
-//         if (config->textures[i] == NULL)
-//         {
-//             fprintf(stderr, "Error: Missing texture for index %d\n", i);
-//             exit(EXIT_FAILURE);
-//         }
-//     }
-//     if (config->map_lines == 0)
-//     {
-//         fprintf(stderr, "Error: No map data found.\n");
-//         exit(EXIT_FAILURE);
-//     }
-// }
-
-void    parse_file(const char *filename, t_config *config)
+/*checks if it is a .cub file*/
+void ft_ext_check(const char *path, const char *cub)
 {
-    int fd = open(filename, O_RDONLY);
-    if (fd < 0)
-    {
-        perror("Failed to open file");
-        exit(EXIT_FAILURE);
-    }
-    
-    char *line = get_next_line(fd);
-    while(line != NULL)
-    {
-        trim(line);
-        if (line[0] == '\0')
-        {
-            free(line);
-            line = get_next_line(fd);
-            continue;
-        }
-        if (strncmp(line, "NO", 2) == 0)
-            ft_parse_texture(line, NO_TEXTURE, config);
-        else if (strncmp(line, "SO", 2) == 0)
-            ft_parse_texture(line, SO_TEXTURE, config);
-        else if (strncmp(line, "WE", 2) == 0)
-            ft_parse_texture(line, WE_TEXTURE, config);
-        else if (strncmp(line, "EA", 2) == 0)
-            ft_parse_texture(line, EA_TEXTURE, config);
-        else if (line[0] == 'F')
-            ft_parse_color(line, FLOOR_COLOR, config);
-        else if (line[0] == 'C')
-            ft_parse_color(line, CEILING_COLOR, config);
-        else
-            add_map_line(line, config);
-        
-        free(line);
-        line = get_next_line(fd);
-    }
-    close(fd);
-    validate_config(config); //one in map_validation
-}
-
-
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-    {
-        fprintf(stderr, "Usage: %s <cub_file>\n", argv[0]);
-        return EXIT_FAILURE;
-    }
-    
-    t_config config = {0};
-    config.map = NULL;
-    config.map_lines = 0;
-    parse_file(argv[1], &config);
-    
-    printf("Textures:\n");
-    printf("NO: %s\n", config.textures[0]);
-    printf("SO: %s\n", config.textures[1]);
-    printf("WE: %s\n", config.textures[2]);
-    printf("EA: %s\n", config.textures[3]);
-    printf("Floor color: %d, %d, %d\n", config.floor_color[0], config.floor_color[1], config.floor_color[2]);
-    printf("Ceiling color: %d, %d, %d\n", config.ceiling_color[0], config.ceiling_color[1], config.ceiling_color[2]);
-    printf("Map (%d lines):\n", config.map_lines);
-    for(int i = 0; i < config.map_lines; i++)
-    {
-        printf("%s\n", config.map[i]);
-        //free(config.map[i]);
-    }
-
-    draw_minimap(&config);
-
-    //free(config.map);
-    for (int i = 0; i < 4; i++)
-        free(config.textures[i]);
-    return EXIT_SUCCESS;
+    const char *base;
+    const char *slash;
+    const char *dot;
+    //"../../wfwe.cub"
+    //"rhfwhfpwrpg.cub"
+    slash = strrchr(path, '/');
+    if (slash != NULL)
+        base = slash + 1;
+    else
+        base = path;
+    dot = strrchr(base, '.');
+    if (dot == NULL)
+        err_msg("ERR:Not a valid file extension");
+    if (strcmp(dot, cub) != 0)
+        err_msg("ERR: Not a valid file extension");
 }

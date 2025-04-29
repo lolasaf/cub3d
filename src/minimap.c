@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/04/03 22:31:22 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:33:20 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color)
 	}
 }
 
-void draw_minimap(t_config *config)
+void draw_minimap(t_data *data)
 {
 	int	x;
 	int	y;
@@ -76,13 +76,13 @@ void draw_minimap(t_config *config)
 	img.addr = mlx_get_data_addr(img.img_ptr, &img.bbp, &img.line_length,
 		&img.endian);
 	
-	while (y < config->map_lines)
+	while (y < data->map_height)
 	{
-		while (config->map[y][x])
+		while (data->map[y][x])
 		{
-			if (config->map[y][x] == '1') // wall
+			if (data->map[y][x] == '1') // wall
 				color = 0xbe5ac4;
-			else if (config->map[y][x] == '0') // not wall
+			else if (data->map[y][x] == '0') // not wall
 				color = 0xE7BCB4;
 			else // player
 				color = 0x701C1C;
