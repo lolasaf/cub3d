@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/04/28 22:52:29 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:28:10 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,32 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
 	if (draw_end >= SCREEN_HEIGHT)
 		draw_end = SCREEN_HEIGHT - 1;
 	// void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color)
-	while (draw_start <= draw_end)
+	int i = 0;
+	i = draw_start;
+	while (i <= draw_end)
 	{
 		if (ray->side == 0) // horizental
 			color = 0xFFAAAA;
 		else
 			color = 0xAA5555; // vertical
-		put_pixel_to_img(game->mlx, game->img, col, draw_start, color);
-		draw_start++;
+		put_pixel_to_img(game->mlx, game->img, col, i, color);
+		i++;
 	}
+	
+	// below needs to be tested
+	int y = 0;
+	while(y <= draw_start)
+	{
+		put_pixel_to_img(game->mlx, game->img, col, y, 0x88CCEE);
+		y++;
+	}
+	y = draw_end;
+	while (y <= SCREEN_HEIGHT)
+	{
+		put_pixel_to_img(game->mlx, game->img, col, y, 0x88FF88);
+		y++;
+	}
+	
 	//printf("Ray hit at (%.2f, %.2f) distance %.2f wall height %d\n ", ray->hit_x, ray->hit_y, ray->perp_distance, wall_height);
 }
 
@@ -163,24 +180,4 @@ void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
 	}
 	compute_distance(game, &ray);
 	draw_wall(game, col, &ray);
-}
-
-/*
-*/
-void render_walls(my_game *game)
-{
-	int		x;
-	double	cameraX;
-	double	ray_dir_x;
-	double	ray_dir_y;
-
-	x = -1;
-	while(++x < SCREEN_WIDTH)
-	{
-		// cast a ray for each column x on the screen for [0, screen_width -1]
-		cameraX = 2.0 * (double)x / (double)SCREEN_WIDTH - 1.0; // range [-1.0, 1.0]
-		ray_dir_x = game->player_dir_x + game->plane_x * cameraX;
-		ray_dir_y = game->player_dir_y + game->plane_y * cameraX;
-		cast_ray(game, ray_dir_x, ray_dir_y, x);
-	}
 }

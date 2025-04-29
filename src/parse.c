@@ -200,7 +200,7 @@ int main(int argc, char **argv)
     game.plane_x = 0.0;
     game.plane_y = 0.66;
     game.conf->map_width = game.conf->map_lines;
-    render_walls(&game);
+    render_map(&game);
     mlx_put_image_to_window(game.mlx, game.win, img.img_ptr, 0, 0);
 	mlx_loop(game.mlx);
     //free(config.map);

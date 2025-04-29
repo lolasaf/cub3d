@@ -100,8 +100,9 @@ void free_config(t_config *config);
 
 
 // lola's functions
-void draw_minimap(t_config *config);
-void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color);
-void render_walls(my_game *game);
+void    draw_minimap(t_config *config);
+void    put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color);
+void    render_map(my_game *game);
+void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col);
 
 #endif
