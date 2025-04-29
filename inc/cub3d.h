@@ -12,7 +12,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <ctype.h>
-#include "libft.h"
+#include "../lib/libft/libft.h"
 #include <mlx.h>
 
 typedef enum e_type
