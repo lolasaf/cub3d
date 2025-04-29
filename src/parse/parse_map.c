@@ -2,7 +2,7 @@
 
 void err_msg(const char *msg)
 {
-    printf("$%s\n");
+    printf("$%s\n", msg);
     exit(1);
 }
 
@@ -25,36 +25,42 @@ int get_width(char **m_lines, int count)
         int len = strlen(m_lines[i]);
         if (len > max)
             max = len;
+        i++;
     }
     return max;
 }
 
-void enclosed(char **map, int rows, int cols, int x, int y)
+
+void flood_it(char **map, int x, int y)
 {
-    if (x < 0 || x >= rows || y < 0 || y >= cols)
+    if (x < 0 || y < 0 || map[y] == NULL || map[y][x] == '\0')
+        err_msg("Map is not properly closed");
+    if (map[y][x] == '1' || map[y][x] == 'X')
         return;
-    if (map[x][y] == '1' || map[x][y] == OUTSIDE_MARK) return;
-    map[x][y] = OUTSIDE_MARK;
-    enclosed(map, rows, cols, x - 1, y);
-    enclosed(map, rows, cols, x + 1, y);
-    enclosed(map, rows, cols, x, y - 1);
-    enclosed(map, rows, cols, x, y + 1);
+    if (map[y][x] == ' ')
+        err_msg("Map is not properly closed");
+    map[y][x] = 'X';
+    flood_it(map, x + 1, y);
+    flood_it(map, x - 1, y);
+    flood_it(map, x, y + 1);
+    flood_it(map, x, y- 1);
 }
 
-char **pvmap(char **lines, int count)
+char **pvmap(char **lines, int count, t_data *data)
 {
     int p_count = 0;
     int rows = count;
     int cols = get_width(lines, count);
 
 
-    char **map = malloc(rows * sizeof(char *));
+
+    char **map = calloc(rows + 1, sizeof(char *));
     if (!map)
         err_msg("Memory allocation error");
     int i = 0;
     while (i < rows)
     {
-        map[i] = malloc((cols + 1) * sizeof(char));
+        map[i] = calloc(cols + 1, sizeof(char));
         if (!map[i])
             err_msg("Memory allocation error");
         int len = strlen(lines[i]);
@@ -65,9 +71,9 @@ char **pvmap(char **lines, int count)
             map[i][j] = ' ';
             j++;
         }
-        map[i][cols] = '\0';
         i++;
     }
+    map[rows] = NULL;
     i = 0;
     while (i < rows)
     {
@@ -78,39 +84,23 @@ char **pvmap(char **lines, int count)
             if (!is_valid_char(c))
                 err_msg("Error: Invalid character in map");
             if (is_player(c))
+            {
+                data->num[0] = i;
+                data->num[1] = j;
                 p_count++;
+            }
             j++;
         }
         i++;
     }
     if (p_count != 1)
         err_msg("Error: Map must contain exactly one player position");
-    
-    i = 0;
-
-    while (i < rows)
-    {
-        if (map[i][0] != '1') enclosed(map, rows, cols, i, 0);
-        if (map[i][cols - 1] != '1') enclosed(map, rows, cols, i, cols - 1);
-        i++;
-    }
-    int j = 0;
-    while (j < cols)
-    {
-        if (map[0][j] != '1') enclosed(map, rows, cols, 0, j);
-        if (map[rows - 1][j] != '1') enclosed(map, rows, cols, rows - 1, j);
-        j++;
-    }
-
-    for(int i = 0; i < rows; i++)
-        for(int j = 0; j < cols; j++)
-            if (map[i][j] == OUTSIDE_MARK)
-                err_msg("Error! Map is not properly enclosed");
+    flood_it(map, data->num[1], data->num[0]);
     return map;
 }
 
-void process_map(char **map_lines, int count, t_data *data)
+void process_map(t_build *b, t_data *data)
 {
-    char **valid_map = pvmap(map_lines, count);
-    data->map = valid_map;
+    char **valid = pvmap(b->map_lines, b->count, data);
+    data->map = valid;
 }
