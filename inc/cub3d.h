@@ -5,6 +5,7 @@
 //#define TEXTURE_HEIGHT 64
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
+#define MAX_LINES 1000
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,22 +17,31 @@
 #include <mlx.h>
 #include <math.h>
 
-typedef enum e_type
-{
-    NO_TEXTURE,
-    SO_TEXTURE,
-    WE_TEXTURE,
-    EA_TEXTURE,
-    FLOOR_COLOR,
-    CEILING_COLOR,
-    MAP
-} t_type;
 
-typedef struct s_config t_config;
+typedef struct s_texture t_texture;
+typedef struct s_color t_color;
+typedef struct s_build t_build;
+
+typedef struct s_data t_data;
 typedef struct s_game my_game;
 typedef struct s_ray t_ray;
 typedef enum e_type t_type;
 typedef struct s_img t_img;
+
+
+
+
+struct s_texture
+{
+    char *identifier;
+    char *path;
+};
+struct s_color
+{
+    char type;
+    int rgb[3];
+};
+
 
 typedef struct s_img
 {
@@ -50,7 +60,7 @@ typedef struct s_game
     //void    *txt_img[4];
     //int     width;
     //int     height;
-    t_config *conf;
+    t_data *conf;
     double player_x;
     double  player_y;
     double  player_dir_x;
@@ -80,27 +90,52 @@ typedef struct s_ray
     //double perp_wall;
 } t_ray;
 
-struct s_config
+typedef struct s_data
 {
-    char *textures[4];
-    int floor_color[3];
-    int ceiling_color[3];
+    t_texture texture[4];
+    t_color color[2];
     char **map;
     int map_width;
-    int map_lines; // change to map_height
+    int map_height;
+    int num[2];
+    int is_last;
+} t_data;
+
+struct s_build{
+    char *map_lines[MAX_LINES];
+    int count; // map height
 };
 
-void parse_file(const char *f_name, t_config *config);
-void parse_texture(char *line, t_type type, t_config *config);
-void parse_color(char *line, t_type type, t_config *config);
-void add_map_line(char *line, t_config *config);
-void trim_whitespace(char *str);
-void validate_config(t_config *config);
-void free_config(t_config *config);
+
+///////////////// OLD FUNCTIONS
+
+// void parse_file(const char *f_name, t_data *data);
+// void parse_texture(char *line, t_type type, t_data *data);
+// void parse_color(char *line, t_type type, t_data *data);
+// void add_map_line(char *line, t_data *data);
+// void trim_whitespace(char *str);
+// void validate_config(t_data *data);
+// void free_config(t_data *data);
+
+// Sandy's functions
+void transform_sec(char *map);
+void err_msg(const char *msg);
+char *trim(char *line);
+int ft_parse_texture(char *line, t_data *data);
+int parse_color(const char *str, int values[3]);
+void parse_color_tok(char *token, t_data *data);
+void process_map(t_build *b, t_data *data);
+void transform(t_build *a);
+void ft_print(char **map);
+void flood_it(char **map, int x, int y);
+void ft_ext_check(const char *path, const char *cub);
+void add_map_line(t_build *assemble, const char *line, t_data *data);
+void ft_parse_tandc(const char *line, t_data *data);
+
 
 
 // lola's functions
-void    draw_minimap(t_config *config);
+void    draw_minimap(t_data *data);
 void    put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color);
 void    render_map(my_game *game);
 void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col);

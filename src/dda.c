@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/04/29 15:28:10 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:14:10 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
 		else if (ray.dir_y < 0 && ray.side == 0)
 			ray.map_y += -1; // adjust for lower y if coming from down up
 		if (ray.map_x >= 0 && ray.map_x < game->conf->map_width &&
-				ray.map_y >= 0 && ray.map_y < game->conf->map_lines)
+				ray.map_y >= 0 && ray.map_y < game->conf->map_height)
 		{
 			if (game->conf->map[ray.map_y][ray.map_x] == 1)
 				ray.hit = 1;
