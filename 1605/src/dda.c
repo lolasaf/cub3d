@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/17 14:42:24 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:43:55 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
 	int wall_height;
 	int draw_start;
 	int draw_end;
-	int color;
+	// int color;
 
 	wall_height = (int) (SCREEN_HEIGHT / ray->perp_distance);
 	draw_start = SCREEN_HEIGHT / 2 - wall_height / 2;
@@ -134,7 +134,7 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
 	// void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color)
 
 	// TEXTURE CODE
-/*
+
 	int texture;
 	if (ray->side == 0)
 	{
@@ -152,9 +152,9 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
 	}
 	double wall_x;
 	if (ray->side == 0)
-			wall_x = game->player_x + ray->perp_distance * ray->dir_x;
+		wall_x = game->player_x + ray->perp_distance * ray->dir_x;
 	else
-			wall_x = game->player_y + ray->perp_distance * ray->dir_y;
+		wall_x = game->player_y + ray->perp_distance * ray->dir_y;
 	wall_x -= floor(wall_x);
 	int tex_x = (int)(wall_x * game->conf->o->width);
 	if (tex_x < 0)
@@ -174,12 +174,23 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
         int color = txt_addr[tex_y * game->conf->o->texture_ll[texture] / 4 +  tex_x];
         put_pixel_to_img(game->mlx, game->img, col, y, color);
     }
-*/
 
 	int hex_f  = rgb_to_hex(game->conf->color[0].rgb[0], game->conf->color[0].rgb[1], game->conf->color[0].rgb[2]);
-	//printf("%d\n", hex_f);
 	int hex_c = rgb_to_hex(game->conf->color[1].rgb[0], game->conf->color[1].rgb[1], game->conf->color[1].rgb[2]);
-	//printf("%d\n", hex_c);
+	// // TEXTURES BASICALLY
+	// int i = 0;
+	// i = draw_start;
+	// while (i <= draw_end)
+	// {
+	// 	if (ray->side == 0) // horizental
+	// 		color = 0xFFAAAA;
+	// 	else
+	// 		color = 0xAA5555; // vertical
+	// 	put_pixel_to_img(game->mlx, game->img, col, i, color);
+	// 	i++;
+	// }
+	
+	// below needs to be tested
 	int y = 0;
 	while(y <= draw_start)
 	{
@@ -192,36 +203,6 @@ void	draw_wall(my_game *game, int col, t_ray *ray)
 		put_pixel_to_img(game->mlx, game->img, col, y, hex_c);
 		y++;
 	}
-
-	// COLOR CODE
-	int i = 0;
-	i = draw_start;
-	while (i <= draw_end)
-	{
-		if (ray->side == 0) // horizental
-			color = 0xFFAAAA;
-		else
-			color = 0xAA5555; // vertical
-		put_pixel_to_img(game->mlx, game->img, col, i, color);
-		i++;
-	}
-	
-	// below needs to be tested
-	int y = 0;
-	while(y <= draw_start)
-	{
-		put_pixel_to_img(game->mlx, game->img, col, y, 0x88CCEE);
-		y++;
-	}
-	y = draw_end;
-	while (y <= SCREEN_HEIGHT)
-	{
-		put_pixel_to_img(game->mlx, game->img, col, y, 0x88FF88);
-		y++;
-	}
-
-
-	
 	//printf("Ray hit at (%.2f, %.2f) distance %.2f wall height %d\n ", ray->hit_x, ray->hit_y, ray->perp_distance, wall_height);
 }
 

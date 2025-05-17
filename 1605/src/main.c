@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/13 16:27:47 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:53:33 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ int handle_keypress(int kc, my_game *game)
         printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
     }
     clear_image(game->img);
-    ft_render_map(game); // Redraw the scene
+    render_map(game); // Redraw the scene
     mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
     // clear_image(game->img);
     return 0;
@@ -285,7 +285,7 @@ int main(int argc, char **argv)
     printf("map_width: %d\n", game.conf->map_width);
     //clear_image(game.img);
     mlx_texture_load(&game);
-    ft_render_map(&game);
+    render_map(&game);
     mlx_put_image_to_window(game.mlx, game.win, img.img_ptr, 0, 0);
     mlx_hook(game.win, 2, 1L<<0, ft_on_press, &game.keys);
     mlx_hook(game.win, 3, 1L<<1, ft_on_release, &game.keys);

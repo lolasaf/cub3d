@@ -6,7 +6,7 @@
 #    By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/05/13 15:31:04 by kforfoli         ###   ########.fr        #
+#    Updated: 2025/05/17 13:54:09 by kforfoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MINILIBXDIR := lib/minilibx-linux
 LIBFT := $(LIBFTDIR)/libft.a
 LIBMLX := $(MINILIBXDIR)/libmlx_Linux.a
 #--- SOURCES ---
-SRCS := $(addprefix $(SRCDIR)/, main.c minimap.c dda.c render_map.c parse.c cast_ray.c\
+SRCS := $(addprefix $(SRCDIR)/, main.c minimap.c dda.c render_map.c parse.c\
 	parse_colors.c parse_map.c parse_textures.c player.c)
 #--- OBJECTS ---
 OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))

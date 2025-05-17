@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/13 15:38:29 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:54:54 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,30 @@ to fit the bits per pixel requirement of the image.
 The bits position depends on the computer's endian,
 bits are assigned accordingly.
 */
-// void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color)
-// {
-// 	int	pixel;
+void	put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color)
+{
+	int	pixel;
 
-// 	if (img->bbp != 32)
-// 	{
-// 		color = mlx_get_color_value(mlx, color);
-// 	}
-// 	pixel = (y * img->line_length) + (x * 4);
-// 	if (img->endian == 1)
-// 	{
-// 		img->addr[pixel + 0] = (color >> 24);
-// 		img->addr[pixel + 1] = (color >> 16) & 0xFF;
-// 		img->addr[pixel + 2] = (color >> 8) & 0xFF;
-// 		img->addr[pixel + 3] = (color) & 0xFF;
-// 	}
-// 	else if (img->endian == 0)
-// 	{
-// 		img->addr[pixel + 0] = (color) & 0xFF;
-// 		img->addr[pixel + 1] = (color >> 8) & 0xFF;
-// 		img->addr[pixel + 2] = (color >> 16) & 0xFF;
-// 		img->addr[pixel + 3] = (color >> 24);
-// 	}
-// }
+	if (img->bbp != 32)
+	{
+		color = mlx_get_color_value(mlx, color);
+	}
+	pixel = (y * img->line_length) + (x * 4);
+	if (img->endian == 1)
+	{
+		img->addr[pixel + 0] = (color >> 24);
+		img->addr[pixel + 1] = (color >> 16) & 0xFF;
+		img->addr[pixel + 2] = (color >> 8) & 0xFF;
+		img->addr[pixel + 3] = (color) & 0xFF;
+	}
+	else if (img->endian == 0)
+	{
+		img->addr[pixel + 0] = (color) & 0xFF;
+		img->addr[pixel + 1] = (color >> 8) & 0xFF;
+		img->addr[pixel + 2] = (color >> 16) & 0xFF;
+		img->addr[pixel + 3] = (color >> 24);
+	}
+}
 
 void draw_minimap(t_data *data)
 {
