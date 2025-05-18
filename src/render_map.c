@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:50:38 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 21:30:58 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:48:15 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	render_map(my_game *game)
 		ray_dir_y = game->player_dir_y + game->plane_y * camera_x;
 		cast_ray(game, ray_dir_x, ray_dir_y, x);
 	}
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 21:23:01 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:47:25 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ void	draw(my_game *game, t_draw *draw_vars, t_ray *ray)
 	draw_wall(game, ray, draw_vars);
 	draw_floor(game, draw_vars);
 	draw_ceiling(game, draw_vars);
-	//draw_minimap(game);
 	//mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
 }

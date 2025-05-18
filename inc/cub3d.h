@@ -183,6 +183,8 @@ int ft_on_press(int kc, my_game *g);
 int ft_on_release(int kc, my_game *g);
 void    ft_player_orientation(my_game *g);
 void clear_image(t_img *img);
+int handle_keypress(int kc, my_game *game);
+
 
 // t_press* ft_init_keys(t_press *k);
 
