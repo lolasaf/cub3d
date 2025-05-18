@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_clrs.c                                       :+:      :+:    :+:   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:25:54 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/04/29 20:25:55 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/09 20:29:24 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,23 @@ int parse_color(const char *str, int values[3])
     return 1;
 }
 
-void parse_color_tok(char *token, t_data *data)
+void parse_color_tok(char id, char *token, t_data *data)
 {
     static int j = 0;
     token = trim(token);
-    if (*token != 'F' && *token != 'C')
-        return;
-    char id = *token;
-    token++;
-    token = trim(token);
+    //if (*token != 'F' && *token != 'C')
+        //return;
+    //char id = *token;
+    //token++;
+    //token = trim(token);
     int values[3] = {0, 0, 0};
     if (!parse_color(token, values))
     {
         int i = 0;
         while(values[i])
         {
-            printf("%d\n", values[i]);
+            //printf("%d\n", values[i]);
+            // check this
             i++;
         }
         err_msg("Error! Failed to parse color values!");
@@ -82,7 +83,7 @@ void parse_color_tok(char *token, t_data *data)
         data->color[0].rgb[2] = values[2];
         j = j + 1;
     }
-    if (id == 'C')
+    else if (id == 'C')
     {
         data->color[1].type = 'C';
         data->color[1].rgb[0] = values[0];

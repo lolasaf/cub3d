@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/04/29 20:30:43 by kforfoli         ###   ########.fr        #
+#    Updated: 2025/05/18 21:20:13 by wel-safa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ MINILIBXDIR := lib/minilibx-linux
 LIBFT := $(LIBFTDIR)/libft.a
 LIBMLX := $(MINILIBXDIR)/libmlx_Linux.a
 #--- SOURCES ---
-SRCS := $(addprefix $(SRCDIR)/, main.c minimap.c dda.c render_map.c parse.c \
-	parse_colors.c parse_map.c parse_textures.c)
+SRCS := $(addprefix $(SRCDIR)/, cast_ray.c draw_wall.c draw.c main.c minimap.c\
+	parse_colors.c parse_map.c parse_textures.c parse.c player.c\
+	render_map.c utils.c)
 #--- OBJECTS ---
 OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 #--- HEADERS ---

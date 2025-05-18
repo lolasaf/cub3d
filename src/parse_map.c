@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:26:00 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/04/29 20:56:58 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:20:38 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void err_msg(const char *msg)
+void    err_msg(const char *msg)
 {
-    printf("$%s\n", msg);
+    printf("$error %s\n", msg); // check this
     exit(1);
 }
 
@@ -49,8 +49,8 @@ void flood_it(char **map, int x, int y)
         err_msg("Map is not properly closed");
     if (map[y][x] == '1' || map[y][x] == 'X')
         return;
-    if (map[y][x] == ' ')
-        err_msg("Map is not properly closed");
+    //if (map[y][x] == ' ')
+        //err_msg("Map is not properly closed");
     map[y][x] = 'X';
     flood_it(map, x + 1, y);
     flood_it(map, x - 1, y);
@@ -96,9 +96,12 @@ char **pvmap(char **lines, int count, t_data *data)
                 err_msg("Error: Invalid character in map");
             if (is_player(c))
             {
+                data->player = c;
                 data->num[0] = i;
                 data->num[1] = j;
                 p_count++;
+                if (data->num[0] == 0 || data->num[1] == 0)
+                    err_msg("Player cannot be in borders");
             }
             j++;
         }
