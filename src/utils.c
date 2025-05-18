@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel_to_img.c                                 :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:01:22 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 21:19:54 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:34:12 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void clear_image(t_img *img)
+void	clear_image(t_img *img)
 {
-    memset(img->addr, 0, img->line_length * SCREEN_HEIGHT);
+	memset(img->addr, 0, img->line_length * SCREEN_HEIGHT);
 }
 
 /*

@@ -22,7 +22,8 @@
 #define ESC_KEY 65307
 #define RIGHT_ARROW 65363
 #define LEFT_ARROW 65361
-
+#define VERTICAL 1
+#define HORIZONTAL 0
 
 
 typedef struct s_texture t_texture;
@@ -209,5 +210,7 @@ int     get_tex_x(my_game *game, t_draw *draw_vars);
 void    render_map(my_game *game);
 void    draw_minimap(my_game *game);
 void    handle_esc(my_game *game);
+void	draw_mini_player(my_game *game, int scale);
+void	draw_mini_grid(my_game *game, int scale, int x, int y);
 
 #endif

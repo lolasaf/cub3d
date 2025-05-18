@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 20:18:38 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:09:55 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	assign_texture(t_ray *ray, t_draw *draw_vars)
 {
-	if (ray->side == 0)
+	if (ray->side == HORIZONTAL)
 	{
 		if (ray->dir_y > 0)
 			draw_vars->texture = TEX_NORTH;
@@ -32,7 +32,7 @@ void	assign_texture(t_ray *ray, t_draw *draw_vars)
 
 void	calculate_wall_x(my_game *game, t_ray *ray, t_draw *draw_vars)
 {
-	if (ray->side == 0)
+	if (ray->side == HORIZONTAL)
 		draw_vars->wall_x = game->player_x + ray->perp_distance * ray->dir_x;
 	else
 		draw_vars->wall_x = game->player_y + ray->perp_distance * ray->dir_y;

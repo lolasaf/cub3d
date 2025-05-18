@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:50:38 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 21:48:15 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:33:49 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 takes my_game struct pointer and calculates ray directions pased on
 camera plane that we have given (field of View but in vector format)
+It casts a ray for each column x on the screen for [0, screen_width -1]
+camera_x range -> range [-1.0, 1.0]
 */
 void	render_map(my_game *game)
 {
@@ -26,8 +28,6 @@ void	render_map(my_game *game)
 	x = -1;
 	while (++x < SCREEN_WIDTH)
 	{
-		// cast a ray for each column x on the screen for [0, screen_width -1]
-		// camera_x range  // range [-1.0, 1.0]
 		camera_x = 2.0 * (double)x / (double)SCREEN_WIDTH - 1.0;
 		ray_dir_x = game->player_dir_x + game->plane_x * camera_x;
 		ray_dir_y = game->player_dir_y + game->plane_y * camera_x;

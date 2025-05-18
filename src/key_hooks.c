@@ -6,11 +6,20 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:25:54 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/18 21:43:21 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:22:28 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	handle_esc(my_game *game)
+{
+	mlx_destroy_image(game->mlx, game->img->img_ptr);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit (1);
+}
 
 void isnot_wall(my_game *game, double x, double y)
 {
@@ -21,15 +30,6 @@ void isnot_wall(my_game *game, double x, double y)
     }
     else
         return;   
-}
-
-void    handle_esc(my_game *game)
-{
-    mlx_destroy_image(game->mlx, game->img->img_ptr);
-    mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	exit (1);
 }
 
 int handle_keypress(int kc, my_game *game)
