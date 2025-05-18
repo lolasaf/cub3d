@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:26:06 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/04/29 20:26:07 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:39:38 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void ft_check_xpm(char *path, const char *xpm)
     if (strcmp(dot, xpm) != 0)
         err_msg("ERR: Not a valid texture");
 }
+
 void ft_validate_textures(t_data *data)
 {
     //extension must be .xpm(2)

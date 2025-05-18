@@ -3,16 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/17 13:53:33 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:28:02 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_print(char **map)
+/*void printing_shit(t_build *b, t_data *data)
+{
+    int i = 0;
+    printf("Map before validation\n");
+    while (b->map_lines[i])
+        printf("%s\n", b->map_lines[i++]);
+    printf("Textures:\n");
+    printf("NO: %s\n", data->texture[0].path);
+    printf("SO: %s\n", data->texture[1].path);
+    printf("WE: %s\n", data->texture[2].path);
+    printf("EA: %s\n", data->texture[3].path);
+    printf("Floor color: %d, %d, %d\n", data->color[0].rgb[0], data->color[0].rgb[1], data->color[0].rgb[2]);
+    printf("Ceiling color: %d, %d, %d\n", data->color[1].rgb[0], data->color[1].rgb[1], data->color[1].rgb[2]);
+    printf("Map after validation (%d lines):\n", data->map_height);
+    i = 0;
+    while(data->map[i])
+        printf("%s\n", data->map[i++]);
+}*/
+/*void ft_print(char **map)
 {
     int i = 0;
     while(map[i] != NULL)
@@ -20,11 +38,11 @@ void ft_print(char **map)
         printf("%s\n", map[i]);
         i++;
     }
-}
+}*/
 
 void mlx_texture_load(my_game *game)
 {
-        game->texture_img[0] =
+    game->texture_img[0] =
         mlx_xpm_file_to_image(game->mlx, game->conf->texture[0].path, &game->conf->o->width, &game->conf->o->height);
     game->texture_img[1] =
         mlx_xpm_file_to_image(game->mlx, game->conf->texture[1].path, &game->conf->o->width, &game->conf->o->height);
@@ -54,7 +72,7 @@ void parse_func(char *file, t_build *b, t_data *data)
     if (fd < 1)
         err_msg("Failed to open file");
     char *line = get_next_line(fd);
-    while(line != NULL)
+    while (line != NULL)
     {
         if (data->is_last == 2 && *line != '\n')
         {
@@ -82,32 +100,6 @@ void parse_func(char *file, t_build *b, t_data *data)
     }
 }
 
-void printing_shit(t_build *b, t_data *data)
-{
-    int i = 0;
-    printf("Map before validation\n");
-    while (b->map_lines[i])
-        printf("%s\n", b->map_lines[i++]);
-    printf("Textures:\n");
-    printf("NO: %s\n", data->texture[0].path);
-    printf("SO: %s\n", data->texture[1].path);
-    printf("WE: %s\n", data->texture[2].path);
-    printf("EA: %s\n", data->texture[3].path);
-    printf("Floor color: %d, %d, %d\n", data->color[0].rgb[0], data->color[0].rgb[1], data->color[0].rgb[2]);
-    printf("Ceiling color: %d, %d, %d\n", data->color[1].rgb[0], data->color[1].rgb[1], data->color[1].rgb[2]);
-    printf("Map after validation (%d lines):\n", data->map_height);
-    i = 0;
-    while(data->map[i])
-        printf("%s\n", data->map[i++]);
-}
-
-//make check and set
-
-
-void clear_image(t_img *img)
-{
-    memset(img->addr, 0, img->line_length * SCREEN_HEIGHT);
-}
 void isnot_wall(my_game *game, double x, double y)
 {
     if (game->conf->map[(int)y][(int)x] != '\0' && game->conf->map[(int)y][(int)x] != '1')
@@ -119,76 +111,48 @@ void isnot_wall(my_game *game, double x, double y)
         return;   
 }
 
+void    handle_esc(my_game *game)
+{
+    mlx_destroy_image(game->mlx, game->img->img_ptr);
+    mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit (1);
+}
+
 int handle_keypress(int kc, my_game *game) 
 {
     double move_speed = 0.1;
     double rot_speed = 0.05;
 
-    // clear_image(game->img);
-    if (kc == 119) // W
-    { // 'w' key - Move forward
-        printf("\nBEFORE Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-
+    if (kc == ESC_KEY)
+		handle_esc(game);
+    if (kc == W_KEY)
+    {
         double new_x = game->player_x + game->player_dir_x * move_speed;
         double new_y = game->player_y + game->player_dir_y * move_speed;
         isnot_wall(game, new_x, new_y);
-        // Check for wall collisions (simplified - replace with your map check)
-        // if (game->conf->map[(int)new_y][(int)new_x] != '1') {
-        //     game->player_x = new_x;
-        //     game->player_y = new_y;
-        // }
-        printf("\nAFTER Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
     } 
-    else if (kc == 115) // S
-    { // 'S' key - Move backward
-        printf("\nBEFORE Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-
+    else if (kc == S_KEY)
+    {
         double new_x = game->player_x - game->player_dir_x * move_speed;
         double new_y = game->player_y - game->player_dir_y * move_speed;
         isnot_wall(game, new_x, new_y);
-        printf("\nAFTER Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-        // Check for wall collisions
-        // if (game->conf->map[(int)new_y][(int)new_x] != '1') {
-        //     game->player_x = new_x;
-        //     game->player_y = new_y;
-        // }
     }
-    else if (kc == 97) // A // moving left
+    else if (kc == A_KEY)
     {
-        printf("\nBEFORE Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-
         double new_x = game->player_x + game->player_dir_y * move_speed;
         double new_y = game->player_y - game->player_dir_x * move_speed;
         isnot_wall(game, new_x, new_y);
-        printf("\nAFTER Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-    }
-    else if (kc == 100) // D
+        }
+    else if (kc == D_KEY)
     {
-        printf("\nBEFORE Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-
         double new_x = game->player_x - game->player_dir_y * move_speed;
         double new_y = game->player_y + game->player_dir_x * move_speed;
-        isnot_wall(game, new_x, new_y);
-        printf("\nAFTER Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-        
+        isnot_wall(game, new_x, new_y);        
     }
-    else if (kc == 65363)
+    else if (kc == RIGHT_ARROW)
     {
-        printf("\nBEFORE Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-
         //for direction vector
         double old_dir_x = game->player_dir_x;
         game->player_dir_x = game->player_dir_x * cos(rot_speed) - game->player_dir_y * sin(rot_speed);
@@ -196,16 +160,10 @@ int handle_keypress(int kc, my_game *game)
         //for camera plane
         double old_plane_x = game->plane_x;
         game->plane_x = game->plane_x * cos(rot_speed) - game->plane_y * sin(rot_speed);
-        game->plane_y = old_plane_x * sin(rot_speed) + game->plane_y * cos(-rot_speed); 
-        printf("\nAFTER Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
-
+        game->plane_y = old_plane_x * sin(rot_speed) + game->plane_y * cos(-rot_speed);
     }
-    else if (kc == 65361)
+    else if (kc == LEFT_ARROW)
     {
-        printf("\nBEFORE Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
         double old_dir_x = game->player_dir_x;
         game->player_dir_x = game->player_dir_x * cos(-rot_speed) - game->player_dir_y * sin(-rot_speed);
         game->player_dir_y = old_dir_x * sin(-rot_speed) + game->player_dir_y * cos(-rot_speed);
@@ -213,9 +171,6 @@ int handle_keypress(int kc, my_game *game)
         double old_plane_x = game->plane_x;
         game->plane_x = game->plane_x * cos(-rot_speed) - game->plane_y * sin(-rot_speed);
         game->plane_y = old_plane_x * sin(-rot_speed) + game->plane_y * cos(-rot_speed);
-        printf("\nAFTER Directional Change:\n");
-        printf("Player->dir_x: %f; Player->dir_y: %f\n\n", game->player_dir_x, game->player_dir_y);
-        printf("Player->dir_x: %f; Player->dir_y: %f; Camera plane_x: %f; Camera plane_y: %f\n\n", game->player_dir_x, game->player_dir_y, game->plane_x, game->plane_y);
     }
     clear_image(game->img);
     render_map(game); // Redraw the scene
@@ -227,7 +182,6 @@ int handle_keypress(int kc, my_game *game)
 
 int main(int argc, char **argv)
 {
-    // SANDY'S MAIN START
     if (argc != 2)
         err_msg("only two args");
     t_build b;
@@ -236,21 +190,17 @@ int main(int argc, char **argv)
     data.is_last = 0;
     ft_ext_check(argv[1], ".cub");
     parse_func(argv[1], &b, &data);
-
-
     int i = 0;
-    if (b.map_lines[i] == NULL)
+    if (b.map_lines[i] == NULL) // is this supposed to be while loop??
         err_msg("Error");
+    
     ft_validate_textures(&data);
     process_map(&b, &data);
-    // SANDY'S MAIN END
 
     // testing parsing start
-    printing_shit(&b, &data);
+    //printing_shit(&b, &data);
     // testing parsing end
 
-    // Lola codes ... start
-    //draw_minimap(&data);
     my_game game;
     t_img   img;
     t_press ks;
@@ -265,34 +215,17 @@ int main(int argc, char **argv)
     (game.img)->img_ptr = mlx_new_image(game.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
     (game.img)->addr = mlx_get_data_addr(game.img->img_ptr, &game.img->bbp, &game.img->line_length,
 		&game.img->endian);
-    // double px = (double)game.conf->num[1];
-    // double py = (double)game.conf->num[0];
-    // game.player_x = px;
-    // game.player_y = py;
-    game.player_x = (double)data.num[1] + 0.5; // Add 0.5 to center in the cell
+    game.player_x = (double)data.num[1] + 0.5;
     game.player_y = (double)data.num[0] + 0.5;
-    // printf("num[1]: %d\n", game.conf->num[1]);
-    // printf("num[0]: %d\n", game.conf->num[0]);
-    // printf("double num[1]: %f\n", (double)game.conf->num[1]);
-    // printf("double num[0]: %f\n", (double)game.conf->num[0]);
-    // game.player_dir_x = 1.0;
-    // game.player_dir_y = 0.0;
     ft_player_orientation(&game);
-    // game.plane_x = 0.0;
-    // game.plane_y = -0.66;
-    printf("map_width: %d\n", game.conf->map_width);
-    //game.conf->map_width = game.conf->map_height; //??
-    printf("map_width: %d\n", game.conf->map_width);
     //clear_image(game.img);
     mlx_texture_load(&game);
     render_map(&game);
     mlx_put_image_to_window(game.mlx, game.win, img.img_ptr, 0, 0);
     mlx_hook(game.win, 2, 1L<<0, ft_on_press, &game.keys);
     mlx_hook(game.win, 3, 1L<<1, ft_on_release, &game.keys);
-    // mlx_key_hook(game.win, handle_keypress, &game);
     mlx_key_hook(game.win, handle_keypress, &game);
 	mlx_loop(game.mlx);
-    // LOLA"S CODE ENDS HERE
-    
+    // where do we clear image, window?
     return EXIT_SUCCESS;
 }

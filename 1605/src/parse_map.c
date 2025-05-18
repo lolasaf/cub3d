@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:26:00 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/13 16:17:22 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:20:38 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void err_msg(const char *msg)
+void    err_msg(const char *msg)
 {
     printf("$error %s\n", msg); // check this
     exit(1);

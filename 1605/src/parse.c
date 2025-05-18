@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:22:46 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/04/29 20:23:13 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:42:46 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void ft_parse_tandc(const char *line, t_data *data)
 {
@@ -39,7 +38,7 @@ void ft_parse_tandc(const char *line, t_data *data)
             free(token);
             return;
         }
-            //ft_parse_texture(token, (char *)another, data);
+        //ft_parse_texture(token, (char *)another, data);
         if (token[0] == 'F' || token[0] == 'C')
         {
             parse_color_tok(token[0],(char *)another, data);
@@ -76,16 +75,15 @@ void ft_ext_check(const char *path, const char *cub)
     const char *base;
     const char *slash;
     const char *dot;
-    //"../../wfwe.cub"
-    //"rhfwhfpwrpg.cub"
-    slash = strrchr(path, '/');
+
+    slash = strrchr(path, '/'); // is function allowed?
     if (slash != NULL)
         base = slash + 1;
     else
         base = path;
-    dot = strrchr(base, '.');
+    dot = strrchr(base, '.'); // is function allowed?
     if (dot == NULL)
-        err_msg("ERR:Not a valid file extension");
+        err_msg("ERR: Not a valid file extension");
     if (strcmp(dot, cub) != 0)
         err_msg("ERR: Not a valid file extension");
 }
