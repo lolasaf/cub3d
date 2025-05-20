@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/18 21:42:45 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:51:29 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void parse_func(char *file, t_build *b, t_data *data)
                 else
                     break;
             }
+            // free(line);
             line = is_line;
         }
         else if (*line != '\n')
@@ -98,6 +99,7 @@ void parse_func(char *file, t_build *b, t_data *data)
         else
             line = get_next_line(fd);
     }
+    // free(line);
 }
 
 int main(int argc, char **argv)

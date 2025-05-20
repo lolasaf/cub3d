@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:22:46 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/18 20:42:46 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:00:01 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,17 @@ char *add_map_line(t_build *assemble, const char *line, t_data *data,int *fd)
     char *cpy = (char *)line;
     char *next = get_next_line(*fd);
     if (assemble->count >= MAX_LINES)
+    {
+        free(next);
         err_msg("Too many lines");
+    }
     if (strchr(cpy, '\n') != NULL)
     {
         int distance = strchr(cpy, '\n') - cpy;
         cpy[distance] = '\0';
     }
     assemble->map_lines[assemble->count] = strdup(cpy);
+    free(cpy);
     if (!assemble->map_lines[assemble->count])
         err_msg("Strdup failed");
     assemble->count++;
