@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/22 02:00:17 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/22 02:33:40 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ void mlx_texture_load(my_game *game)
     if (!game->texture_img[0] || !game->texture_img[1] || !game->texture_img[2] ||
         !game->texture_img[3])
         err_msg("Failed to load textures");
-    printf("0 img->image = %p\n", ((t_img*)(game->texture_img[0]))->image);
-    printf("1 img->image = %p\n", ((t_img*)(game->texture_img[1]))->image); 
-    printf("2 img->image = %p\n", ((t_img*)(game->texture_img[2]))->image); 
-    printf("3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image);  
     game->conf->o->texture_addr[0] = (unsigned int *)mlx_get_data_addr(
         game->texture_img[0], &game->conf->o->texture_bpp[0], &game->conf->o->texture_ll[0], &game->conf->o->texture_endian[0]);
     game->conf->o->texture_addr[1] = (unsigned int *)mlx_get_data_addr(
