@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/20 13:59:09 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/22 02:00:17 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,14 @@ void mlx_texture_load(my_game *game)
         mlx_xpm_file_to_image(game->mlx, game->conf->texture[2].path, &game->conf->o->width, &game->conf->o->height);
     game->texture_img[3] =
         mlx_xpm_file_to_image(game->mlx, game->conf->texture[3].path, &game->conf->o->width, &game->conf->o->height);
+    game->texture_img[4] = NULL;
     if (!game->texture_img[0] || !game->texture_img[1] || !game->texture_img[2] ||
         !game->texture_img[3])
         err_msg("Failed to load textures");
+    printf("0 img->image = %p\n", ((t_img*)(game->texture_img[0]))->image);
+    printf("1 img->image = %p\n", ((t_img*)(game->texture_img[1]))->image); 
+    printf("2 img->image = %p\n", ((t_img*)(game->texture_img[2]))->image); 
+    printf("3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image);  
     game->conf->o->texture_addr[0] = (unsigned int *)mlx_get_data_addr(
         game->texture_img[0], &game->conf->o->texture_bpp[0], &game->conf->o->texture_ll[0], &game->conf->o->texture_endian[0]);
     game->conf->o->texture_addr[1] = (unsigned int *)mlx_get_data_addr(
@@ -86,7 +91,10 @@ void parse_func(char *file, t_build *b, t_data *data)
                 if (trimmed != NULL)
                     err_msg("New line detected in map");
                 else
+                {
+                    free(is_line);
                     break;
+                }
             }
             // free(line);
             line = is_line;
@@ -124,12 +132,15 @@ int main(int argc, char **argv)
     ft_validate_textures(&data);
     process_map(&b, &data);
 
+    int j = 0;
+    while (j < b.count)
+        free(b.map_lines[j++]);
     // testing parsing start
     //printing_shit(&b, &data);
     // testing parsing end
 
     my_game game;
-    t_img   img;
+    t_imgp   img;
     t_press ks;
     t_texture_object ob;
     game.img = &img;
@@ -148,11 +159,14 @@ int main(int argc, char **argv)
     //clear_image(game.img);
     mlx_texture_load(&game);
     render_map(&game);
+
+    
+    
     //mlx_put_image_to_window(game.mlx, game.win, img.img_ptr, 0, 0);
-    mlx_hook(game.win, 2, 1L<<0, ft_on_press, &game.keys);
-    mlx_hook(game.win, 3, 1L<<1, ft_on_release, &game.keys);
+    mlx_hook(game.win, 2, 1, ft_on_press, &game);
+    mlx_hook(game.win, 3, 2, ft_on_release, &game);
     mlx_key_hook(game.win, handle_keypress, &game);
 	mlx_loop(game.mlx);
     // where do we clear image, window?
-    return EXIT_SUCCESS;
+    exit(EXIT_SUCCESS);
 }

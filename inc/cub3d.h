@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include "libft.h"
 #include <mlx.h>
+#include <mlx_int.h>
 #include <math.h>
 #include <stdbool.h>
 
@@ -34,7 +35,7 @@ typedef struct s_data t_data;
 typedef struct s_game my_game;
 typedef struct s_ray t_ray;
 typedef enum e_type t_type;
-typedef struct s_img t_img;
+typedef struct s_imgp t_imgp;
 typedef struct s_press t_press;
 typedef struct s_textureobj t_texture_object;
 
@@ -58,14 +59,14 @@ struct s_color
     int rgb[3];
 };
 
-typedef struct s_img
+typedef struct s_imgp
 {
     void    *img_ptr;
     char    *addr;
     int     bbp; // bits per pixel
     int     line_length;
     int     endian;
-} t_img;
+} t_imgp;
 
 typedef struct s_press
 {
@@ -91,10 +92,10 @@ typedef struct s_game
 {
     void    *mlx;
     void    *win;
-    t_img    *img;
+    t_imgp    *img;
     t_data *conf;
     t_press *keys;
-    void    *texture_img[4];
+    void    *texture_img[5];
     double player_x;
     double  player_y;
     double  player_dir_x;
@@ -183,7 +184,7 @@ void ft_validate_textures(t_data *data);
 int ft_on_press(int kc, my_game *g);
 int ft_on_release(int kc, my_game *g);
 void    ft_player_orientation(my_game *g);
-void clear_image(t_img *img);
+void	clear_image(my_game *game, t_imgp *img);
 int handle_keypress(int kc, my_game *game);
 
 
@@ -192,7 +193,7 @@ int handle_keypress(int kc, my_game *game);
 int     rgb_to_hex(int r, int g, int b);
 
 // lola's functions
-void    put_pixel_to_img(void *mlx, t_img *img, int x, int y, int color);
+void    put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color);
 void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col);
 void	init_ray(my_game *game, t_ray *ray);
 void    ray_loop(my_game *game, t_ray *ray);

@@ -45,34 +45,50 @@ void    ft_player_orientation(my_game *g)
 
 int ft_on_press(int kc, my_game *g)
 {
+    // if ((t_img*)(g->texture_img[3]))
+    //     printf("BEFORE ft_on_press 3 img->image = %p\n", ((t_img*)(g->texture_img[3]))->image);
+    // else
+    //     write(1, "BLA\n", 4);
     if(kc == 119)  //W A:97 S:115 D:100 LEFT:65361 Right: 65363
         g->keys->key_up = true;
-    if (kc == 115)
+    else if (kc == 115)
         g->keys->key_down = true;
-    if (kc == 97)
+    else if (kc == 97)
         g->keys->key_left = true;
-    if (kc == 100)
+    else if (kc == 100)
         g->keys->key_right = true;
-    if (kc == 65361)
+    else if (kc == 65361)
         g->keys->rotate_l = true;
-    if (kc == 65363)
+    else if (kc == 65363)
         g->keys->rotate_r = true;
+    // if ((t_img*)(g->texture_img[3]))
+    //     printf("AFTER ft_on_press 3 img->image = %p\n", ((t_img*)(g->texture_img[3]))->image);
+    // else
+    //     write(1, "BLA2\n", 5);
     return 0;
 }
 
 int ft_on_release(int kc, my_game *g)
 {
+    if ((t_img*)(g->texture_img[3]))
+        printf("BEFORE ft_on_release 3 img->image = %p\n", ((t_img*)(g->texture_img[3]))->image);
+    else
+        write(1, "BLA3\n", 5);
     if(kc == 119)  //W A:97 S:115 D:100 LEFT:65361 Right: 65363
         g->keys->key_up = false;
-    if (kc == 115)
+    else if (kc == 115)
         g->keys->key_down = false;
-    if (kc == 97)
+    else if (kc == 97)
         g->keys->key_left = false;
-    if (kc == 100)
+    else if (kc == 100)
         g->keys->key_right = false;
-    if (kc == 65361)
+    else if (kc == 65361)
         g->keys->rotate_l = false;
-    if (kc == 65363)
+    else if (kc == 65363)
         g->keys->rotate_r = false;
+    if ((t_img*)(g->texture_img[3]))
+        printf("AFTER ft_on_release 3 img->image = %p\n", ((t_img*)(g->texture_img[3]))->image);
+    else
+        write(1, "BLA4\n", 5);
     return 0;
 }

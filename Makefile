@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/05/20 13:51:41 by kforfoli         ###   ########.fr        #
+#    Updated: 2025/05/22 00:08:32 by wel-safa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBFTHEADERS := $(addprefix $(LIBFTDIR)/, libft.h ft_printf.h\
 MLXHEADER := /usr/local/include
 #--- FLAGS ---
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -I$(INCDIR) -I$(LIBFTDIR) -I$(MINILIBXDIR) \
+CFLAGS := -Wall -Wextra -Werror -I$(INCDIR) -I$(LIBFTDIR) -I$(MINILIBXDIR) \
 	-I$(MLXHEADER) -g
 LDFLAGS := -L$(LIBFTDIR) -L$(MINILIBXDIR)
 LDLIBS := -lft -lmlx

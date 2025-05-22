@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:26:06 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/18 20:39:38 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/22 01:36:53 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char *ft_trim(char *line)
 
 int ft_parse_texture(char *token, char *line, t_data *data)
 {
+    // to do, strdup function is not allowed ???
     char *trimmed = trim(line);
     static int i = 0;
     if (i == 10)
