@@ -210,8 +210,9 @@ void	calculate_wall_x(my_game *game, t_ray *ray, t_draw *draw_vars);
 int     get_tex_x(my_game *game, t_draw *draw_vars);
 void    render_map(my_game *game);
 void    draw_minimap(my_game *game);
-void    handle_esc(my_game *game);
+int	    handle_esc(my_game *game);
 void	draw_mini_player(my_game *game, int scale);
 void	draw_mini_grid(my_game *game, int scale, int x, int y);
+int mouse_hook(int kc, int x, int y, my_game *game);
 
 #endif
