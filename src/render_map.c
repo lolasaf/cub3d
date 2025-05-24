@@ -44,7 +44,10 @@ void	render_map(my_game *game)
 			// printf("DURING 3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image);
 		}
 	}
+	//forsprites
+	handle_sprites(game);
 	draw_minimap(game);
+	
 	// printf("0 img->image = %p\n", ((t_img*)(game->texture_img[0]))->image);
 	// printf("1 img->image = %p\n", ((t_img*)(game->texture_img[1]))->image); 
 	// printf("2 img->image = %p\n", ((t_img*)(game->texture_img[2]))->image); 

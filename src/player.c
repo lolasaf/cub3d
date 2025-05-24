@@ -11,7 +11,7 @@ t_press* ft_init_keys(t_press *k)
     return k;
 }
 
-void    ft_player_orientation(my_game *g)
+void ns(my_game *g)
 {
     if (g->conf->player == 'N')
     {
@@ -27,7 +27,11 @@ void    ft_player_orientation(my_game *g)
         g->plane_x = 0.66;
         g->plane_y = 0.0;
     }
-    else if (g->conf->player == 'E')
+}
+
+void ew(my_game *g)
+{
+    if (g->conf->player == 'E')
     {
         g->player_dir_x = 1;
         g->player_dir_y = 0;
@@ -42,6 +46,13 @@ void    ft_player_orientation(my_game *g)
         g->plane_y = -0.66;
     }
 }
+
+void    ft_player_orientation(my_game *g)
+{
+    ns(g);
+    ew(g);
+}
+
 
 int ft_on_press(int kc, my_game *g)
 {

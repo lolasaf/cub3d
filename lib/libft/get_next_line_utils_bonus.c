@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:36:48 by wel-safa          #+#    #+#             */
-/*   Updated: 2023/08/09 20:07:17 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:47:10 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	n;
+// size_t	ft_strlen(const char *s)
+// {
+// 	size_t	n;
 
-	n = 0;
-	if (!s)
-		return (0);
-	while (s[n])
-		n++;
-	return (n);
-}
+// 	n = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[n])
+// 		n++;
+// 	return (n);
+// }
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -78,21 +78,21 @@ char	*ft_buffjoin(char *buffer, char const *newread)
 	return (buffer);
 }
 
-char	*ft_strdup(const char *s)
-{
-	size_t	size;
-	char	*ptr;
-	size_t	i;
+// char	*ft_strdup(const char *s)
+// {
+// 	size_t	size;
+// 	char	*ptr;
+// 	size_t	i;
 
-	i = 0;
-	size = ft_strlen(s);
-	ptr = (char *)ft_calloc(1, size + 1);
-	if (!ptr)
-		return (0);
-	while (i < size + 1)
-	{
-		((char *)ptr)[i] = ((char *)s)[i];
-		i++;
-	}
-	return (ptr);
-}
+// 	i = 0;
+// 	size = ft_strlen(s);
+// 	ptr = (char *)ft_calloc(1, size + 1);
+// 	if (!ptr)
+// 		return (0);
+// 	while (i < size + 1)
+// 	{
+// 		((char *)ptr)[i] = ((char *)s)[i];
+// 		i++;
+// 	}
+// 	return (ptr);
+// }
