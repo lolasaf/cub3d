@@ -1,7 +1,7 @@
-NO textures/fandf.xpm
-SO textures/fandf.xpm
-WE textures/fandf.xpm
-EA textures/fandf.xpm
+NO etc/textures/fandf.xpm
+SO etc/textures/fandf.xpm
+WE etc/textures/fandf.xpm
+EA etc/textures/fandf.xpm
 
 C 53,41,34
 F 45,33,27

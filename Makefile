@@ -23,7 +23,7 @@ LIBMLX := $(MINILIBXDIR)/libmlx_Linux.a
 #--- SOURCES ---
 SRCS := $(addprefix $(SRCDIR)/, cast_ray.c draw_wall.c draw.c key_hooks.c\
 	main.c minimap.c parse_colors.c parse_map.c parse_textures.c\
-	parse.c player.c render_map.c utils.c)
+	parse.c player.c sprites.c render_map.c utils.c)
 #--- OBJECTS ---
 OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 #--- HEADERS ---

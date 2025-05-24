@@ -6,68 +6,82 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:25:54 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/09 20:29:24 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:44:13 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int parse_color(const char *str, int values[3])
+
+const char *skip_whitespace(const char *str) 
 {
-    int i = 0;
+    while (*str && ft_isspace((unsigned char)*str))
+        str++;
+    return str;
+}
+
+const char *parse_single_value(const char *str, int *value) 
+{
+    str = skip_whitespace(str); // Skip leading whitespace
+    if (!ft_isdigit((unsigned char)*str))
+        return NULL;
+    *value = 0;
+    while (*str && ft_isdigit((unsigned char)*str)) 
+    {
+        *value = *value * 10 + (*str - '0');
+        str++;
+    }
+    return str;
+}
+
+int parse_color(const char *str, int values[3]) 
+{
     const char *p = str;
+    int i = 0;
+
     while (i < 3)
     {
-        while(*p && isspace((unsigned char)*p))
-            p++;
-        if (!isdigit((unsigned char)*p))
+        p = parse_single_value(p, &values[i]);
+        if (p == NULL)
             return 0;
-        int num = 0;
-        while(*p && isdigit((unsigned char) *p))
+        p = skip_whitespace(p); 
+        if (i < 2) 
         {
-            num = num * 10 + (*p - '0');
-            p++;
-        }
-        values[i] = num;
-
-        while (*p &&isspace((unsigned char)*p))
-            p++;
-        if(i < 3)
-        {
-            if (*p != ',' && *p != '\0')
+            if (*p != ',')
                 return 0;
             p++;
         }
         i++;
     }
-    while (*p && isspace((unsigned char) *p))
-        p++;
-    if (*p != '\0' && *p != '\n')
-        return 0;
     return 1;
+}
+
+int set_floor(t_data *data, int values[3])
+{
+    data->color[0].type = 'F';
+    data->color[0].rgb[0] = values[0];
+    data->color[0].rgb[1] = values[1];
+    data->color[0].rgb[2] = values[2];
+    return 1;
+}
+
+int set_ceiling(t_data *data, int values[3])
+{
+    data->color[1].type = 'C';
+    data->color[1].rgb[0] = values[0];
+    data->color[1].rgb[1] = values[1];
+    data->color[1].rgb[2] = values[2];
+    return 2;
 }
 
 void parse_color_tok(char id, char *token, t_data *data)
 {
-    static int j = 0;
+    static int j;
+    
     token = trim(token);
-    //if (*token != 'F' && *token != 'C')
-        //return;
-    //char id = *token;
-    //token++;
-    //token = trim(token);
     int values[3] = {0, 0, 0};
     if (!parse_color(token, values))
-    {
-        int i = 0;
-        while(values[i])
-        {
-            //printf("%d\n", values[i]);
-            // check this
-            i++;
-        }
         err_msg("Error! Failed to parse color values!");
-    }
     int i = 0;
     while (i < 3)
     {
@@ -76,22 +90,9 @@ void parse_color_tok(char id, char *token, t_data *data)
         i++;
     }
     if (id == 'F')
-    {
-        data->color[0].type = 'F';
-        data->color[0].rgb[0] = values[0];
-        data->color[0].rgb[1] = values[1];
-        data->color[0].rgb[2] = values[2];
-        j = j + 1;
-    }
+        j += set_floor(data, values);
     else if (id == 'C')
-    {
-        data->color[1].type = 'C';
-        data->color[1].rgb[0] = values[0];
-        data->color[1].rgb[1] = values[1];
-        data->color[1].rgb[2] = values[2];
-        j = j + 2;
-    }
+        j += set_ceiling(data, values);
     if (j == 3)
         data->is_last++;
 }
-

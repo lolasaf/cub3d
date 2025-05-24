@@ -141,5 +141,7 @@ void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
 	init_ray(game, &ray);
 	ray_loop(game, &ray);
 	compute_distance(game, &ray);
+	//forsprites
+	game->z_buffer[col] = ray.perp_distance;
 	draw(game, &draw_vars, &ray);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:26:06 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/22 01:36:53 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/24 06:14:31 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int     ft_isspace(char c)
 
 char *trim(char *line)
 {
-    while(isspace((unsigned char)*line))
+    while(ft_isspace((unsigned char)*line))
         line++;
     if (*line == 0)
         return line;
-    char *end = line + strlen(line) -1;
-    while(end > line && isspace((unsigned char)*end))
+    char *end = line + ft_strlen(line) -1;
+    while(end > line && ft_isspace((unsigned char)*end))
         end--;
     *(end + 1) = '\0';
     return line;
@@ -38,45 +38,39 @@ char *ft_trim(char *line)
         line++;
     if (line == NULL)
         return line;
-    char *end = line + strlen(line) - 1;
+    char *end = line + ft_strlen(line) - 1;
     while(end > line && ft_isspace((unsigned char)*end))
         end--;
     *(end + 1) = '\0';
     return line;
 
 }
-
+int set_texture(t_data *data, int i, char *path, char *str)
+{
+    int j = 1;
+    char *nl = ft_strchr(path, '\n');
+    if (nl)
+        *nl = '\0';
+    data->texture[i].identifier = ft_strdup(str);
+    data->texture[i].path = ft_strdup(path);
+    j = j + i;
+    return j;
+}   
 int ft_parse_texture(char *token, char *line, t_data *data)
 {
-    // to do, strdup function is not allowed ???
     char *trimmed = trim(line);
+
     static int i = 0;
     if (i == 10)
         err_msg("Duplicate texture detected");
-    if (strncmp(token, "NO", 2) == 0)
-    {
-        data->texture[0].identifier = strdup("NO");
-        data->texture[0].path = strdup(trimmed);
-        i = i + 1;
-    }
-    if (strncmp(token, "SO", 2) == 0)
-    {
-        data->texture[1].identifier = strdup("SO");
-        data->texture[1].path = strdup(trimmed);
-        i = i + 2;
-    }
-    if (strncmp(token, "WE", 2) == 0)
-    {
-        data->texture[2].identifier = strdup("WE");
-        data->texture[2].path = strdup(trimmed);
-        i = i + 3;
-    }
-    if (strncmp(token, "EA", 2) == 0)
-    {
-        data->texture[3].identifier = strdup("EA");
-        data->texture[3].path = strdup(trimmed);
-        i = i + 4;
-    }
+    if (ft_strncmp(token, "NO", 2) == 0)
+        i += set_texture(data, 0, trimmed, "NO"); //1
+    if (ft_strncmp(token, "SO", 2) == 0)
+        i += set_texture(data, 1, trimmed, "SO"); //2
+    if (ft_strncmp(token, "WE", 2) == 0)
+        i += set_texture(data, 2, trimmed, "WE");//3
+    if (ft_strncmp(token, "EA", 2) == 0)
+        i += set_texture(data, 3, trimmed, "EA");//4
     if (i == 10)
         data->is_last++;
     return 1;
@@ -89,12 +83,12 @@ void ft_check_xpm(char *path, const char *xpm)
     const char *dot;
     //"../../wfwe.cub"
     //"rhfwhfpwrpg.cub"
-    slash = strrchr(path, '/');
+    slash = ft_strrchr(path, '/');
     if (slash != NULL)
         base = slash + 1;
     else
         base = path;
-    dot = strrchr(base, '.');
+    dot = ft_strrchr(base, '.');
     if (dot == NULL)
         err_msg("ERR:Not a valid texture");
     if (strcmp(dot, xpm) != 0)
@@ -103,26 +97,13 @@ void ft_check_xpm(char *path, const char *xpm)
 
 void ft_validate_textures(t_data *data)
 {
-    //extension must be .xpm(2)
-    //see if all texture paths have a path(1)
-    //check if path exists(3)
     if (data->texture[0].path == NULL || data->texture[1].path == NULL || data->texture[2].path == NULL || data->texture[3].path == NULL)
         err_msg("Texture paths not provided");
     int i = 0;
     while (i < 4)
     {
+        
         ft_check_xpm(data->texture[i].path, ".xpm");
         i++;
     }
-    /*
-    int fd[4];
-    i = 0;
-    while(i < 4)
-    {
-        fd[i] = open(data->texture[i].path,O_RDONLY);
-        if (fd[i] < 0)
-            err_msg("Couldn't find texture file");
-        i++;
-    }
-    */
 }

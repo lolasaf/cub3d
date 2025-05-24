@@ -55,13 +55,31 @@ void    free_map(t_data *conf)
     free(conf->map);
 }
 
+void free_sprites(my_game *game)
+{
+    int i = 0;
+    while (i < MAX_SPRITES)
+    {
+        if (game->sprites[i].img != NULL)
+        {
+            mlx_destroy_image(game->mlx, game->sprites[i].img);
+            game->sprites[i].img = NULL;
+        }
+        i++; 
+    }
+}
 
 int	handle_esc(my_game *game)
 {
 
     free_map(game->conf);
-    
     free_textures(game);
+    free_sprites(game);
+    if (game->z_buffer != NULL)
+    {
+        free(game->z_buffer);
+        game->z_buffer = NULL;
+    }
 	mlx_destroy_image(game->mlx, game->img->img_ptr);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
@@ -76,8 +94,6 @@ void isnot_wall(my_game *game, double x, double y)
         game->player_x = x;
         game->player_y = y;
     }
-    else
-        return;   
 }
 
 int mouse_hook(int kc, int x, int y, my_game *game)
@@ -111,66 +127,94 @@ int mouse_hook(int kc, int x, int y, my_game *game)
     return (0);
 }
 
+void ft_move_y(char c, my_game *game, double ms)
+{
+    double new_x;
+    double new_y;
+
+    if(c == '+')
+    {
+        new_x = game->player_x + game->player_dir_x * ms;
+        new_y = game->player_y + game->player_dir_y * ms;
+        isnot_wall(game, new_x, new_y);
+    }
+    else if (c == '-')
+    {
+        new_x = game->player_x - game->player_dir_x * ms;
+        new_y = game->player_y - game->player_dir_y * ms;
+        isnot_wall(game, new_x, new_y);
+    }
+}
+
+void ft_move_x(char c, my_game *game, double ms)
+{
+    double new_x;
+    double new_y;
+
+    if(c == '<')
+    {
+        new_x = game->player_x + game->player_dir_y * ms;
+        new_y = game->player_y - game->player_dir_x * ms;
+        isnot_wall(game, new_x, new_y);
+    }
+    else if(c == '>')
+    {
+        double new_x = game->player_x - game->player_dir_y * ms;
+        double new_y = game->player_y + game->player_dir_x * ms;
+        isnot_wall(game, new_x, new_y);        
+    }
+}
+
+void ft_move_z(char c, my_game *game, double rs)
+{
+    double old_dir_x;
+    double old_plane_x;
+
+    if (c == ')')
+    {
+        old_dir_x = game->player_dir_x;
+        game->player_dir_x = game->player_dir_x * cos(rs) - game->player_dir_y * sin(rs);
+        game->player_dir_y = old_dir_x * sin(rs) + game->player_dir_y * cos(rs);
+        old_plane_x = game->plane_x;
+        game->plane_x = game->plane_x * cos(rs) - game->plane_y * sin(rs);
+        game->plane_y = old_plane_x * sin(rs) + game->plane_y * cos(-rs);
+    }
+    else if(c == '(')
+    {
+        old_dir_x = game->player_dir_x;
+        game->player_dir_x = game->player_dir_x * cos(-rs) - game->player_dir_y * sin(-rs);
+        game->player_dir_y = old_dir_x * sin(-rs) + game->player_dir_y * cos(-rs);
+
+        old_plane_x = game->plane_x;
+        game->plane_x = game->plane_x * cos(-rs) - game->plane_y * sin(-rs);
+        game->plane_y = old_plane_x * sin(-rs) + game->plane_y * cos(-rs);
+    }
+}
+
 int handle_keypress(int kc, my_game *game)
 {
-    double move_speed = 0.1;
-    double rot_speed = 0.05;
+    double move_speed;
+    double rot_speed;
 
-    // printf("BEFORE handle 3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image);  
+    move_speed = 0.1;
+    rot_speed = 0.05;
+
 
     if (kc == ESC_KEY)
 		handle_esc(game);
     if (kc == W_KEY)
-    {
-        double new_x = game->player_x + game->player_dir_x * move_speed;
-        double new_y = game->player_y + game->player_dir_y * move_speed;
-        isnot_wall(game, new_x, new_y);
-    } 
+        ft_move_y('+', game, move_speed);
     else if (kc == S_KEY)
-    {
-        double new_x = game->player_x - game->player_dir_x * move_speed;
-        double new_y = game->player_y - game->player_dir_y * move_speed;
-        isnot_wall(game, new_x, new_y);
-    }
+        ft_move_y('-', game, move_speed);
     else if (kc == A_KEY)
-    {
-        double new_x = game->player_x + game->player_dir_y * move_speed;
-        double new_y = game->player_y - game->player_dir_x * move_speed;
-        isnot_wall(game, new_x, new_y);
-        }
+        ft_move_x('<', game, move_speed);
     else if (kc == D_KEY)
-    {
-        double new_x = game->player_x - game->player_dir_y * move_speed;
-        double new_y = game->player_y + game->player_dir_x * move_speed;
-        isnot_wall(game, new_x, new_y);        
-    }
+        ft_move_x('>', game, move_speed);
     else if (kc == RIGHT_ARROW)
-    {
-        //for direction vector
-        double old_dir_x = game->player_dir_x;
-        game->player_dir_x = game->player_dir_x * cos(rot_speed) - game->player_dir_y * sin(rot_speed);
-        game->player_dir_y = old_dir_x * sin(rot_speed) + game->player_dir_y * cos(rot_speed);
-        //for camera plane
-        double old_plane_x = game->plane_x;
-        game->plane_x = game->plane_x * cos(rot_speed) - game->plane_y * sin(rot_speed);
-        game->plane_y = old_plane_x * sin(rot_speed) + game->plane_y * cos(-rot_speed);
-    }
+        ft_move_z(')', game, rot_speed);
     else if (kc == LEFT_ARROW)
-    {
-        double old_dir_x = game->player_dir_x;
-        game->player_dir_x = game->player_dir_x * cos(-rot_speed) - game->player_dir_y * sin(-rot_speed);
-        game->player_dir_y = old_dir_x * sin(-rot_speed) + game->player_dir_y * cos(-rot_speed);
-
-        double old_plane_x = game->plane_x;
-        game->plane_x = game->plane_x * cos(-rot_speed) - game->plane_y * sin(-rot_speed);
-        game->plane_y = old_plane_x * sin(-rot_speed) + game->plane_y * cos(-rot_speed);
-    }
-    // printf("DURING handle 3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image); 
+        ft_move_z('(', game, rot_speed);
     clear_image(game, game->img);
-    // printf("AFTER CLEAR 3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image); 
     render_map(game); // Redraw the scene
-    // printf("AFTER RENDER 3 img->image = %p\n", ((t_img*)(game->texture_img[3]))->image); 
-    //mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
-    // clear_image(game->img);
     return 0;
 }

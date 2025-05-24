@@ -25,6 +25,7 @@
 #define LEFT_ARROW 65361
 #define VERTICAL 1
 #define HORIZONTAL 0
+#define MAX_SPRITES 2
 
 
 typedef struct s_texture t_texture;
@@ -33,6 +34,7 @@ typedef struct s_color t_color;
 typedef struct s_build t_build;
 typedef struct s_data t_data;
 typedef struct s_game my_game;
+typedef struct s_sprite_sort sprite_sort;
 typedef struct s_ray t_ray;
 typedef enum e_type t_type;
 typedef struct s_imgp t_imgp;
@@ -47,6 +49,12 @@ typedef enum e_tex
     TEX_EAST,
     TEX_WEST
 } t_tex;
+
+typedef struct s_sprite_sort
+{
+    double dist;
+    int index;
+} sprite_sort;
 
 struct s_texture
 {
@@ -88,6 +96,27 @@ typedef struct s_textureobj
     int texture_endian[4];
 } t_texture_object;
 
+typedef struct s_sprite
+{
+    double x;
+    double y;
+    void *img;
+    int id;
+} t_sprite;
+
+typedef struct s_sprite_drawing
+{
+    double t_x;
+    double t_y;
+    int s_sx;
+    int s_h;
+    int s_w;
+    int start_x;
+    int start_y;
+    int end_x;
+    int end_y;
+} t_sprite_props;
+
 typedef struct s_game
 {
     void    *mlx;
@@ -95,14 +124,16 @@ typedef struct s_game
     t_imgp    *img;
     t_data *conf;
     t_press *keys;
-    void    *texture_img[5];
+    void    *texture_img[5]; //??why 5?
     double player_x;
     double  player_y;
     double  player_dir_x;
     double  player_dir_y;
     double plane_x;
     double plane_y;
-    //double *z_buffer;
+    t_sprite sprites[MAX_SPRITES];
+    int num_sprites;
+    double *z_buffer;
 } my_game;
 
 typedef struct s_ray
@@ -169,6 +200,7 @@ t_press* ft_init_keys(t_press *k);
 void transform_sec(char *map);
 void err_msg(const char *msg);
 char *ft_trim(char *line);
+int     ft_isspace(char c);
 char *trim(char *line);
 int ft_parse_texture(char *token, char *line, t_data *data);
 int parse_color(const char *str, int values[3]);
@@ -186,7 +218,17 @@ int ft_on_release(int kc, my_game *g);
 void    ft_player_orientation(my_game *g);
 void	clear_image(my_game *game, t_imgp *img);
 int handle_keypress(int kc, my_game *game);
-
+//sprites
+void ft_init_sprites(my_game *g);
+void mlx_sprite_load(my_game *g);
+void ft_sort(sprite_sort *to_sort, int count);
+void handle_sprites(my_game *g);
+void get_vertical_prop(t_sprite_props *prop);
+void get_horizonatal_prop(t_sprite_props *prop);
+void draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop, int stripe_x, int tex_x);
+void single_sprite_render(my_game *g, t_img *sprite_tex, t_sprite_props *prop);
+void render_sprites(sprite_sort *to_sort, my_game *g);
+void handle_sprites(my_game *g);
 
 // t_press* ft_init_keys(t_press *k);
 
