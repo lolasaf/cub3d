@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:25:54 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/24 03:53:22 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:47:17 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void free_sprites(my_game *game)
     }
 }
 
-void	handle_esc(my_game *game)
+int	handle_esc(my_game *game)
 {
 
     free_map(game->conf);
@@ -94,6 +94,37 @@ void isnot_wall(my_game *game, double x, double y)
         game->player_x = x;
         game->player_y = y;
     }
+}
+
+int mouse_hook(int kc, int x, int y, my_game *game)
+{
+    double rot_speed = 0.1;
+    x = y;
+    y = x;
+    if (kc == 5) // scroll down
+    {
+        //for direction vector
+        double old_dir_x = game->player_dir_x;
+        game->player_dir_x = game->player_dir_x * cos(rot_speed) - game->player_dir_y * sin(rot_speed);
+        game->player_dir_y = old_dir_x * sin(rot_speed) + game->player_dir_y * cos(rot_speed);
+        //for camera plane
+        double old_plane_x = game->plane_x;
+        game->plane_x = game->plane_x * cos(rot_speed) - game->plane_y * sin(rot_speed);
+        game->plane_y = old_plane_x * sin(rot_speed) + game->plane_y * cos(-rot_speed);
+    }
+    else if (kc == 4) // scroll up
+    {
+        double old_dir_x = game->player_dir_x;
+        game->player_dir_x = game->player_dir_x * cos(-rot_speed) - game->player_dir_y * sin(-rot_speed);
+        game->player_dir_y = old_dir_x * sin(-rot_speed) + game->player_dir_y * cos(-rot_speed);
+
+        double old_plane_x = game->plane_x;
+        game->plane_x = game->plane_x * cos(-rot_speed) - game->plane_y * sin(-rot_speed);
+        game->plane_y = old_plane_x * sin(-rot_speed) + game->plane_y * cos(-rot_speed);
+    }
+    clear_image(game, game->img);
+    render_map(game);
+    return (0);
 }
 
 void ft_move_y(char c, my_game *game, double ms)

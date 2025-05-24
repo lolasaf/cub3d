@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/24 19:12:08 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:28:06 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ int main(int argc, char **argv)
     mlx_hook(game.win, 2, 1, ft_on_press, &game);
     mlx_hook(game.win, 3, 2, ft_on_release, &game);
     mlx_key_hook(game.win, handle_keypress, &game);
+    mlx_hook(game.win, 17, 0, handle_esc, &game);
+    mlx_hook(game.win, 4, 1L << 2, mouse_hook, &game);
     mlx_loop(game.mlx);
+    // where do we clear image, window?
     exit(EXIT_SUCCESS);
 }
