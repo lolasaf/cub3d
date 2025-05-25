@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:58:39 by wel-safa          #+#    #+#             */
-/*   Updated: 2023/08/09 20:12:54 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:58:28 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_splitnl(char *buff, int i)
 		return (NULL);
 	if (i < 0)
 		i = ft_strlen(buff) - 1;
-	temp = (char *)ft_calloc(sizeof(char), i + 2);
+	temp = (char *)ft_calloc_gnl(sizeof(char), i + 2);
 	if (!temp)
 		return (NULL);
 	j = -1;
@@ -71,12 +71,12 @@ char	*get_next_line(int fd)
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	newread = (char *)ft_calloc(1, BUFFER_SIZE + 1);
+	newread = (char *)ft_calloc_gnl(1, BUFFER_SIZE + 1);
 	if (!newread)
 		return (NULL);
 	if (!buffer[fd])
 	{
-		buffer[fd] = (char *)ft_calloc(1, 1);
+		buffer[fd] = (char *)ft_calloc_gnl(1, 1);
 		if (!buffer[fd])
 		{
 			free(newread);

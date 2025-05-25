@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:59:26 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 04:47:10 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:57:00 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_checknl(char *buffer);
 char	*ft_splitnl(char *buff, int i);
 char	*ft_readfile(int fd, char *buffer);
 size_t	ft_strlen(const char *s);
-void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_calloc_gnl(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 char	*ft_buffjoin(char *buffer, char const *buf);
 char	*ft_strdup(const char *s);

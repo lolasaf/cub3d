@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:36:48 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 04:47:10 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:57:54 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	return (n);
 // }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_gnl(size_t nmemb, size_t size)
 {
 	size_t	bytes;
 	void	*ptr;
@@ -61,7 +61,7 @@ char	*ft_buffjoin(char *buffer, char const *newread)
 
 	temp = ft_strdup(buffer);
 	free(buffer);
-	buffer = (char *)ft_calloc(1, ft_strlen(temp) + ft_strlen(newread) + 1);
+	buffer = (char *)ft_calloc_gnl(1, ft_strlen(temp) + ft_strlen(newread) + 1);
 	if (!buffer)
 		return (NULL);
 	i = -1;

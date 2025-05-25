@@ -20,8 +20,7 @@ int	mlx_destroy_image(t_xvar *xvar, t_img *img)
       XShmDetach(xvar->display, &(img->shm));
       shmdt(img->shm.shmaddr);
       /* shmctl IPC_RMID already done */
-    }
-  printf("img->image = %p\n", img->image);  
+    }  
   XDestroyImage(img->image);  /* For image & shm-image. Also free img->data */  
   XFreePixmap(xvar->display, img->pix);
   if (img->gc)

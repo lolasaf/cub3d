@@ -23,6 +23,8 @@
 #define ESC_KEY 65307
 #define RIGHT_ARROW 65363
 #define LEFT_ARROW 65361
+#define	SCROLL_DOWN 5
+#define SCROLL_UP 4
 #define VERTICAL 1
 #define HORIZONTAL 0
 #define MAX_SPRITES 2
@@ -184,77 +186,134 @@ struct s_build{
     int count; // map height
 };
 
+// cast_ray.c
+void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col);
+void	init_ray(my_game *game, t_ray *ray);
+void    ray_loop(my_game *game, t_ray *ray);
+void	calc_steps(my_game *game, t_ray *ray);
+void	compute_distance(my_game *game, t_ray *ray);
 
-///////////////// OLD FUNCTIONS
+// draw_wall.c
+void	draw_wall(my_game *game, t_ray *ray, t_draw *draw_vars);
+void	draw_wall_column(my_game *game, t_draw *draw_vars, int tex_x);
+void	assign_texture(t_ray *ray, t_draw *draw_vars);
+void	calculate_wall_x(my_game *game, t_ray *ray, t_draw *draw_vars);
+int     get_tex_x(my_game *game, t_draw *draw_vars);
 
-// void parse_file(const char *f_name, t_data *data);
-// void parse_texture(char *line, t_type type, t_data *data);
-// void parse_color(char *line, t_type type, t_data *data);
-// void add_map_line(char *line, t_data *data);
-// void trim_whitespace(char *str);
-// void validate_config(t_data *data);
-// void free_config(t_data *data);
+// draw.c
+void	draw(my_game *game, t_draw *draw_vars, t_ray *ray);
+void    get_draw_vars(t_ray *ray, t_draw *draw_vars);
+void    draw_floor(my_game *game, t_draw *draw_vars);
+void    draw_ceiling(my_game *game, t_draw *draw_vars);
+int     rgb_to_hex(int r, int g, int b);
 
-// Sandy's functions
-t_press* ft_init_keys(t_press *k);
-void transform_sec(char *map);
-void err_msg(const char *msg);
-char *ft_trim(char *line);
-int     ft_isspace(char c);
-char *trim(char *line);
-int ft_parse_texture(char *token, char *line, t_data *data);
-int parse_color(const char *str, int values[3]);
-void parse_color_tok(char id,char *token, t_data *data);
-void process_map(t_build *b, t_data *data);
-void transform(t_build *a);
-//void ft_print(char **map);
-void flood_it(char **map, int x, int y);
-void ft_ext_check(const char *path, const char *cub);
-char *add_map_line(t_build *assemble, const char *line, t_data *data, int *fd);
-void ft_parse_tandc(const char *line, t_data *data);
-void ft_validate_textures(t_data *data);
-int ft_on_press(int kc, my_game *g);
-int ft_on_release(int kc, my_game *g);
-void    ft_player_orientation(my_game *g);
+// exit_game.c
+int		exit_game(my_game *game);
+void	free_sprites(my_game *game);
+void	free_map(t_data *conf);
+void	free_textures(my_game *game);
+void	free_texture_vars(my_game *game);
+
+// find_player.c
+int		find_player(char **map, int rows, int cols, t_data *data);
+int		set_player(char c, int i, int j, t_data *data);
+void	check_borders(t_data *d, int rows, int cols);
+
+// initialize.c
+void	initialize_game(my_game *game, t_data *data);
+t_press	*ft_init_keys(t_press *k);
+
+// key_flags.c
+int		ft_on_release(int kc, my_game *g);
+int		ft_on_press(int kc, my_game *g);
+
+// key_hooks.c
+void	ft_mlx_hook_loop(my_game *game);
+int		mouse_hook(int kc, int x, int y, my_game *game);
+int		handle_keypress(int kc, my_game *game);
+void	isnot_wall(my_game *game, double x, double y);
+
+// minimap.c
+void    draw_minimap(my_game *game);
+void	draw_mini_grid(my_game *game, int scale, int x, int y);
+void	draw_mini_player(my_game *game, int scale);
+
+// move.c
+void ft_move_y(char c, my_game *game, double ms);
+void ft_move_z(char c, my_game *game, double rs);
+void ft_move_x(char c, my_game *game, double ms);
+
+// parse_color_tok.c
+void	parse_color_tok(char id, char *token, t_data *data);
+int		set_ceiling(t_data *data, int values[3]);
+int		set_floor(t_data *data, int values[3]);
+
+// parse_colors.c
+int			parse_color(const char *str, int values[3]);
+const char	*parse_single_value(const char *str, int *value);
+const char	*skip_whitespace(const char *str);
+
+// parse_map_utils.c
+int		get_width(char **m_lines, int count);
+int		is_valid_char(char c);
+int		is_player(char c);
+void	ft_free_map(char **map);
+
+// parse_map.c
+void	process_map(t_build *b, t_data *data);
+char	**pvmap(char **lines, int count, t_data *data);
+char	**init_map(char **lines, int count, t_data *data);
+void	flood_it(char **map, int x, int y);
+
+// parse_tandc.c
+void	ft_parse_tandc(const char *line, t_data *data);
+void	ft_colorortext(char *str, char *token, t_data *data);
+
+// parse_texture_load.c
+void	mlx_texture_load(my_game *game);
+void	set_dets(my_game *game);
+void	load_texture_img(my_game *game);
+
+// parse_textures.c
+void	ft_validate_textures(t_data *data);
+void	ft_check_xpm(char *path, const char *xpm);
+int		ft_parse_texture(char *token, char *line, t_data *data);
+int		set_texture(t_data *data, int i, char *path, char *str);
+
+// parse_utils.c
+void	ft_ext_check(const char *path, const char *cub);
+char	*ft_trim(char *line);
+char	*trim(char *line);
+
+// parse.c
+void	parse(int argc, char **argv, t_data *data);
+void	parse_func(char *file, t_build *b, t_data *data);
+char	*add_map_line(t_build *assmbl, const char *line, t_data *data, int *fd);
+
+// player.c
+void	ft_player_orientation(my_game *g);
+void	ew(my_game *g);
+void	ns(my_game *g);
+
+// render_game.c
+void	render_game(my_game *game);
+
+// utils.c
+int		ft_isspace(char c);
+void	put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 void	clear_image(my_game *game, t_imgp *img);
-int handle_keypress(int kc, my_game *game);
+void	err_msg(const char *msg);
+
 //sprites
 void ft_init_sprites(my_game *g);
 void mlx_sprite_load(my_game *g);
 void ft_sort(sprite_sort *to_sort, int count);
-void handle_sprites(my_game *g);
 void get_vertical_prop(t_sprite_props *prop);
 void get_horizonatal_prop(t_sprite_props *prop);
 void draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop, int stripe_x, int tex_x);
 void single_sprite_render(my_game *g, t_img *sprite_tex, t_sprite_props *prop);
 void render_sprites(sprite_sort *to_sort, my_game *g);
 void handle_sprites(my_game *g);
-
-// t_press* ft_init_keys(t_press *k);
-
-int     rgb_to_hex(int r, int g, int b);
-
-// lola's functions
-void    put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color);
-void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col);
-void	init_ray(my_game *game, t_ray *ray);
-void    ray_loop(my_game *game, t_ray *ray);
-void	calc_steps(my_game *game, t_ray *ray);
-void	compute_distance(my_game *game, t_ray *ray);
-void	draw(my_game *game, t_draw *draw_vars, t_ray *ray);
-void    get_draw_vars(t_ray *ray, t_draw *draw_vars);
-void    draw_floor(my_game *game, t_draw *draw_vars);
-void    draw_ceiling(my_game *game, t_draw *draw_vars);
-void	draw_wall(my_game *game, t_ray *ray, t_draw *draw_vars);
-void	draw_wall_column(my_game *game, t_draw *draw_vars, int tex_x);
-void	assign_texture(t_ray *ray, t_draw *draw_vars);
-void	calculate_wall_x(my_game *game, t_ray *ray, t_draw *draw_vars);
-int     get_tex_x(my_game *game, t_draw *draw_vars);
-void    render_map(my_game *game);
-void    draw_minimap(my_game *game);
-int	    handle_esc(my_game *game);
-void	draw_mini_player(my_game *game, int scale);
-void	draw_mini_grid(my_game *game, int scale, int x, int y);
-int mouse_hook(int kc, int x, int y, my_game *game);
 
 #endif

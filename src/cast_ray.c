@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:16:10 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 22:16:36 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/24 23:50:14 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
 	init_ray(game, &ray);
 	ray_loop(game, &ray);
 	compute_distance(game, &ray);
-	//forsprites
 	game->z_buffer[col] = ray.perp_distance;
 	draw(game, &draw_vars, &ray);
 }

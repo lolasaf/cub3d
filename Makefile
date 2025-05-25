@@ -6,7 +6,7 @@
 #    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/05/22 00:08:32 by wel-safa         ###   ########.fr        #
+#    Updated: 2025/05/25 00:55:00 by wel-safa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,11 @@ MINILIBXDIR := lib/minilibx-linux
 LIBFT := $(LIBFTDIR)/libft.a
 LIBMLX := $(MINILIBXDIR)/libmlx_Linux.a
 #--- SOURCES ---
-SRCS := $(addprefix $(SRCDIR)/, cast_ray.c draw_wall.c draw.c key_hooks.c\
-	main.c minimap.c parse_colors.c parse_map.c parse_textures.c\
-	parse.c player.c sprites.c render_map.c utils.c)
+SRCS := $(addprefix $(SRCDIR)/, cast_ray.c draw_wall.c draw.c exit_game.c \
+	find_player.c initialize.c key_flags.c key_hooks.c main.c minimap.c \
+	move.c parse_color_tok.c parse_colors.c parse_map_utils.c parse_map.c \
+	parse_tandc.c parse_texture_load.c parse_textures.c parse_utils.c parse.c \
+	player.c render_game.c sprites.c utils.c)
 #--- OBJECTS ---
 OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 #--- HEADERS ---
