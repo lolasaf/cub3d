@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/24 23:03:57 by wel-safa          #+#    #+#             */
+/*   Updated: 2025/05/26 12:25:37 by kforfoli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	check_borders(t_data *d, int rows, int cols)
+{
+	if (d->num[0] == 0 || d->num[0] == rows - 1 || d->num[1] == 0
+		|| d->num[1] == cols - 1)
+		err_msg("Player cannot be in borders", NULL, (t_data *)d);
+}
+
+int	set_player(char c, int i, int j, t_data *data)
+{
+	if (!is_valid_char(c))
+		err_msg("Error: Invalid character in map", NULL, (t_data *)data);
+	if (is_player(c))
+	{
+		data->player = c;
+		data->num[0] = i;
+		data->num[1] = j;
+		return (1);
+	}
+	return (0);
+}
+
+int	find_player(char **map, int rows, int cols, t_data *data)
+{
+	int		p_count;
+	int		i;
+	int		j;
+	char	c;
+
+	p_count = 0;
+	i = 0;
+	while (i < rows)
+	{
+		j = 0;
+		while (j < cols)
+		{
+			c = map[i][j];
+			if (set_player(c, i, j, data))
+				p_count++;
+			if (p_count != 0)
+				check_borders(data, rows, cols);
+			j++;
+		}
+		i++;
+	}
+	return (p_count);
+}
