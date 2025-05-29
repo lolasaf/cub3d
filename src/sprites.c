@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 23:44:48 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:05:57 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,48 +67,34 @@ void	ft_init_sprites(my_game *g)
 	b_y = (g->conf->map_height / 2) + 0.5;
 	while (i < g->num_sprites)
 	{
-		if (g->conf->map[(int)b_y][(int)b_x] == 'X')
+		if (b_x < 0 || (int) b_x >= g->conf->map_width)
+			b_x = (g->conf->map_width / 2) + 0.5;
+		if (b_y < 0 || (int) b_y >= g->conf->map_height)
+			b_y = (g->conf->map_height / 2) + 0.5;
+		while (1)
 		{
-			//printf("sprite at x = %f, y = %f\n", b_x, b_y);
-			g->sprites[i].x = b_x;
-			g->sprites[i].y = b_y;
-			g->sprites[i].id = i;
-			b_x += 2;
-			b_y += 2;
-			i++;
+			if (g->conf->map[(int)b_y][(int)b_x] == 'X')
+			{
+				g->sprites[i].x = b_x;
+				g->sprites[i].y = b_y;
+				g->sprites[i].id = i;
+				b_x += 2;
+				b_y += 2;
+				break;
+			}
+			else
+			{
+				b_x++;
+				b_y++;
+				if (b_x < 0 || (int) b_x >= g->conf->map_width)
+					b_x = 0.5;
+				if (b_y < 0 || (int) b_y >= g->conf->map_height)
+					b_y = 0.5;
+			}
 		}
-		else
-		{
-			b_x++;
-			b_y++;
-			if (b_x < 0 || (int) b_x >= g->conf->map_width)
-				b_x = 0.5;
-			if (b_y < 0 || (int) b_y >= g->conf->map_height)
-				b_y = 0.5;
-		}
+		i++;
 	}
 }
-
-/*
-
-0
-1
-2
-3
-4
-5
-6
-7
-8 -> 0 (8 % 8) -> 0
-9 -> 1 (8 % 9) -> 1
-10 -> 2
-11 - 3
-12
-13
-14
-15
-16 0
-*/
 
 void	mlx_sprite_load(my_game *g)
 {
@@ -116,23 +102,19 @@ void	mlx_sprite_load(my_game *g)
 	int			w;
 	int			h;
 	int			j;
-	const char	*sprite_paths[MAX_SPRITES] = {"sprites/charizard.xpm",
-			"sprites/mewtwo.xpm", "sprites/ditto.xpm", "sprites/dragonair.xpm", "sprites/eevee.xpm", 
-			"sprites/horsea.xpm",  "sprites/pichu.xpm"};
+	const char	*sprite_paths[6] = {"sprites/charizard.xpm",
+			"sprites/mewtwo.xpm", "sprites/dragonair.xpm", "sprites/eevee.xpm", 
+			"sprites/horsea.xpm", "sprites/wigglytuff.xpm"};
 
-	
-	g->num_sprites = MAX_SPRITES;
-	int c = ft_counter(g);
-	while(g->num_sprites >= c)
-		g->num_sprites--;
-	// g->num_sprites = ft_counter(g) / 3; // set number
-
+	g->num_sprites = ft_counter(g) / 10; // set number
+	if (!g->num_sprites)
+		g->num_sprites = 1;
 	i = 0;
 	while (i < g->num_sprites)
 	{
 		j = i;
-		if (i > 6)
-			j = i % 7;
+		if (i > 5)
+			j = i % 6;
 		g->sprites[i].img = mlx_xpm_file_to_image(g->mlx,
 				(char *)sprite_paths[j], &w, &h);
 		if (!g->sprites[i].img)
