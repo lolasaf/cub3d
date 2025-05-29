@@ -298,7 +298,9 @@ char	*trim(char *line);
 
 // parse.c
 void	parse(int argc, char **argv, t_data *data);
-void	parse_func(char *file, t_build *b, t_data *data);
+void	parse_func(int fd, t_build *b, t_data *data);
+char	*check_map(char *is_line, int *fd, int *stop);
+char	*newline(char *line, t_data *d, int *fd);
 char	*add_map_line(t_build *assmbl, const char *line, t_data *data, int *fd);
 
 // player.c

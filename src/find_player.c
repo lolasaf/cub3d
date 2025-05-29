@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:03:57 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 20:21:16 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 22:17:03 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ void	check_borders(char **map, t_data *d, int rows, int cols)
 {
 	if (d->num[0] == 0 || d->num[0] == rows - 1 || d->num[1] == 0
 		|| d->num[1] == cols - 1)
-		{
-			ft_free_map(map);
-			err_msg("Player cannot be in borders",(t_build *)d->build, (t_data *)d);
-		}
-		// err_msg("Player cannot be in borders", NULL, (t_data *)d);
+	{
+		ft_free_map(map);
+		err_msg("Player cannot be in borders", d->build, d);
+	}
 }
 
 int	set_player(char c, int i, int j, t_data *data)
