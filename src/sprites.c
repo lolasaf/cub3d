@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 21:42:09 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 23:44:48 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,35 @@
 // 	}
 // }
 
+int	ft_counter(my_game *g)
+{
+	int	x;
+	int y = 0;
+	int c = 0;
+	while(y < g->conf->map_height)
+	{
+		x = 0;
+		while (g->conf->map[y][x])
+		{
+			if (g->conf->map[y][x] == 'X')
+				c++;
+			x++;
+		}
+		y++;
+	}
+	return c;
+}
+
 void	ft_init_sprites(my_game *g)
 {
 	int			i;
 	double		b_x;
 	double		b_y;
 
-	g->num_sprites = 2;
+	// g->num_sprites = 8;
+	// int c = ft_counter(g);
+	// while(g->num_sprites > c)
+	// 	g->num_sprites--;
 	i = 0;
 	b_x = (g->conf->map_width / 2) + 0.5;
 	b_y = (g->conf->map_height / 2) + 0.5;
@@ -67,21 +89,55 @@ void	ft_init_sprites(my_game *g)
 	}
 }
 
+/*
+
+0
+1
+2
+3
+4
+5
+6
+7
+8 -> 0 (8 % 8) -> 0
+9 -> 1 (8 % 9) -> 1
+10 -> 2
+11 - 3
+12
+13
+14
+15
+16 0
+*/
+
 void	mlx_sprite_load(my_game *g)
 {
 	int			i;
 	int			w;
 	int			h;
+	int			j;
 	const char	*sprite_paths[MAX_SPRITES] = {"sprites/charizard.xpm",
-			"sprites/mewtwo.xpm"};
+			"sprites/mewtwo.xpm", "sprites/ditto.xpm", "sprites/dragonair.xpm", "sprites/eevee.xpm", 
+			"sprites/horsea.xpm",  "sprites/pichu.xpm"};
+
+	
+	g->num_sprites = MAX_SPRITES;
+	int c = ft_counter(g);
+	while(g->num_sprites >= c)
+		g->num_sprites--;
+	// g->num_sprites = ft_counter(g) / 3; // set number
 
 	i = 0;
-	while (i < MAX_SPRITES)
+	while (i < g->num_sprites)
 	{
+		j = i;
+		if (i > 6)
+			j = i % 7;
 		g->sprites[i].img = mlx_xpm_file_to_image(g->mlx,
-				(char *)sprite_paths[i], &w, &h);
+				(char *)sprite_paths[j], &w, &h);
 		if (!g->sprites[i].img)
 		{
+			printf("%d\n", g->sprites[i].id);
 			free_textures(g);
 			destroy_mlx(g);
 			destroy_buffer(g);
