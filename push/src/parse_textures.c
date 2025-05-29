@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 13:12:05 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:51:41 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	set_texture(t_data *data, int i, char *path, char *str)
 	return (j);
 }
 
-int	ft_parse_texture(char *token, char *line, t_data *data, char **frline)
+int	ft_parse_texture(char *token, char *line, t_data *data, char *frline)
 {
 	char		*trimmed;
 	static int	i;
@@ -37,8 +37,8 @@ int	ft_parse_texture(char *token, char *line, t_data *data, char **frline)
 	{
 		free(token);
 		token = NULL;
-		free(*frline);
-		*frline = NULL;
+		free(frline);
+		frline = NULL;
 		err_msg("Duplicate texture detected", NULL, (t_data *)data);
 	}
 	if (ft_strncmp(token, "NO", 2) == 0)
