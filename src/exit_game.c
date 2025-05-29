@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 00:07:35 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_build(t_build *build)
 	}
 }
 
-void	free_sprites(my_game *game)
+void	free_sprites(t_game *game)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ void	free_sprites(my_game *game)
 	}
 }
 
-int	exit_game(my_game *game)
+int	exit_game(t_game *game)
 {
 	free_map(game->conf);
 	free_textures(game);

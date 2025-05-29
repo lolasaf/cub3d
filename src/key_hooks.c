@@ -6,13 +6,13 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 00:23:17 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:18:13 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	isnot_wall(my_game *game, double x, double y)
+void	isnot_wall(t_game *game, double x, double y)
 {
 	if (game->conf->map[(int)y][(int)x] != '\0'
 		&& game->conf->map[(int)y][(int)x] != '1')
@@ -22,7 +22,7 @@ void	isnot_wall(my_game *game, double x, double y)
 	}
 }
 
-void	kill_sprite(my_game *game, int id)
+void	kill_sprite(t_game *game, int id)
 {
 	if (game->sprites[id].img != NULL)
 	{
@@ -32,7 +32,7 @@ void	kill_sprite(my_game *game, int id)
 	}
 }
 
-void	ft_destroy_sprite(my_game *game)
+void	ft_destroy_sprite(t_game *game)
 {
 	static int	counter = 0;
 	int			i;
@@ -55,8 +55,7 @@ void	ft_destroy_sprite(my_game *game)
 	}
 }
 
-
-int	handle_keypress(int kc, my_game *game)
+int	handle_keypress(int kc, t_game *game)
 {
 	double	move_speed;
 	double	rot_speed;
@@ -84,7 +83,7 @@ int	handle_keypress(int kc, my_game *game)
 	return (0);
 }
 
-int	mouse_hook(int kc, int x, int y, my_game *game)
+int	mouse_hook(int kc, int x, int y, t_game *game)
 {
 	double	rot_speed;
 
@@ -98,14 +97,4 @@ int	mouse_hook(int kc, int x, int y, my_game *game)
 	clear_image(game);
 	render_game(game);
 	return (0);
-}
-
-void	ft_mlx_hook_loop(my_game *game)
-{
-	mlx_hook(game->win, 2, 1, ft_on_press, game);
-	mlx_hook(game->win, 3, 2, ft_on_release, game);
-	mlx_key_hook(game->win, handle_keypress, game);
-	mlx_hook(game->win, 17, 0, exit_game, game);
-	mlx_hook(game->win, 4, 1L << 2, mouse_hook, game);
-	mlx_loop(game->mlx);
 }

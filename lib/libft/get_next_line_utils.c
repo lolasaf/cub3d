@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:36:48 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 01:57:12 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:49:33 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@
 	ft_bzero(ptr, bytes);
 	return (ptr);
 }*/
+
+char	*ft_free_null(char *buffer, char *newread)
+{
+	free(buffer);
+	free(newread);
+	return (NULL);
+}
 
 void	ft_bzero(void *s, size_t n)
 {

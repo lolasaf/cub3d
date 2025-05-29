@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 00:32:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:08:18 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // 	}
 // }
 
-int	ft_counter(my_game *g)
+int	ft_counter(t_game *g)
 {
 	int	x;
 	int y = 0;
@@ -52,7 +52,7 @@ int	ft_counter(my_game *g)
 	return c;
 }
 
-void	ft_init_sprites(my_game *g)
+void	ft_init_sprites(t_game *g)
 {
 	int			i;
 	double		b_x;
@@ -96,7 +96,7 @@ void	ft_init_sprites(my_game *g)
 	}
 }
 
-void	mlx_sprite_load(my_game *g)
+void	mlx_sprite_load(t_game *g)
 {
 	int			i;
 	int			w;
@@ -131,11 +131,11 @@ void	mlx_sprite_load(my_game *g)
 	ft_init_sprites(g);
 }
 
-void	ft_sort(sprite_sort *to_sort, int count)
+void	ft_sort(t_sprite_sort *to_sort, int count)
 {
 	int			i;
 	int			j;
-	sprite_sort	temp;
+	t_sprite_sort	temp;
 
 	i = 0;
 	while (i < count - 1)
@@ -158,7 +158,7 @@ void	ft_sort(sprite_sort *to_sort, int count)
 /*
 void	handle_sprites(my_game *g)
 {
-	sprite_sort	to_sort[MAX_SPRITES];
+	t_sprite_sort	to_sort[MAX_SPRITES];
 	int			i;
 
 	i = 0;
@@ -201,7 +201,7 @@ void	get_horizonatal_prop(t_sprite_props *prop)
 		prop->end_x = SCREEN_WIDTH - 1;
 }
 
-t_sprite_props	calc_properties(my_game *g, t_sprite *s, double *catch)
+t_sprite_props	calc_properties(t_game *g, t_sprite *s, double *catch)
 {
 	t_sprite_props	prop;
 	double			x_rel;
@@ -235,7 +235,7 @@ unsigned int	get_sprite_pixel_color(t_img *sprite_tex, int tex_x, int tex_y)
 	return (tex_addr[tex_y * (tex_ll / 4) + tex_x]);
 }
 
-void	draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop,
+void	draw_stripe(t_game *game, t_img *sprite_tex, t_sprite_props *prop,
 		int stripe_x, int tex_x)
 {
 	int				y;
@@ -262,7 +262,7 @@ void	draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop,
 	}
 }
 
-void	single_sprite_render(my_game *g, t_img *sprite_tex,
+void	single_sprite_render(t_game *g, t_img *sprite_tex,
 		t_sprite_props *prop)
 {
 	int	stripe_x;
@@ -286,7 +286,7 @@ void	single_sprite_render(my_game *g, t_img *sprite_tex,
 	}
 }
 
-void	render_sprites(sprite_sort *to_sort, my_game *g)
+void	render_sprites(t_sprite_sort *to_sort, t_game *g)
 {
 	int				i;
 	t_sprite		*s;
@@ -316,9 +316,9 @@ void	render_sprites(sprite_sort *to_sort, my_game *g)
 	}
 }
 
-void	handle_sprites(my_game *g)
+void	handle_sprites(t_game *g)
 {
-	sprite_sort	to_sort[MAX_SPRITES];
+	t_sprite_sort	to_sort[MAX_SPRITES];
 	int			i;
 
 	i = 0;

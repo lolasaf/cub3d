@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:50:38 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 23:27:28 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ camera plane that we have given (field of View but in vector format)
 It casts a ray for each column x on the screen for [0, screen_width -1]
 camera_x range -> range [-1.0, 1.0]
 */
-void	render_game(my_game *game)
+void	render_game(t_game *game)
 {
 	int		x;
 	double	camera_x;

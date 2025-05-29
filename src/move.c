@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 00:16:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 09:08:22 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_move_x(char c, my_game *game, double ms)
+void	ft_move_x(char c, t_game *game, double ms)
 {
 	double	new_x;
 	double	new_y;
@@ -31,7 +31,7 @@ void	ft_move_x(char c, my_game *game, double ms)
 	}
 }
 
-void	ft_move_z(char c, my_game *game, double rs)
+void	ft_move_z(char c, t_game *game, double rs)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -59,7 +59,7 @@ void	ft_move_z(char c, my_game *game, double rs)
 	}
 }
 
-void	ft_move_y(char c, my_game *game, double ms)
+void	ft_move_y(char c, t_game *game, double ms)
 {
 	double	new_x;
 	double	new_y;

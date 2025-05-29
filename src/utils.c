@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:18:02 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 19:57:55 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	err_msg(const char *msg, void *build, void *data)
 	exit(1);
 }
 
-void	clear_image(my_game *game)
+void	clear_image(t_game *game)
 {
 	int	px;
 	int	py;
@@ -62,7 +62,7 @@ to fit the bits per pixel requirement of the image.
 The bits position depends on the computer's endian,
 bits are assigned accordingly.
 */
-void	put_pixel_to_img(my_game *game, int x, int y, int color)
+void	put_pixel_to_img(t_game *game, int x, int y, int color)
 {
 	int		pixel;
 	void	*mlx;

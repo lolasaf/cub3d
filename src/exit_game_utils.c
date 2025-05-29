@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:50:17 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 20:00:52 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_block(void *block)
 	block = NULL;
 }
 
-void	destroy_mlx(my_game *game)
+void	destroy_mlx(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img->img_ptr);
 	mlx_destroy_window(game->mlx, game->win);
@@ -27,7 +27,7 @@ void	destroy_mlx(my_game *game)
 	free(game->mlx);
 }
 
-void	destroy_buffer(my_game *game)
+void	destroy_buffer(t_game *game)
 {
 	if (game->z_buffer != NULL)
 	{
@@ -49,7 +49,7 @@ void	free_texture_vars(t_data *conf)
 	}
 }
 
-void	free_textures(my_game *game)
+void	free_textures(t_game *game)
 {
 	int	i;
 
