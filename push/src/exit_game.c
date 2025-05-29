@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/27 18:53:32 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:37:05 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	free_texture_vars(my_game *game)
 	{
 		if (game->conf->texture[i].path)
 			free(game->conf->texture[i].path);
+		game->conf->texture[i].path = NULL;
 		if (game->conf->texture[i].identifier)
 			free(game->conf->texture[i].identifier);
+		game->conf->texture[i].identifier = NULL;
 		i++;
 	}
 }
@@ -87,17 +89,15 @@ void free_map_v2(t_data *conf)
 		free(conf->map);
 	}
 	i = 0;
-	if (conf->texture[i].identifier)
+	while(i < 4)
 	{
-		while(i < 4 && conf->texture[i].identifier)
-		{
+		if (conf->texture[i].identifier)
 			free(conf->texture[i].identifier);
-			conf->texture[i].identifier = NULL;
-			if (conf->texture[i].path)	
-				free(conf->texture[i].path);
-			conf->texture[i].path = NULL;
-			i++;
-		}
+		conf->texture[i].identifier = NULL;
+		if (conf->texture[i].path)	
+			free(conf->texture[i].path);
+		conf->texture[i].path = NULL;
+		i++;
 	}
 }
 

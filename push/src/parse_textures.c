@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 13:33:59 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:12:05 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,20 @@ int	set_texture(t_data *data, int i, char *path, char *str)
 	return (j);
 }
 
-int	ft_parse_texture(char *token, char *line, t_data *data)
+int	ft_parse_texture(char *token, char *line, t_data *data, char **frline)
 {
 	char		*trimmed;
 	static int	i;
 
 	trimmed = trim(line);
 	if (i == 10)
+	{
+		free(token);
+		token = NULL;
+		free(*frline);
+		*frline = NULL;
 		err_msg("Duplicate texture detected", NULL, (t_data *)data);
+	}
 	if (ft_strncmp(token, "NO", 2) == 0)
 		i += set_texture(data, 0, trimmed, "NO");
 	if (ft_strncmp(token, "SO", 2) == 0)

@@ -124,7 +124,7 @@ typedef struct s_game
     void    *mlx;
     void    *win;
     t_imgp    *img;
-    t_data *conf;
+    t_data *conf; // free
     t_press *keys;
     void    *texture_img[5]; //??why 5?
     double player_x;
@@ -268,8 +268,10 @@ char	**init_map(char **lines, int count, t_data *data);
 void	flood_it(char **map, int x, int y, t_build *b, t_data *data);
 
 // parse_tandc.c
+void	ft_colorortext(char *str, char *token, t_data *data, char *frline);
+//void	ft_colorortext(char *str, char *token, t_data *data);
+//void	ft_colorortext(char *str, char *token, t_data *data, char *frline);
 void	ft_parse_tandc(const char *line, t_data *data);
-void	ft_colorortext(char *str, char *token, t_data *data);
 
 // parse_texture_load.c
 void	mlx_texture_load(my_game *game);
@@ -279,8 +281,10 @@ void	load_texture_img(my_game *game);
 // parse_textures.c
 void	ft_validate_textures(t_data *data);
 void	ft_check_xpm(char *path, const char *xpm, t_data *data);
-int		ft_parse_texture(char *token, char *line, t_data *data);
+//int		ft_parse_texture(char *token, char *line, t_data *data);
+int		ft_parse_texture(char *token, char *line, t_data *data, char *frline);
 int		set_texture(t_data *data, int i, char *path, char *str);
+
 
 // parse_utils.c
 void	ft_ext_check(const char *path, const char *cub);

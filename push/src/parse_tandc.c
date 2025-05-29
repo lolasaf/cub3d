@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tandc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:40:08 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/27 17:38:06 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:47:43 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_colorortext(char *str, char *token, t_data *data)
+void	ft_colorortext(char *str, char *token, t_data *data, char *frline)
 {
 	char a;
 	if ((int)ft_strncmp(token, "NO", 2) == 0 || (int)ft_strncmp(token, "SO", 2) == 0
 		|| (int)ft_strncmp(token, "WE", 2) == 0 || (int)ft_strncmp(token, "EA", 2) == 0)
 	{
-		ft_parse_texture(token, (char *)str, data);
+		ft_parse_texture(token, (char *)str, data, frline);
 		free(token);
 		return ;
 	}
@@ -56,9 +56,9 @@ void	ft_parse_tandc(const char *line, t_data *data)
 		token_len = p - token_start;
 		token = ft_calloc(token_len + 1, sizeof(char));
 		if (!token)
-			err_msg("Memory allocation failure", NULL, (t_data *)data);
+			err_msg("Memory allocation failure", NULL, (t_data *)data); // free line
 		ft_strncpy(token, token_start, token_len);
 		another = p;
-		ft_colorortext((char *)another, token, data);
+		ft_colorortext((char *)another, token, data, (char *)line);
 	}
 }

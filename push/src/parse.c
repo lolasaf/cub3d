@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:21:01 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/28 14:21:42 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:25:05 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,15 @@ char	*newline(char *line, t_data *d, int *fd)
 	{
 		ft_parse_tandc(line, d);
 		if (line)
-		{
 			free(line);
-			line = NULL;
-		}
+		line = NULL;
 		line = get_next_line(*fd);
 	}
 	else
 	{
 		if (line)
-		{
 			free(line);
-			line = NULL;
-		}
+		line = NULL;
 		line = get_next_line(*fd);
 	}
 	return (line);
@@ -234,7 +230,7 @@ void	parse(int argc, char **argv, t_data *data)
 	ft_ext_check(argv[1], ".cub");
 	parse_func(argv[1], &b, data);
 	if (b.map_lines[0] == NULL)
-		err_msg("Error", &b, (t_data *)data); // check exit and free
+		err_msg("Error", (t_build *)&b, (t_data *)data); // check exit and free
 	ft_validate_textures(data);
 	process_map(&b, data);
 	j = 0;
