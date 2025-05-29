@@ -6,13 +6,13 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:39:16 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 02:23:15 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ns(my_game *g)
+void	ns(t_game *g)
 {
 	if (g->conf->player == 'N')
 	{
@@ -30,7 +30,7 @@ void	ns(my_game *g)
 	}
 }
 
-void	ew(my_game *g)
+void	ew(t_game *g)
 {
 	if (g->conf->player == 'E')
 	{
@@ -48,7 +48,7 @@ void	ew(my_game *g)
 	}
 }
 
-void	ft_player_orientation(my_game *g)
+void	ft_player_orientation(t_game *g)
 {
 	ns(g);
 	ew(g);

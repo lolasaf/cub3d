@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:18:24 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
+/*   Created: 2025/05/30 01:17:51 by wel-safa          #+#    #+#             */
+/*   Updated: 2025/05/30 01:19:29 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	ft_mlx_hook_loop(t_game *game)
 {
-	t_data				data;
-	t_game				game;
-	t_imgp				img;
-	t_press				ks;
-	t_texture_object	ob;
-
-	parse(argc, argv, &data);
-	game.img = &img;
-	game.conf = &data;
-	game.conf->o = &ob;
-	game.keys = ft_init_keys(&ks);
-	initialize_game(&game, &data);
-	render_game(&game);
-	ft_mlx_hook_loop(&game);
-	exit(EXIT_SUCCESS);
+	mlx_hook(game->win, 2, 1, ft_on_press, game);
+	mlx_hook(game->win, 3, 2, ft_on_release, game);
+	mlx_key_hook(game->win, handle_keypress, game);
+	mlx_hook(game->win, 17, 0, exit_game, game);
+	mlx_hook(game->win, 4, 1L << 2, mouse_hook, game);
+	mlx_loop(game->mlx);
 }

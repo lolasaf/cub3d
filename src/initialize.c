@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:40:20 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 20:20:05 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_press	*ft_init_keys(t_press *k)
 	return (k);
 }
 
-void	initialize_game(my_game *game, t_data *data)
+void	initialize_game(t_game *game, t_data *data)
 {
 	game->z_buffer = (double *)malloc(SCREEN_WIDTH * sizeof(double));
 	if (!game->z_buffer)

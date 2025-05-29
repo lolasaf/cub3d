@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 19:57:20 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	assign_texture(t_ray *ray, t_draw *draw_vars)
 	}
 }
 
-void	calculate_wall_x(my_game *game, t_ray *ray, t_draw *draw_vars)
+void	calculate_wall_x(t_game *game, t_ray *ray, t_draw *draw_vars)
 {
 	if (ray->side == HORIZONTAL)
 		draw_vars->wall_x = game->player_x + ray->perp_distance * ray->dir_x;
@@ -43,7 +43,7 @@ void	calculate_wall_x(my_game *game, t_ray *ray, t_draw *draw_vars)
 		draw_vars->wall_x = 1.0;
 }
 
-int	get_tex_x(my_game *game, t_draw *draw_vars)
+int	get_tex_x(t_game *game, t_draw *draw_vars)
 {
 	int	tex_x;
 
@@ -55,7 +55,7 @@ int	get_tex_x(my_game *game, t_draw *draw_vars)
 	return (tex_x);
 }
 
-void	draw_wall_column(my_game *game, t_draw *draw_vars, int tex_x)
+void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x)
 {
 	int				y;
 	int				tex_y;
@@ -79,7 +79,7 @@ void	draw_wall_column(my_game *game, t_draw *draw_vars, int tex_x)
 	}
 }
 
-void	draw_wall(my_game *game, t_ray *ray, t_draw *draw_vars)
+void	draw_wall(t_game *game, t_ray *ray, t_draw *draw_vars)
 {
 	int	tex_x;
 

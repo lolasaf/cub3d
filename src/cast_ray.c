@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:16:10 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 23:50:14 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Checks hit side of ray, side = 0 (horizental), side = 1 (vertical)
 If horizental -> calculates distance using y values othewise x values
 Also checks for ray directions close to zero to avoid seg faults
 */
-void	compute_distance(my_game *game, t_ray *ray)
+void	compute_distance(t_game *game, t_ray *ray)
 {
 	if (ray->side == HORIZONTAL)
 	{
@@ -51,7 +51,7 @@ Determines whether to step in the positive or negative direction
 based on the ray's direction. Calculates the distance from the player
 to the first gridline in each direction
 */
-void	calc_steps(my_game *game, t_ray *ray)
+void	calc_steps(t_game *game, t_ray *ray)
 {
 	if (ray->dir_x < 0)
 	{
@@ -79,7 +79,7 @@ void	calc_steps(my_game *game, t_ray *ray)
 	}
 }
 
-void	init_ray(my_game *game, t_ray *ray)
+void	init_ray(t_game *game, t_ray *ray)
 {
 	ray->map_x = (int)game->player_x;
 	ray->map_y = (int)game->player_y;
@@ -103,7 +103,7 @@ side (X or Y), updates the current map cell, and checks if the new cell
 contains a wall ('1'). The loop ends when a wall is hit
 or the ray leaves the map boundaries.
 */
-void	ray_loop(my_game *game, t_ray *ray)
+void	ray_loop(t_game *game, t_ray *ray)
 {
 	while (!ray->hit)
 	{
@@ -130,7 +130,7 @@ void	ray_loop(my_game *game, t_ray *ray)
 	}
 }
 
-void	cast_ray(my_game *game, double ray_dir_x, double ray_dir_y, int col)
+void	cast_ray(t_game *game, double ray_dir_x, double ray_dir_y, int col)
 {
 	t_ray	ray;
 	t_draw	draw_vars;

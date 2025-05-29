@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   key_flags.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 00:19:21 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 09:06:06 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // W A:97 S:115 D:100 LEFT:65361 Right: 65363
-int	ft_on_press(int kc, my_game *g)
+int	ft_on_press(int kc, t_game *g)
 {
 	if (kc == 119)
 		g->keys->key_up = true;
@@ -31,7 +31,7 @@ int	ft_on_press(int kc, my_game *g)
 }
 
 // W A:97 S:115 D:100 LEFT:65361 Right: 65363
-int	ft_on_release(int kc, my_game *g)
+int	ft_on_release(int kc, t_game *g)
 {
 	if (kc == 119)
 		g->keys->key_up = false;

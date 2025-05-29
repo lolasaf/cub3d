@@ -6,13 +6,13 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 00:17:14 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:39:55 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_mini_player(my_game *game, int scale)
+void	draw_mini_player(t_game *game, int scale)
 {
 	int	px;
 	int	py;
@@ -34,7 +34,7 @@ void	draw_mini_player(my_game *game, int scale)
 	}
 }
 
-void	draw_mini_grid(my_game *game, int scale, int x, int y)
+void	draw_mini_grid(t_game *game, int scale, int x, int y)
 {
 	int	i;
 	int	j;
@@ -55,7 +55,7 @@ void	draw_mini_grid(my_game *game, int scale, int x, int y)
 	}
 }
 
-void	draw_mini_sprite(my_game *game, int px, int py, int scale)
+void	draw_mini_sprite(t_game *game, int px, int py, int scale)
 {
 	int	i;
 	int	j;
@@ -75,7 +75,7 @@ void	draw_mini_sprite(my_game *game, int px, int py, int scale)
 	}
 }
 
-void	draw_mini_sprites_loop(my_game *game, int scale)
+void	draw_mini_sprites_loop(t_game *game, int scale)
 {
 	int	i;
 
@@ -83,12 +83,13 @@ void	draw_mini_sprites_loop(my_game *game, int scale)
 	while (i < game->num_sprites)
 	{
 		if (game->sprites[i].img)
-			draw_mini_sprite(game, game->sprites[i].x, game->sprites[i].y, scale);
+			draw_mini_sprite(game, game->sprites[i].x,
+				game->sprites[i].y, scale);
 		i++;
 	}
 }
 
-void	draw_minimap(my_game *game)
+void	draw_minimap(t_game *game)
 {
 	int	x;
 	int	y;

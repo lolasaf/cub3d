@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:58:39 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 15:25:50 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:49:26 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*buffer;
+static char	*g_buffer;
 
 /*
 	Check if buffer has new line and return index of line
@@ -35,12 +35,11 @@ int	ft_checknl(char *buffer)
 	return (-1);
 }
 
-
 void	free_gnl_buffer(void)
 {
-	if (buffer)
-		free(buffer);
-	buffer = NULL;
+	if (g_buffer)
+		free(g_buffer);
+	g_buffer = NULL;
 }
 
 /*
@@ -140,19 +139,19 @@ char	*get_next_line(int fd)
 	newread = (char *)ft_calloc(1, BUFFER_SIZE + 1);
 	if (!newread)
 		return (NULL);
-	if (!buffer)
+	if (!g_buffer)
 	{
-		buffer = (char *)ft_calloc(1, 1);
-		if (!buffer)
+		g_buffer = (char *)ft_calloc(1, 1);
+		if (!g_buffer)
 		{
 			free(newread);
 			return (NULL);
 		}
 	}
-	buffer = get_next_line_2(fd, buffer, newread);
-	if (!buffer)
+	g_buffer = get_next_line_2(fd, g_buffer, newread);
+	if (!g_buffer)
 		return (NULL);
-	return (ft_splitnl(buffer, ft_checknl(buffer)));
+	return (ft_splitnl(g_buffer, ft_checknl(g_buffer)));
 }
 
 char	*get_next_line_2(int fd, char *buffer, char *newread)
@@ -179,13 +178,6 @@ char	*get_next_line_2(int fd, char *buffer, char *newread)
 	}
 	free(newread);
 	return (buffer);
-}
-
-char	*ft_free_null(char *buffer, char *newread)
-{
-	free(buffer);
-	free(newread);
-	return (NULL);
 }
 
 // int	main(void)

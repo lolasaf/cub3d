@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 00:29:24 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	rgb_to_hex(int r, int g, int b)
 	return (hex_color);
 }
 
-void	draw_ceiling(my_game *game, t_draw *draw_vars)
+void	draw_ceiling(t_game *game, t_draw *draw_vars)
 {
 	int	hex_c;
 	int	y;
@@ -37,7 +37,7 @@ void	draw_ceiling(my_game *game, t_draw *draw_vars)
 	}
 }
 
-void	draw_floor(my_game *game, t_draw *draw_vars)
+void	draw_floor(t_game *game, t_draw *draw_vars)
 {
 	int	hex_f;
 	int	y;
@@ -66,7 +66,7 @@ void	get_draw_vars(t_ray *ray, t_draw *draw_vars)
 		draw_vars->draw_end = SCREEN_HEIGHT - 1;
 }
 
-void	draw(my_game *game, t_draw *draw_vars, t_ray *ray)
+void	draw(t_game *game, t_draw *draw_vars, t_ray *ray)
 {
 	get_draw_vars(ray, draw_vars);
 	draw_wall(game, ray, draw_vars);

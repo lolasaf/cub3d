@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:35:57 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 23:15:14 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:26:44 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,20 @@ int	set_ceiling(t_data *data, int values[3])
 	return (2);
 }
 
+void	set_f_c(int *j, char id, t_data *data, int values[3])
+{
+	if (id == 'F')
+		*j += set_floor(data, values);
+	else if (id == 'C')
+		*j += set_ceiling(data, values);
+}
+
 void	parse_color_tok(char id, char *token, t_data *data, char *frline)
 {
 	static int	j;
 	int			i;
 	int			values[3];
 
-	// values[0] = 0;
-	// values[1] = 0;
-	// values[2] = 0;
 	ft_memset(values, 0, 3);
 	token = trim(token);
 	if (!parse_color(token, values))
@@ -56,10 +61,7 @@ void	parse_color_tok(char id, char *token, t_data *data, char *frline)
 		}
 		i++;
 	}
-	if (id == 'F')
-		j += set_floor(data, values);
-	else if (id == 'C')
-		j += set_ceiling(data, values);
+	set_f_c(&j, id, data, values);
 	if (j == 3)
 		data->is_last++;
 }
