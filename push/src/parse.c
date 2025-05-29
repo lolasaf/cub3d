@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:21:01 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 15:14:17 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:45:06 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*add_map_line(t_build *assmbl, const char *line, t_data *data, int *fd)
 		cpy[distance] = '\0';
 	}
 	assmbl->map_lines[assmbl->count] = ft_strdup(cpy);
-	free(cpy);
+	free((char *)line);
 	if (!assmbl->map_lines[assmbl->count])
 		err_msg("ft_strdup failed", (t_build *)assmbl, (t_data *)data); // check exit
 	assmbl->count++;
@@ -117,23 +117,42 @@ void	parse_func(char *file, t_build *b, t_data *data)
 char	*check_map(char *is_line, int *fd, int *stop)
 {
 	char    *trimmed;                                       
-                                                        
-	trimmed = NULL;                                                                                            
+    char *another;                             
+	trimmed = NULL;        
+	another = NULL;                                                                                    
 	trimmed = ft_trim(is_line);                     
-	while (trimmed != NULL && *trimmed == '\n')     
-			trimmed = ft_trim(get_next_line(*fd));  
-	if (trimmed != NULL)                            
-	{                                               
-			free(trimmed);                          
-			trimmed = ft_strdup("freebuilt");       
-			return trimmed;                         
-	}                         
-	else                                            
-	{                                               
-			free(is_line);                          
-			*stop = 1;                              
+	while (trimmed != NULL && *trimmed == '\n')
+	{
+		if (another)
+		{
+			free(another);
+			another = NULL;
+		}
+		another = get_next_line(*fd);     
+		trimmed = ft_trim(another);  
 	}
-	return trimmed;                                   
+	if (trimmed != NULL)                            
+	{
+		if (another)                                            
+			free(another);
+		another = NULL;                          
+		trimmed = ft_strdup("freebuilt");       
+		return trimmed;                         
+	}
+	else                                            
+	{
+		free(is_line);
+		is_line = NULL;
+		*stop = 1;                              
+	}
+	char *ret = ft_strdup(trimmed);
+	if (another)
+		free(another);
+	another = NULL;
+	if (is_line)
+		free(is_line);
+	is_line = NULL;
+	return ret;                                   
 
 }
 // // need the stop int to stop the func there is a case where trimmed will be null and u need to set line = is_line if stop != 1 continue else break ;
@@ -199,13 +218,23 @@ void	parse_func(char *file, t_build *b, t_data *data)
 					if (is_line)
 					{
 						free(is_line);
-						free(line);
+						is_line = NULL;
+						if (line)
+							free(line);
+						line = NULL;
 						break;
 					}
 				}
 				if (is_line && ft_strncmp(is_line, "freebuilt", 10) == 0)
+				{
+					if (is_line)
+						free(is_line);
+					is_line = NULL;
 					err_msg("New line detected in map", (t_build *)b, (t_data *)data);
+				}
 			}
+			// if (line)
+			//  	free(line);
 			line = is_line;
 		}
 		else
@@ -230,6 +259,7 @@ void	parse(int argc, char **argv, t_data *data)
 	memset(&b, 0, sizeof(t_build));
 	b.count = 0;
 	data->is_last = 0;
+	data->build = &b;
 	ft_ext_check(argv[1], ".cub");
 	parse_func(argv[1], &b, data);
 	if (b.map_lines[0] == NULL)

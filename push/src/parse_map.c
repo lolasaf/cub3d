@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:56:06 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/27 19:08:05 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:47:07 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ char	**pvmap(char **lines, int count, t_data *data, t_build *b)
 	pad_map(map, lines, data->map_height, data->map_width);
 	p_count = find_player(map, data->map_height, data->map_width, data);
 	if (p_count != 1)
+	{
+		ft_free_map(map);
 		err_msg("Error: Map must contain exactly one player position", (t_build *) b, (t_data *)data);
+	}
 	flood_it(map, data->num[1], data->num[0], (t_build *) b, data);
 	return (map);
 }

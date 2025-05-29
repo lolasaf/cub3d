@@ -173,6 +173,7 @@ typedef struct s_data
     t_texture texture[4];
     t_color color[2];
     t_texture_object *o;
+    t_build *build;
     char **map;
     int map_width;
     int map_height;
@@ -219,7 +220,7 @@ void free_build(t_build *build);
 // find_player.c
 int		find_player(char **map, int rows, int cols, t_data *data);
 int		set_player(char c, int i, int j, t_data *data);
-void	check_borders(t_data *d, int rows, int cols);
+void	check_borders(char **map, t_data *d, int rows, int cols);
 
 // initialize.c
 void	initialize_game(my_game *game, t_data *data);
@@ -246,7 +247,7 @@ void ft_move_z(char c, my_game *game, double rs);
 void ft_move_x(char c, my_game *game, double ms);
 
 // parse_color_tok.c
-void	parse_color_tok(char id, char *token, t_data *data);
+void	parse_color_tok(char id, char *token, t_data *data, char *frline);
 int		set_ceiling(t_data *data, int values[3]);
 int		set_floor(t_data *data, int values[3]);
 

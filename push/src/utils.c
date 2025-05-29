@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:18:02 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 12:18:28 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:36:30 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	err_msg(const char *msg, void *build, void *map)
 {
 	free_build((t_build *)build);
 	free_map_v2((t_data *)map);
+	free_gnl_buffer();
 	printf("$error %s\n", msg);
 	// NEED TO FREE STUFF IN DIFFERENT SCENARIOS
 	exit(1);

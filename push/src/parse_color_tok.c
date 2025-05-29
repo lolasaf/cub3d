@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:35:57 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/28 14:18:50 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:39:11 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	set_ceiling(t_data *data, int values[3])
 	return (2);
 }
 
-void	parse_color_tok(char id, char *token, t_data *data)
+void	parse_color_tok(char id, char *token, t_data *data, char *frline)
 {
 	static int	j;
 	int			i;
@@ -49,12 +49,23 @@ void	parse_color_tok(char id, char *token, t_data *data)
 		// xtra = ft_strdup(trim(token));
 	token = trim(token);
 	if (!parse_color(token, values))
+	{
+		if (frline)
+			free(frline);
+		frline = NULL;
 		err_msg("Error! Failed to parse color values!", NULL, (t_data *)data);
+		
+	}
 	i = 0;
 	while (i < 3)
 	{
 		if (values[i] < 0 || values[i] > 255)
+		{
+			if (frline)
+				free(frline);
+			frline = NULL;
 			err_msg("Error: Color values out of range", NULL, (t_data *)data);
+		}
 		i++;
 	}
 	if (id == 'F')
