@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 13:51:41 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:26:32 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	ft_parse_texture(char *token, char *line, t_data *data, char *frline)
 		token = NULL;
 		free(frline);
 		frline = NULL;
+		free_gnl_buffer();
 		err_msg("Duplicate texture detected", NULL, (t_data *)data);
 	}
 	if (ft_strncmp(token, "NO", 2) == 0)

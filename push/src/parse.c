@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:21:01 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 13:25:05 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:14:17 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,10 @@ void	parse_func(char *file, t_build *b, t_data *data)
 			line = is_line;
 		}
 		else
+		{
 			line = newline(line, data, &fd);
+		}
+			// line = newline(line, data, &fd);
 	}
 	//free(t_build) //need to also free it before you err in the check map add_map_line func
 	close(fd);

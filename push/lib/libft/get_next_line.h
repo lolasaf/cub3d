@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:59:26 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 00:57:00 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:26:03 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # ifdef BUFFER_SIZE
 # else
@@ -30,11 +30,12 @@ int		ft_checknl(char *buffer);
 char	*ft_splitnl(char *buff, int i);
 char	*ft_readfile(int fd, char *buffer);
 size_t	ft_strlen(const char *s);
-void	*ft_calloc_gnl(size_t nmemb, size_t size);
+void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 char	*ft_buffjoin(char *buffer, char const *buf);
 char	*ft_strdup(const char *s);
 char	*ft_free_null(char *buffer, char *newread);
 char	*get_next_line_2(int fd, char *buffer, char *newread);
+void	free_gnl_buffer(void);
 
 #endif

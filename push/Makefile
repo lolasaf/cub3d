@@ -6,7 +6,7 @@
 #    By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/05/27 17:00:50 by kforfoli         ###   ########.fr        #
+#    Updated: 2025/05/29 15:22:13 by kforfoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 #--- HEADERS ---
 HEADERS := $(addprefix $(INCDIR)/, cub3d.h)
 LIBFTHEADERS := $(addprefix $(LIBFTDIR)/, libft.h ft_printf.h\
-	get_next_line_bonus.h)
+	get_next_line.h)
 MLXHEADER := /usr/local/include
 #--- FLAGS ---
 CC := cc

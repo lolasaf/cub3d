@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:36:48 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 00:57:54 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 01:57:12 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	n;
+/*size_t	ft_strlen(const char *s)
+{
+	size_t	n;
 
-// 	n = 0;
-// 	if (!s)
-// 		return (0);
-// 	while (s[n])
-// 		n++;
-// 	return (n);
-// }
+	n = 0;
+	if (!s)
+		return (0);
+	while (s[n])
+		n++;
+	return (n);
+}*/
 
-void	*ft_calloc_gnl(size_t nmemb, size_t size)
+/*void	*ft_calloc(size_t nmemb, size_t size)
 {
 	size_t	bytes;
 	void	*ptr;
@@ -37,7 +37,7 @@ void	*ft_calloc_gnl(size_t nmemb, size_t size)
 		return (0);
 	ft_bzero(ptr, bytes);
 	return (ptr);
-}
+}*/
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -61,7 +61,7 @@ char	*ft_buffjoin(char *buffer, char const *newread)
 
 	temp = ft_strdup(buffer);
 	free(buffer);
-	buffer = (char *)ft_calloc_gnl(1, ft_strlen(temp) + ft_strlen(newread) + 1);
+	buffer = (char *)ft_calloc(1, ft_strlen(temp) + ft_strlen(newread) + 1);
 	if (!buffer)
 		return (NULL);
 	i = -1;
@@ -78,21 +78,21 @@ char	*ft_buffjoin(char *buffer, char const *newread)
 	return (buffer);
 }
 
-// char	*ft_strdup(const char *s)
-// {
-// 	size_t	size;
-// 	char	*ptr;
-// 	size_t	i;
+/*char	*ft_strdup(const char *s)
+{
+	size_t	size;
+	char	*ptr;
+	size_t	i;
 
-// 	i = 0;
-// 	size = ft_strlen(s);
-// 	ptr = (char *)ft_calloc(1, size + 1);
-// 	if (!ptr)
-// 		return (0);
-// 	while (i < size + 1)
-// 	{
-// 		((char *)ptr)[i] = ((char *)s)[i];
-// 		i++;
-// 	}
-// 	return (ptr);
-// }
+	i = 0;
+	size = ft_strlen(s);
+	ptr = (char *)ft_calloc(1, size + 1);
+	if (!ptr)
+		return (0);
+	while (i < size + 1)
+	{
+		((char *)ptr)[i] = ((char *)s)[i];
+		i++;
+	}
+	return (ptr);
+}*/

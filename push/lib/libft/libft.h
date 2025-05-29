@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:30:48 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/04/03 14:12:46 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:22:23 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <bsd/string.h>
 # include <stdio.h>
 # include "ft_printf.h"
-# include "get_next_line_bonus.h"
+# include "get_next_line.h"
 
 typedef struct s_list
 {

@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:58:39 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 00:58:28 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:25:50 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
+
+static char	*buffer;
 
 /*
 	Check if buffer has new line and return index of line
@@ -33,6 +35,14 @@ int	ft_checknl(char *buffer)
 	return (-1);
 }
 
+
+void	free_gnl_buffer(void)
+{
+	if (buffer)
+		free(buffer);
+	buffer = NULL;
+}
+
 /*
 	returns string before new line ending in new line and null
 	rearranges buffer to keep everything after new line and 
@@ -47,7 +57,7 @@ char	*ft_splitnl(char *buff, int i)
 		return (NULL);
 	if (i < 0)
 		i = ft_strlen(buff) - 1;
-	temp = (char *)ft_calloc_gnl(sizeof(char), i + 2);
+	temp = (char *)ft_calloc(sizeof(char), i + 2);
 	if (!temp)
 		return (NULL);
 	j = -1;
@@ -64,29 +74,85 @@ char	*ft_splitnl(char *buff, int i)
 	return (temp);
 }
 
-char	*get_next_line(int fd)
+/*char	*get_next_line_save(int fd)
 {
-	static char	*buffer[1024];
+	static char	*buffer;
 	char		*newread;
+	int			bytesread;
 
+	bytesread = 0;
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	newread = (char *)ft_calloc_gnl(1, BUFFER_SIZE + 1);
+	newread = (char *)ft_calloc(1, BUFFER_SIZE + 1);
 	if (!newread)
 		return (NULL);
-	if (!buffer[fd])
+	if (!buffer)
 	{
-		buffer[fd] = (char *)ft_calloc_gnl(1, 1);
-		if (!buffer[fd])
+		buffer = (char *)ft_calloc(1, 1);
+		if (!buffer)
 		{
 			free(newread);
 			return (NULL);
 		}
 	}
-	buffer[fd] = get_next_line_2(fd, buffer[fd], newread);
-	if (!buffer[fd])
+	while (ft_checknl(buffer) < 0)
+	{
+		bytesread = read(fd, newread, BUFFER_SIZE);
+		if (bytesread < 0)
+		{
+			free(buffer);
+			buffer = NULL;
+			free(newread);
+			return (NULL);
+		}
+		else if (bytesread == 0)
+		{
+			if (ft_strlen(buffer) == 0)
+			{
+				free(buffer);
+				buffer = NULL;
+				free(newread);
+				return (NULL);
+			}
+			free(newread);
+			return (ft_splitnl(buffer, ft_checknl(buffer)));
+		}
+		newread[bytesread] = 0;
+		buffer = ft_buffjoin(buffer, newread);
+		if (ft_strlen(buffer) == 0)
+		{
+			free(buffer);
+			free(newread);
+			buffer = NULL;
+			return (NULL);
+		}
+	}
+	free(newread);
+	return (ft_splitnl(buffer, ft_checknl(buffer)));
+}*/
+
+char	*get_next_line(int fd)
+{
+	char		*newread;
+
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	return (ft_splitnl(buffer[fd], ft_checknl(buffer[fd])));
+	newread = (char *)ft_calloc(1, BUFFER_SIZE + 1);
+	if (!newread)
+		return (NULL);
+	if (!buffer)
+	{
+		buffer = (char *)ft_calloc(1, 1);
+		if (!buffer)
+		{
+			free(newread);
+			return (NULL);
+		}
+	}
+	buffer = get_next_line_2(fd, buffer, newread);
+	if (!buffer)
+		return (NULL);
+	return (ft_splitnl(buffer, ft_checknl(buffer)));
 }
 
 char	*get_next_line_2(int fd, char *buffer, char *newread)
