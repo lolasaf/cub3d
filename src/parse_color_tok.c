@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:35:57 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 20:19:43 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 23:15:14 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	parse_color_tok(char id, char *token, t_data *data, char *frline)
 	int			i;
 	int			values[3];
 
-	values[0] = 0;
-	values[1] = 0;
-	values[2] = 0;
+	// values[0] = 0;
+	// values[1] = 0;
+	// values[2] = 0;
+	ft_memset(values, 0, 3);
 	token = trim(token);
 	if (!parse_color(token, values))
 	{
