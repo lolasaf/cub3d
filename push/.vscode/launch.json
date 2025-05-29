@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/cub3d",
-			"args": ["maps/bad/file_letter_end.cub"],
+			"args": ["maps/bad/textures_forbidden.cub"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:15:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 13:30:44 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:44:42 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	load_texture_img(my_game *game)
 	game->texture_img[4] = NULL;
 	if (!game->texture_img[0] || !game->texture_img[1] || !game->texture_img[2]
 		|| !game->texture_img[3])
-		err_msg("Failed to load textures", NULL, (t_data *)game->conf);
+	{
+		destroy_mlx(game);
+		destroy_buffer(game);
+		err_msg("Failed to load textures", (t_build *) game->conf->build, (t_data *)game->conf);
+	}
 }
 
 void	set_dets(my_game *game)

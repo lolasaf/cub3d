@@ -216,6 +216,10 @@ void	free_textures(my_game *game);
 void	free_texture_vars(my_game *game);
 void free_map_v2(t_data *conf);
 void free_build(t_build *build);
+void	destroy_mlx(my_game *game);
+void	destroy_buffer(my_game *game);
+void	free_block(void *block);
+
 
 // find_player.c
 int		find_player(char **map, int rows, int cols, t_data *data);

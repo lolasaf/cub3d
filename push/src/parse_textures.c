@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 16:02:20 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:08:22 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ int	ft_parse_texture(char *token, char *line, t_data *data, char *frline)
 	trimmed = trim(line);
 	if (i == 10)
 	{
-		free(token);
-		token = NULL;
-		free(frline);
-		frline = NULL;
+		free_block(token);
+		free_block(frline);
 		free_gnl_buffer();
 		err_msg("Duplicate texture detected", NULL, (t_data *)data);
 	}

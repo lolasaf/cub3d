@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 12:37:05 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:51:27 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	free_textures(my_game *game)
 		}
 		i--;
 	}
+}
+
+void	free_block(void *block)
+{
+	if (block)
+		free(block);
+	block = NULL;
 }
 
 void	free_map(t_data *conf)
@@ -122,14 +129,24 @@ int	exit_game(my_game *game)
 	free_map(game->conf);
 	free_textures(game);
 	free_sprites(game);
+	destroy_buffer(game);
+	destroy_mlx(game);
+	exit(0);
+}
+
+void	destroy_mlx(my_game *game)
+{
+	mlx_destroy_image(game->mlx, game->img->img_ptr);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+}
+
+void	destroy_buffer(my_game *game)
+{
 	if (game->z_buffer != NULL)
 	{
 		free(game->z_buffer);
 		game->z_buffer = NULL;
 	}
-	mlx_destroy_image(game->mlx, game->img->img_ptr);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	exit(0);
 }

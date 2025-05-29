@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:40:08 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 15:41:15 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:07:59 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_parse_tandc(const char *line, t_data *data)
 		token = ft_calloc(token_len + 1, sizeof(char));
 		if (!token)
 		{
-			free((char *)line);
+			free_block((char *)line);
 			err_msg("Memory allocation failure", NULL, (t_data *)data); // free line
 		}
 		ft_strncpy(token, token_start, token_len);

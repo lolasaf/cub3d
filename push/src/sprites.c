@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 15:29:35 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:46:22 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	mlx_sprite_load(my_game *g)
 		if (!g->sprites[i].img)
 		{
 			free_textures(g);
-			err_msg("Failed to load sprite texture. Check path!", NULL, g->conf);
+			destroy_mlx(g);
+			destroy_buffer(g);
+			err_msg("Failed to load sprite texture. Check path!", (t_build *)g->conf->build, g->conf);
 		}
 		// Potentially call freeing functions here as well check if they exist ie !null and then free
 		i++;
