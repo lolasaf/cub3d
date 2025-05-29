@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 02:17:54 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:58:29 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	isnot_wall(my_game *game, double x, double y)
 {
-	if (game->conf->map[(int)y][(int)x] != '\0' 
+	if (game->conf->map[(int)y][(int)x] != '\0'
 		&& game->conf->map[(int)y][(int)x] != '1')
 	{
 		game->player_x = x;
@@ -27,23 +27,23 @@ int	handle_keypress(int kc, my_game *game)
 	double	move_speed;
 	double	rot_speed;
 
-	move_speed = 0.1;
+	move_speed = 0.05;
 	rot_speed = 0.05;
 	if (kc == ESC_KEY)
 		exit_game(game);
-	if (kc == W_KEY)
+	if (kc == W_KEY && game->keys->key_up == true)
 		ft_move_y('+', game, move_speed);
-	else if (kc == S_KEY)
+	if (kc == S_KEY && game->keys->key_down == true)
 		ft_move_y('-', game, move_speed);
-	else if (kc == A_KEY)
+	if (kc == A_KEY && game->keys->key_left == true)
 		ft_move_x('<', game, move_speed);
-	else if (kc == D_KEY)
+	if (kc == D_KEY && game->keys->key_right == true)
 		ft_move_x('>', game, move_speed);
-	else if (kc == RIGHT_ARROW)
+	if (kc == RIGHT_ARROW && game->keys->rotate_r == true)
 		ft_move_z(')', game, rot_speed);
-	else if (kc == LEFT_ARROW)
+	if (kc == LEFT_ARROW && game->keys->rotate_l == true)
 		ft_move_z('(', game, rot_speed);
-	clear_image(game, game->img);
+	clear_image(game);
 	render_game(game);
 	return (0);
 }
@@ -52,14 +52,14 @@ int	mouse_hook(int kc, int x, int y, my_game *game)
 {
 	double	rot_speed;
 
-	rot_speed = 0.1;
+	rot_speed = 0.05;
 	x = y;
 	y = x;
 	if (kc == SCROLL_DOWN)
 		ft_move_z(')', game, rot_speed);
 	else if (kc == SCROLL_UP)
 		ft_move_z('(', game, rot_speed);
-	clear_image(game, game->img);
+	clear_image(game);
 	render_game(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 22:09:55 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:57:20 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	draw_wall_column(my_game *game, t_draw *draw_vars, int tex_x)
 		txt_addr = game->conf->o->texture_addr[draw_vars->texture];
 		color = txt_addr[tex_y * game->conf->o->texture_ll[draw_vars->texture] 
 			/ 4 + tex_x];
-		put_pixel_to_img(game->mlx, game->img, draw_vars->col, y, color);
+		put_pixel_to_img(game, draw_vars->col, y, color);
 		y++;
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3parse_map_utils.c                                 :+:      :+:    :+:   */
+/*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:02:47 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 23:10:34 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:23:11 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	ft_free_map(char **map)
 {
 	int	i;
 
-	if (map == NULL) 
+	if (map == NULL)
 		return ;
 	i = 0;
 	while (map[i] != NULL)
 	{
-		free(map[i]); 
-		map[i] = NULL; 
+		free_block(map[i]);
+		map[i] = NULL;
 		i++;
 	}
-	free(map); 
+	free_block(map);
 	map = NULL;
 }
 

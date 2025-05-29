@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1parse_color_tok.c                                 :+:      :+:    :+:   */
+/*   parse_color_tok.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:35:57 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 22:39:31 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:19:43 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	set_ceiling(t_data *data, int values[3])
 	return (2);
 }
 
-void	parse_color_tok(char id, char *token, t_data *data)
+void	parse_color_tok(char id, char *token, t_data *data, char *frline)
 {
 	static int	j;
 	int			i;
@@ -41,12 +41,18 @@ void	parse_color_tok(char id, char *token, t_data *data)
 	values[2] = 0;
 	token = trim(token);
 	if (!parse_color(token, values))
-		err_msg("Error! Failed to parse color values!");
+	{
+		free_block(frline);
+		err_msg("Failed to parse color values!", NULL, (t_data *)data);
+	}
 	i = 0;
 	while (i < 3)
 	{
 		if (values[i] < 0 || values[i] > 255)
-			err_msg("Error: Color values out of range");
+		{
+			free_block(frline);
+			err_msg("Color values out of range", NULL, (t_data *)data);
+		}
 		i++;
 	}
 	if (id == 'F')

@@ -6,23 +6,27 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:03:57 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 00:32:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:21:16 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_borders(t_data *d, int rows, int cols)
+void	check_borders(char **map, t_data *d, int rows, int cols)
 {
-	if (d->num[0] == 0 || d->num[0] == rows - 1 
-		|| d->num[1] == 0 || d->num[1] == cols - 1)
-		err_msg("Player cannot be in borders");
+	if (d->num[0] == 0 || d->num[0] == rows - 1 || d->num[1] == 0
+		|| d->num[1] == cols - 1)
+		{
+			ft_free_map(map);
+			err_msg("Player cannot be in borders",(t_build *)d->build, (t_data *)d);
+		}
+		// err_msg("Player cannot be in borders", NULL, (t_data *)d);
 }
 
 int	set_player(char c, int i, int j, t_data *data)
 {
 	if (!is_valid_char(c))
-		err_msg("Error: Invalid character in map");
+		err_msg("Error: Invalid character in map", NULL, (t_data *)data);
 	if (is_player(c))
 	{
 		data->player = c;
@@ -42,16 +46,16 @@ int	find_player(char **map, int rows, int cols, t_data *data)
 
 	p_count = 0;
 	i = 0;
-	while (i < rows) 
+	while (i < rows)
 	{
 		j = 0;
-		while (j < cols) 
+		while (j < cols)
 		{
 			c = map[i][j];
 			if (set_player(c, i, j, data))
 				p_count++;
 			if (p_count != 0)
-				check_borders(data, rows, cols);
+				check_borders(map, data, rows, cols);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/25 01:34:17 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:14:41 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,19 @@ int	set_texture(t_data *data, int i, char *path, char *str)
 	return (j);
 }
 
-int	ft_parse_texture(char *token, char *line, t_data *data)
+int	ft_parse_texture(char *token, char *line, t_data *data, char *frline)
 {
 	char		*trimmed;
 	static int	i;
 
 	trimmed = trim(line);
 	if (i == 10)
-		err_msg("Duplicate texture detected");
+	{
+		free_block(token);
+		free_block(frline);
+		free_gnl_buffer();
+		err_msg("Duplicate texture detected", NULL, (t_data *)data);
+	}
 	if (ft_strncmp(token, "NO", 2) == 0)
 		i += set_texture(data, 0, trimmed, "NO");
 	if (ft_strncmp(token, "SO", 2) == 0)
@@ -48,7 +53,7 @@ int	ft_parse_texture(char *token, char *line, t_data *data)
 	return (1);
 }
 
-void	ft_check_xpm(char *path, const char *xpm)
+void	ft_check_xpm(char *path, const char *xpm, t_data *data)
 {
 	const char	*base;
 	const char	*slash;
@@ -61,22 +66,22 @@ void	ft_check_xpm(char *path, const char *xpm)
 		base = path;
 	dot = ft_strrchr(base, '.');
 	if (dot == NULL)
-		err_msg("ERR:Not a valid texture");
+		err_msg("Not a valid texture", data->build, data);
 	if (strcmp(dot, xpm) != 0)
-		err_msg("ERR: Not a valid texture");
+		err_msg("Not a valid texture", data->build, data);
 }
 
 void	ft_validate_textures(t_data *data)
 {
 	int	i;
 
-	if (data->texture[0].path == NULL || data->texture[1].path == NULL 
+	if (data->texture[0].path == NULL || data->texture[1].path == NULL
 		|| data->texture[2].path == NULL || data->texture[3].path == NULL)
-		err_msg("Texture paths not provided");
+		err_msg("Texture paths not provided", NULL, (t_data *)data);
 	i = 0;
 	while (i < 4)
 	{
-		ft_check_xpm(data->texture[i].path, ".xpm");
+		ft_check_xpm(data->texture[i].path, ".xpm", data);
 		i++;
 	}
 }

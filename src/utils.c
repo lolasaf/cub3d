@@ -6,25 +6,23 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:18:02 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 23:21:44 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:57:55 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	clear_image(t_imgp *img)
-// {
-// 	memset(img->addr, 0, img->line_length * SCREEN_HEIGHT);
-// }
-
-void	err_msg(const char *msg)
+void	err_msg(const char *msg, void *build, void *data)
 {
-	printf("$error %s\n", msg);
-	// NEED TO FREE STUFF IN DIFFERENT SCENARIOS
+	free_build((t_build *)build);
+	free_map((t_data *)data);
+	free_texture_vars((t_data *)data);
+	free_gnl_buffer();
+	printf("$Error: %s\n", msg);
 	exit(1);
 }
 
-void	clear_image(my_game *game, t_imgp *img)
+void	clear_image(my_game *game)
 {
 	int	px;
 	int	py;
@@ -35,7 +33,7 @@ void	clear_image(my_game *game, t_imgp *img)
 	{
 		py = -1;
 		while (++py < SCREEN_HEIGHT)
-			put_pixel_to_img(game->mlx, img, px, py, 0);
+			put_pixel_to_img(game, px, py, 0);
 	}
 }
 
@@ -49,7 +47,7 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 		dest[i] = src[i];
 		i++;
 	}
-	while (i < n) 
+	while (i < n)
 	{
 		dest[i] = '\0';
 		i++;
@@ -64,10 +62,14 @@ to fit the bits per pixel requirement of the image.
 The bits position depends on the computer's endian,
 bits are assigned accordingly.
 */
-void	put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color)
+void	put_pixel_to_img(my_game *game, int x, int y, int color)
 {
-	int	pixel;
+	int		pixel;
+	void	*mlx;
+	t_imgp	*img;
 
+	mlx = game->mlx;
+	img = game->img;
 	if (img->bbp != 32)
 	{
 		color = mlx_get_color_value(mlx, color);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
+#    By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 10:42:56 by wel-safa          #+#    #+#              #
-#    Updated: 2025/04/03 14:01:24 by wel-safa         ###   ########.fr        #
+#    Updated: 2025/05/29 15:22:37 by kforfoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ BONUSSRC := ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
 BONUSOBJS := ${BONUSSRC:.c=.o}
 
 EXTRASRC := ft_printf_base.c ft_printf.c ft_printf_putnbr.c\
-	get_next_line_bonus.c get_next_line_utils_bonus.c
+	get_next_line.c get_next_line_utils.c
 EXTRAOBJS := $(EXTRASRC:.c=.o)
 
 HEADER := libft.h
-EXTRAHEADER := ft_printf.h get_next_line_bonus.h
+EXTRAHEADER := ft_printf.h get_next_line.h
 
 CFLAGS := -Wall -Werror -Wextra
 ARFLAGS := rcs

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1parse_utils.c                                     :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:47:18 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/24 22:49:42 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:34:42 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_ext_check(const char *path, const char *cub)
 		base = path;
 	dot = ft_strrchr(base, '.');
 	if (dot == NULL)
-		err_msg("ERR: Not a valid file extension");
+		err_msg("ERR: Not a valid file extension", NULL, NULL);
 	if (strcmp(dot, cub) != 0)
-		err_msg("ERR: Not a valid file extension");
+		err_msg("ERR: Not a valid file extension", NULL, NULL);
 }

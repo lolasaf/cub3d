@@ -124,7 +124,7 @@ typedef struct s_game
     void    *mlx;
     void    *win;
     t_imgp    *img;
-    t_data *conf;
+    t_data *conf; // free
     t_press *keys;
     void    *texture_img[5]; //??why 5?
     double player_x;
@@ -173,6 +173,7 @@ typedef struct s_data
     t_texture texture[4];
     t_color color[2];
     t_texture_object *o;
+    t_build *build;
     char **map;
     int map_width;
     int map_height;
@@ -208,16 +209,22 @@ void    draw_ceiling(my_game *game, t_draw *draw_vars);
 int     rgb_to_hex(int r, int g, int b);
 
 // exit_game.c
-int		exit_game(my_game *game);
-void	free_sprites(my_game *game);
 void	free_map(t_data *conf);
+void	free_build(t_build *build);
+void	free_sprites(my_game *game);
+int		exit_game(my_game *game);
+
+// exit_game_utils.c
+void	free_block(void *block);
+void	destroy_mlx(my_game *game);
+void	destroy_buffer(my_game *game);
+void	free_texture_vars(t_data *data);
 void	free_textures(my_game *game);
-void	free_texture_vars(my_game *game);
 
 // find_player.c
 int		find_player(char **map, int rows, int cols, t_data *data);
 int		set_player(char c, int i, int j, t_data *data);
-void	check_borders(t_data *d, int rows, int cols);
+void	check_borders(char **map, t_data *d, int rows, int cols);
 
 // initialize.c
 void	initialize_game(my_game *game, t_data *data);
@@ -244,7 +251,7 @@ void ft_move_z(char c, my_game *game, double rs);
 void ft_move_x(char c, my_game *game, double ms);
 
 // parse_color_tok.c
-void	parse_color_tok(char id, char *token, t_data *data);
+void	parse_color_tok(char id, char *token, t_data *data, char *frline);
 int		set_ceiling(t_data *data, int values[3]);
 int		set_floor(t_data *data, int values[3]);
 
@@ -261,13 +268,15 @@ void	ft_free_map(char **map);
 
 // parse_map.c
 void	process_map(t_build *b, t_data *data);
-char	**pvmap(char **lines, int count, t_data *data);
+char	**pvmap(char **lines, int count, t_data *data, t_build *b);
 char	**init_map(char **lines, int count, t_data *data);
-void	flood_it(char **map, int x, int y);
+void	flood_it(char **map, int x, int y, t_build *b, t_data *data);
 
 // parse_tandc.c
+void	ft_colorortext(char *str, char *token, t_data *data, char *frline);
+//void	ft_colorortext(char *str, char *token, t_data *data);
+//void	ft_colorortext(char *str, char *token, t_data *data, char *frline);
 void	ft_parse_tandc(const char *line, t_data *data);
-void	ft_colorortext(char *str, char *token, t_data *data);
 
 // parse_texture_load.c
 void	mlx_texture_load(my_game *game);
@@ -276,9 +285,11 @@ void	load_texture_img(my_game *game);
 
 // parse_textures.c
 void	ft_validate_textures(t_data *data);
-void	ft_check_xpm(char *path, const char *xpm);
-int		ft_parse_texture(char *token, char *line, t_data *data);
+void	ft_check_xpm(char *path, const char *xpm, t_data *data);
+//int		ft_parse_texture(char *token, char *line, t_data *data);
+int		ft_parse_texture(char *token, char *line, t_data *data, char *frline);
 int		set_texture(t_data *data, int i, char *path, char *str);
+
 
 // parse_utils.c
 void	ft_ext_check(const char *path, const char *cub);
@@ -300,10 +311,10 @@ void	render_game(my_game *game);
 
 // utils.c
 int		ft_isspace(char c);
-void	put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color);
+void	put_pixel_to_img(my_game *game, int x, int y, int color);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
-void	clear_image(my_game *game, t_imgp *img);
-void	err_msg(const char *msg);
+void	clear_image(my_game *game);
+void	err_msg(const char *msg, void *build, void *conf);
 
 //sprites
 void ft_init_sprites(my_game *g);

@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/18 22:32:45 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:57:01 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_mini_player(my_game *game, int scale)
 		i = px - 2;
 		while (i <= px + 2)
 		{
-			put_pixel_to_img(game->mlx, game->img, i, j, 0xFFFF00);
+			put_pixel_to_img(game, i, j, 0xFFFF00);
 			i++;
 		}
 		j++;
@@ -49,7 +49,7 @@ void	draw_mini_grid(my_game *game, int scale, int x, int y)
 	while (i <= (x + 1) * scale)
 	{
 		while (j <= (y + 1) * scale)
-			put_pixel_to_img(game->mlx, game->img, i, j++, color);
+			put_pixel_to_img(game, i, j++, color);
 		i++;
 		j = y * scale;
 	}
