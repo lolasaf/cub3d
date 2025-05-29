@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:40:20 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 13:19:23 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:20:05 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	initialize_game(my_game *game, t_data *data)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		err_msg("Failed to initialize mlx", NULL, (t_data *)data);
-	game->win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+	game->win = mlx_new_window(game->mlx, SCREEN_WIDTH, \
+		SCREEN_HEIGHT, "cub3d");
 	(game->img)->img_ptr = mlx_new_image(game->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	if (!game->img->img_ptr)

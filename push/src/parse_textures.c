@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 19:08:22 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:14:41 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	ft_check_xpm(char *path, const char *xpm, t_data *data)
 		base = path;
 	dot = ft_strrchr(base, '.');
 	if (dot == NULL)
-		err_msg("ERR:Not a valid texture", (t_build *)data->build, (t_data *)data);
+		err_msg("Not a valid texture", data->build, data);
 	if (strcmp(dot, xpm) != 0)
-		err_msg("ERR: Not a valid texture", (t_build *)data->build, (t_data *)data);
+		err_msg("Not a valid texture", data->build, data);
 }
 
 void	ft_validate_textures(t_data *data)

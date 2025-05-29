@@ -3,41 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:18:02 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 15:36:30 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:57:55 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	clear_image(t_imgp *img)
-// {
-// 	memset(img->addr, 0, img->line_length * SCREEN_HEIGHT);
-// }
-
-void	err_msg(const char *msg, void *build, void *map)
+void	err_msg(const char *msg, void *build, void *data)
 {
 	free_build((t_build *)build);
-	free_map_v2((t_data *)map);
+	free_map((t_data *)data);
+	free_texture_vars((t_data *)data);
 	free_gnl_buffer();
-	printf("$error %s\n", msg);
-	// NEED TO FREE STUFF IN DIFFERENT SCENARIOS
+	printf("$Error: %s\n", msg);
 	exit(1);
 }
 
-
-// void	err_msg(const char *msg, void *build, char **map)
-// {
-// 	free_build((t_build *)build);
-// 	free_map_v2(map);
-// 	printf("$error %s\n", msg);
-// 	// NEED TO FREE STUFF IN DIFFERENT SCENARIOS
-// 	exit(1);
-// }
-
-void	clear_image(my_game *game, t_imgp *img)
+void	clear_image(my_game *game)
 {
 	int	px;
 	int	py;
@@ -48,7 +33,7 @@ void	clear_image(my_game *game, t_imgp *img)
 	{
 		py = -1;
 		while (++py < SCREEN_HEIGHT)
-			put_pixel_to_img(game->mlx, img, px, py, 0);
+			put_pixel_to_img(game, px, py, 0);
 	}
 }
 
@@ -77,10 +62,14 @@ to fit the bits per pixel requirement of the image.
 The bits position depends on the computer's endian,
 bits are assigned accordingly.
 */
-void	put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color)
+void	put_pixel_to_img(my_game *game, int x, int y, int color)
 {
-	int	pixel;
+	int		pixel;
+	void	*mlx;
+	t_imgp	*img;
 
+	mlx = game->mlx;
+	img = game->img;
 	if (img->bbp != 32)
 	{
 		color = mlx_get_color_value(mlx, color);
@@ -91,11 +80,11 @@ void	put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color)
 		img->addr[pixel + 0] = (color >> 24);
 		img->addr[pixel + 1] = (color >> 16) & 0xFF;
 		img->addr[pixel + 2] = (color >> 8) & 0xFF;
-		img->addr[pixel + 3] = (color)&0xFF;
+		img->addr[pixel + 3] = (color) & 0xFF;
 	}
 	else if (img->endian == 0)
 	{
-		img->addr[pixel + 0] = (color)&0xFF;
+		img->addr[pixel + 0] = (color) & 0xFF;
 		img->addr[pixel + 1] = (color >> 8) & 0xFF;
 		img->addr[pixel + 2] = (color >> 16) & 0xFF;
 		img->addr[pixel + 3] = (color >> 24);

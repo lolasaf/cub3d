@@ -209,17 +209,17 @@ void    draw_ceiling(my_game *game, t_draw *draw_vars);
 int     rgb_to_hex(int r, int g, int b);
 
 // exit_game.c
-int		exit_game(my_game *game);
-void	free_sprites(my_game *game);
 void	free_map(t_data *conf);
-void	free_textures(my_game *game);
-void	free_texture_vars(my_game *game);
-void free_map_v2(t_data *conf);
-void free_build(t_build *build);
+void	free_build(t_build *build);
+void	free_sprites(my_game *game);
+int		exit_game(my_game *game);
+
+// exit_game_utils.c
+void	free_block(void *block);
 void	destroy_mlx(my_game *game);
 void	destroy_buffer(my_game *game);
-void	free_block(void *block);
-
+void	free_texture_vars(t_data *data);
+void	free_textures(my_game *game);
 
 // find_player.c
 int		find_player(char **map, int rows, int cols, t_data *data);
@@ -311,9 +311,9 @@ void	render_game(my_game *game);
 
 // utils.c
 int		ft_isspace(char c);
-void	put_pixel_to_img(void *mlx, t_imgp *img, int x, int y, int color);
+void	put_pixel_to_img(my_game *game, int x, int y, int color);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
-void	clear_image(my_game *game, t_imgp *img);
+void	clear_image(my_game *game);
 void	err_msg(const char *msg, void *build, void *conf);
 
 //sprites

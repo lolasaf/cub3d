@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture_load.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:15:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 18:44:42 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:16:53 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	load_texture_img(my_game *game)
 	{
 		destroy_mlx(game);
 		destroy_buffer(game);
-		err_msg("Failed to load textures", (t_build *) game->conf->build, (t_data *)game->conf);
+		err_msg("Failed to load textures", game->conf->build, game->conf);
 	}
 }
 

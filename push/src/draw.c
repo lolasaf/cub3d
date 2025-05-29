@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 09:05:33 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:57:14 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_ceiling(my_game *game, t_draw *draw_vars)
 	y = draw_vars->draw_end + 1;
 	while (y < SCREEN_HEIGHT)
 	{
-		put_pixel_to_img(game->mlx, game->img, draw_vars->col, y, hex_c);
+		put_pixel_to_img(game, draw_vars->col, y, hex_c);
 		y++;
 	}
 }
@@ -47,7 +47,7 @@ void	draw_floor(my_game *game, t_draw *draw_vars)
 	y = 0;
 	while (y < draw_vars->draw_start)
 	{
-		put_pixel_to_img(game->mlx, game->img, draw_vars->col, y, hex_f);
+		put_pixel_to_img(game, draw_vars->col, y, hex_f);
 		y++;
 	}
 }

@@ -3,108 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 18:51:27 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:51:04 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_texture_vars(my_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (game->conf->texture[i].path)
-			free(game->conf->texture[i].path);
-		game->conf->texture[i].path = NULL;
-		if (game->conf->texture[i].identifier)
-			free(game->conf->texture[i].identifier);
-		game->conf->texture[i].identifier = NULL;
-		i++;
-	}
-}
-
-void	free_textures(my_game *game)
-{
-	int	i;
-
-	i = 3;
-	free_texture_vars(game);
-	while (i >= 0)
-	{
-		if (game->texture_img[i])
-		{
-			mlx_destroy_image(game->mlx, game->texture_img[i]);
-			game->texture_img[i] = NULL;
-		}
-		i--;
-	}
-}
-
-void	free_block(void *block)
-{
-	if (block)
-		free(block);
-	block = NULL;
-}
 
 void	free_map(t_data *conf)
 {
 	int	i;
 
 	i = 0;
+	if (!conf)
+		return ;
+	if (!conf->map)
+		return ;
 	while (i < conf->map_height)
 	{
-		free(conf->map[i]);
+		free_block(conf->map[i]);
 		i++;
 	}
-	free(conf->map);
+	free_block(conf->map);
 }
 
-void free_build(t_build *build)
+void	free_build(t_build *build)
 {
+	int	i;
+
+	i = 0;
 	if (build)
 	{
-		int i = 0;
-		while(i < build->count)
+		while (i < build->count)
 		{
-			free(build->map_lines[i]);
-			build->map_lines[i] = NULL;
+			free_block(build->map_lines[i]);
 			i++;
 		}
-	}
-}
-
-void free_map_v2(t_data *conf)
-{
-	int i = 0;
-	if (!conf)
-		return;
-	if (conf->map) //maybe use map_height or null terminate final conf->map[i]
-	{
-		while (conf->map[i] != NULL)
-		{
-			free(conf->map[i]);
-			conf->map[i] = NULL;
-			i++;
-		}
-		free(conf->map);
-	}
-	i = 0;
-	while(i < 4)
-	{
-		if (conf->texture[i].identifier)
-			free(conf->texture[i].identifier);
-		conf->texture[i].identifier = NULL;
-		if (conf->texture[i].path)	
-			free(conf->texture[i].path);
-		conf->texture[i].path = NULL;
-		i++;
 	}
 }
 
@@ -132,21 +68,4 @@ int	exit_game(my_game *game)
 	destroy_buffer(game);
 	destroy_mlx(game);
 	exit(0);
-}
-
-void	destroy_mlx(my_game *game)
-{
-	mlx_destroy_image(game->mlx, game->img->img_ptr);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-}
-
-void	destroy_buffer(my_game *game)
-{
-	if (game->z_buffer != NULL)
-	{
-		free(game->z_buffer);
-		game->z_buffer = NULL;
-	}
 }

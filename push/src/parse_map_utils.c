@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:02:47 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 09:06:50 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:23:11 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	ft_free_map(char **map)
 	i = 0;
 	while (map[i] != NULL)
 	{
-		free(map[i]);
+		free_block(map[i]);
 		map[i] = NULL;
 		i++;
 	}
-	free(map);
+	free_block(map);
 	map = NULL;
 }
 

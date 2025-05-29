@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 09:00:21 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:58:29 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	handle_keypress(int kc, my_game *game)
 		ft_move_z(')', game, rot_speed);
 	if (kc == LEFT_ARROW && game->keys->rotate_l == true)
 		ft_move_z('(', game, rot_speed);
-	clear_image(game, game->img);
+	clear_image(game);
 	render_game(game);
 	return (0);
 }
@@ -59,7 +59,7 @@ int	mouse_hook(int kc, int x, int y, my_game *game)
 		ft_move_z(')', game, rot_speed);
 	else if (kc == SCROLL_UP)
 		ft_move_z('(', game, rot_speed);
-	clear_image(game, game->img);
+	clear_image(game);
 	render_game(game);
 	return (0);
 }

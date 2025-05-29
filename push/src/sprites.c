@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 18:46:22 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:15:20 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	mlx_sprite_load(my_game *g)
 			free_textures(g);
 			destroy_mlx(g);
 			destroy_buffer(g);
-			err_msg("Failed to load sprite texture. Check path!", (t_build *)g->conf->build, g->conf);
+			err_msg("Failed to load sprites!", g->conf->build, g->conf);
 		}
 		// Potentially call freeing functions here as well check if they exist ie !null and then free
 		i++;
@@ -185,7 +185,7 @@ void	draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop,
 		color = get_sprite_pixel_color(sprite_tex, tex_x, tex_y);
 		// Basic transparency check: if color is black (0x000000), skip drawing
 		if ((color & 0x00FFFFFF) != 0) // Check if RGB part is not zero
-			put_pixel_to_img(game->mlx, game->img, stripe_x, y, color);
+			put_pixel_to_img(game, stripe_x, y, color);
 		y++;
 	}
 }
