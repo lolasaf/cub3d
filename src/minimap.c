@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 21:49:02 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:17:14 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ void	draw_mini_sprite(my_game *game, int px, int py, int scale)
 	}
 }
 
+void	draw_mini_sprites_loop(my_game *game, int scale)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->num_sprites)
+	{
+		if (game->sprites[i].img)
+			draw_mini_sprite(game, game->sprites[i].x, game->sprites[i].y, scale);
+		i++;
+	}
+}
+
 void	draw_minimap(my_game *game)
 {
 	int	x;
@@ -95,8 +108,5 @@ void	draw_minimap(my_game *game)
 		x = 0;
 	}
 	draw_mini_player(game, scale);
-	if (game->sprites[0].img)
-		draw_mini_sprite(game, game->sprites[0].x, game->sprites[0].y, scale);
-	if (game->sprites[1].img)
-		draw_mini_sprite(game, game->sprites[1].x, game->sprites[1].y, scale);
+	draw_mini_sprites_loop(game, scale);
 }

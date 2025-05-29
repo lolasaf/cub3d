@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 00:05:57 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:32:13 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	mlx_sprite_load(my_game *g)
 			"sprites/mewtwo.xpm", "sprites/dragonair.xpm", "sprites/eevee.xpm", 
 			"sprites/horsea.xpm", "sprites/wigglytuff.xpm"};
 
-	g->num_sprites = ft_counter(g) / 10; // set number
+	g->num_sprites = ft_counter(g) / 15; // set number
 	if (!g->num_sprites)
 		g->num_sprites = 1;
 	i = 0;

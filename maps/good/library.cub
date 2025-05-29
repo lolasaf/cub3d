@@ -1,10 +1,10 @@
-F 139,99,58
-C 171,154,137
+F 230, 230, 250
+C 197, 180, 227
 
-NO textures/atxt4.xpm
-SO textures/atxt.xpm
-WE textures/atxt4.xpm
-EA textures/atxt.xpm
+NO sprites/ditto.xpm
+SO sprites/ditto.xpm
+WE sprites/ditto.xpm
+EA sprites/ditto.xpm
 
 1111111111111111111
 1001001001001001001
