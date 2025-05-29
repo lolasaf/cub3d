@@ -3,33 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 20:15:20 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 21:42:09 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// void	ft_init_sprites(my_game *g)
+// {
+// 	int		i;
+// 	double	b_x;
+// 	double	b_y;
+// 	double	s;
+
+// 	g->num_sprites = 2;
+// 	i = 0;
+// 	b_x = 2.5;
+// 	b_y = 4.5;
+// 	s = 3.0;
+// 	while (i < g->num_sprites)
+// 	{
+// 		g->sprites[i].x = b_x + (i * s);
+// 		g->sprites[i].y = b_y + (i * s);
+// 		g->sprites[i].id = i;
+// 		i++;
+// 	}
+// }
+
 void	ft_init_sprites(my_game *g)
 {
-	int		i;
-	double	b_x;
-	double	b_y;
-	double	s;
+	int			i;
+	double		b_x;
+	double		b_y;
 
 	g->num_sprites = 2;
 	i = 0;
-	b_x = 2.5;
-	b_y = 4.5;
-	s = 3.0;
+	b_x = (g->conf->map_width / 2) + 0.5;
+	b_y = (g->conf->map_height / 2) + 0.5;
 	while (i < g->num_sprites)
 	{
-		g->sprites[i].x = b_x + (i * s);
-		g->sprites[i].y = b_y + (i * s);
-		g->sprites[i].id = i;
-		i++;
+		if (g->conf->map[(int)b_y][(int)b_x] == 'X')
+		{
+			//printf("sprite at x = %f, y = %f\n", b_x, b_y);
+			g->sprites[i].x = b_x;
+			g->sprites[i].y = b_y;
+			g->sprites[i].id = i;
+			b_x += 2;
+			b_y += 2;
+			i++;
+		}
+		else
+		{
+			b_x++;
+			b_y++;
+			if (b_x < 0 || (int) b_x >= g->conf->map_width)
+				b_x = 0.5;
+			if (b_y < 0 || (int) b_y >= g->conf->map_height)
+				b_y = 0.5;
+		}
 	}
 }
 

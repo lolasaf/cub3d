@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 19:58:29 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/29 21:44:50 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,31 @@ void	isnot_wall(my_game *game, double x, double y)
 		game->player_y = y;
 	}
 }
+
+void	kill_sprite(my_game *game, int id)
+{
+	if (game->sprites[id].img != NULL)
+	{
+		printf("Killed sprite number %d\n", id);
+		mlx_destroy_image(game->mlx, game->sprites[id].img);
+		game->sprites[id].img = NULL;
+	}
+}
+
+void	ft_destroy_sprite(my_game *game)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_SPRITES)
+	{
+		if (fabs(game->player_x - game->sprites[i].x) < 0.5
+			&& fabs(game->player_y - game->sprites[i].y) < 0.5)
+			kill_sprite(game, i);
+		i++;
+	}
+}
+
 
 int	handle_keypress(int kc, my_game *game)
 {
@@ -43,6 +68,8 @@ int	handle_keypress(int kc, my_game *game)
 		ft_move_z(')', game, rot_speed);
 	if (kc == LEFT_ARROW && game->keys->rotate_l == true)
 		ft_move_z('(', game, rot_speed);
+	if (kc == 32)
+		ft_destroy_sprite(game);
 	clear_image(game);
 	render_game(game);
 	return (0);
