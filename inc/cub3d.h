@@ -27,7 +27,7 @@
 #define SCROLL_UP 4
 #define VERTICAL 1
 #define HORIZONTAL 0
-#define MAX_SPRITES 2
+#define MAX_SPRITES 100
 
 
 typedef struct s_texture t_texture;

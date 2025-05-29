@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 21:44:50 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:23:17 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	kill_sprite(my_game *game, int id)
 {
 	if (game->sprites[id].img != NULL)
 	{
-		printf("Killed sprite number %d\n", id);
+		printf("Collected Poki Number %d\n", id);
 		mlx_destroy_image(game->mlx, game->sprites[id].img);
 		game->sprites[id].img = NULL;
 	}
@@ -34,15 +34,24 @@ void	kill_sprite(my_game *game, int id)
 
 void	ft_destroy_sprite(my_game *game)
 {
-	int i;
+	static int	counter = 0;
+	int			i;
 
 	i = 0;
-	while (i < MAX_SPRITES)
+	while (i < game->num_sprites)
 	{
 		if (fabs(game->player_x - game->sprites[i].x) < 0.5
 			&& fabs(game->player_y - game->sprites[i].y) < 0.5)
+		{
 			kill_sprite(game, i);
+			counter++;
+		}
 		i++;
+	}
+	if (counter == game->num_sprites)
+	{
+		printf("Good job! You collected them all!!\n");
+		exit_game(game);
 	}
 }
 

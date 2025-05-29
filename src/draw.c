@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:11:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 19:57:14 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:29:24 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	draw_ceiling(my_game *game, t_draw *draw_vars)
 	int	hex_c;
 	int	y;
 
-	hex_c = rgb_to_hex(game->conf->color[1].rgb[0], game->conf->color[1].rgb[1],
-			game->conf->color[1].rgb[2]);
+	hex_c = rgb_to_hex(game->conf->color[0].rgb[0], game->conf->color[0].rgb[1],
+			game->conf->color[0].rgb[2]);
 	y = draw_vars->draw_end + 1;
 	while (y < SCREEN_HEIGHT)
 	{
@@ -42,8 +42,8 @@ void	draw_floor(my_game *game, t_draw *draw_vars)
 	int	hex_f;
 	int	y;
 
-	hex_f = rgb_to_hex(game->conf->color[0].rgb[0], game->conf->color[0].rgb[1],
-			game->conf->color[0].rgb[2]);
+	hex_f = rgb_to_hex(game->conf->color[1].rgb[0], game->conf->color[1].rgb[1],
+			game->conf->color[1].rgb[2]);
 	y = 0;
 	while (y < draw_vars->draw_start)
 	{

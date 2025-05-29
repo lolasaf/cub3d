@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 21:42:09 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:32:13 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,66 @@
 // 	}
 // }
 
+int	ft_counter(my_game *g)
+{
+	int	x;
+	int y = 0;
+	int c = 0;
+	while(y < g->conf->map_height)
+	{
+		x = 0;
+		while (g->conf->map[y][x])
+		{
+			if (g->conf->map[y][x] == 'X')
+				c++;
+			x++;
+		}
+		y++;
+	}
+	return c;
+}
+
 void	ft_init_sprites(my_game *g)
 {
 	int			i;
 	double		b_x;
 	double		b_y;
 
-	g->num_sprites = 2;
+	// g->num_sprites = 8;
+	// int c = ft_counter(g);
+	// while(g->num_sprites > c)
+	// 	g->num_sprites--;
 	i = 0;
 	b_x = (g->conf->map_width / 2) + 0.5;
 	b_y = (g->conf->map_height / 2) + 0.5;
 	while (i < g->num_sprites)
 	{
-		if (g->conf->map[(int)b_y][(int)b_x] == 'X')
+		if (b_x < 0 || (int) b_x >= g->conf->map_width)
+			b_x = (g->conf->map_width / 2) + 0.5;
+		if (b_y < 0 || (int) b_y >= g->conf->map_height)
+			b_y = (g->conf->map_height / 2) + 0.5;
+		while (1)
 		{
-			//printf("sprite at x = %f, y = %f\n", b_x, b_y);
-			g->sprites[i].x = b_x;
-			g->sprites[i].y = b_y;
-			g->sprites[i].id = i;
-			b_x += 2;
-			b_y += 2;
-			i++;
+			if (g->conf->map[(int)b_y][(int)b_x] == 'X')
+			{
+				g->sprites[i].x = b_x;
+				g->sprites[i].y = b_y;
+				g->sprites[i].id = i;
+				b_x += 2;
+				b_y += 2;
+				break;
+			}
+			else
+			{
+				b_x++;
+				b_y++;
+				if (b_x < 0 || (int) b_x >= g->conf->map_width)
+					b_x = 0.5;
+				if (b_y < 0 || (int) b_y >= g->conf->map_height)
+					b_y = 0.5;
+			}
 		}
-		else
-		{
-			b_x++;
-			b_y++;
-			if (b_x < 0 || (int) b_x >= g->conf->map_width)
-				b_x = 0.5;
-			if (b_y < 0 || (int) b_y >= g->conf->map_height)
-				b_y = 0.5;
-		}
+		i++;
 	}
 }
 
@@ -72,16 +101,25 @@ void	mlx_sprite_load(my_game *g)
 	int			i;
 	int			w;
 	int			h;
-	const char	*sprite_paths[MAX_SPRITES] = {"sprites/charizard.xpm",
-			"sprites/mewtwo.xpm"};
+	int			j;
+	const char	*sprite_paths[6] = {"sprites/charizard.xpm",
+			"sprites/mewtwo.xpm", "sprites/dragonair.xpm", "sprites/eevee.xpm", 
+			"sprites/horsea.xpm", "sprites/wigglytuff.xpm"};
 
+	g->num_sprites = ft_counter(g) / 15; // set number
+	if (!g->num_sprites)
+		g->num_sprites = 1;
 	i = 0;
-	while (i < MAX_SPRITES)
+	while (i < g->num_sprites)
 	{
+		j = i;
+		if (i > 5)
+			j = i % 6;
 		g->sprites[i].img = mlx_xpm_file_to_image(g->mlx,
-				(char *)sprite_paths[i], &w, &h);
+				(char *)sprite_paths[j], &w, &h);
 		if (!g->sprites[i].img)
 		{
+			printf("%d\n", g->sprites[i].id);
 			free_textures(g);
 			destroy_mlx(g);
 			destroy_buffer(g);

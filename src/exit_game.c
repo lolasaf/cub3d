@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 19:51:04 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:07:35 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_sprites(my_game *game)
 	int	i;
 
 	i = 0;
-	while (i < MAX_SPRITES)
+	while (i < game->num_sprites)
 	{
 		if (game->sprites[i].img != NULL)
 		{
