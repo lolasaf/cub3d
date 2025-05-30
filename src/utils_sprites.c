@@ -6,11 +6,18 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:54:11 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/30 19:10:53 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 20:12:18 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int fake_random(int seed, int a, int b) {
+    double x = sin(seed * 12.9898) * 43758.5453;
+    double frac = x - floor(x);
+    int range = b - a + 1;
+    return (a + (int)(fabs(frac) * range));
+}
 
 int	ft_counter(t_game *g)
 {
@@ -59,12 +66,13 @@ int	ft_set(double *b_x, double *b_y, t_game *g, int i)
 		g->sprites[i].x = *b_x;
 		g->sprites[i].y = *b_y;
 		g->sprites[i].id = i;
-		*b_x += 2;
-		*b_y += 2;
+		*b_x = fake_random(i * 2, 0, g->conf->map_width - 1) + 0.5;
+		*b_y = fake_random(i * 2 + 1, 0, g->conf->map_height - 1) + 0.5;
 		return (0);
 	}
 	return (1);
 }
+
 
 void	ft_init_sprites(t_game *g)
 {
@@ -73,10 +81,12 @@ void	ft_init_sprites(t_game *g)
 	double	b_y;
 
 	i = 0;
-	b_x = (g->conf->map_width / 2) + 0.5;
-	b_y = (g->conf->map_height / 2) + 0.5;
+	// b_x = (g->conf->map_width / 2) + 0.5;
+	// b_y = (g->conf->map_height / 2) + 0.5;
 	while (i < g->num_sprites)
 	{
+		b_x = fake_random(i * 2, 0, g->conf->map_width - 1) + 0.5;
+		b_y = fake_random(i * 2 + 1, 0, g->conf->map_height - 1) + 0.5;
 		ft_check(&b_x, &b_y, g, 's');
 		while (1)
 		{

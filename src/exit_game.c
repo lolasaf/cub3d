@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 19:23:06 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 20:18:02 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,6 @@ void	free_sprites(t_game *game)
 		i++;
 	}
 }
-
-// void	free_sprites(t_game *game)
-// {
-// 	int	i;
-
-// 	// 0 1 2 3 4 5 6 7 8 9 10 11 12 (12 % 7) = 5
-// 	// 0 1 2 3 4 5 6 7 0 1 2  3  4
-	
-// 	i = game->num_sprites - 1;
-// 	int stop = i - SPRITE_LOAD + 1;
-// 	if (stop < 0)
-// 		stop = 0;
-// 	while (i >= stop)
-// 	{
-// 		if (game->sprites[i].img != NULL)
-// 		{
-// 			mlx_destroy_image(game->mlx, game->sprites[i].img);
-// 			game->sprites[i].img = NULL;
-// 		}
-// 		i--;
-// 	}
-// }
 
 int	exit_game(t_game *game)
 {
