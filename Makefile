@@ -6,7 +6,7 @@
 #    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/05/30 01:20:42 by wel-safa         ###   ########.fr        #
+#    Updated: 2025/05/30 17:29:35 by wel-safa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS := $(addprefix $(SRCDIR)/, cast_ray.c draw_wall.c draw.c \
 	key_hooks.c main.c minimap.c mlx_hooks.c move.c parse_color_tok.c \
 	parse_colors.c parse_func.c parse_map_utils.c parse_map.c \
 	parse_tandc.c parse_texture_load.c parse_textures.c \
-	parse_utils.c parse.c player.c render_game.c sprites.c utils.c)
+	parse_utils.c parse.c player.c render_game.c utils.c\
+	norm_sprites.c utils_sprites.c sort_sprites.c)
 #--- OBJECTS ---
 OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 #--- HEADERS ---
