@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:26:19 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 21:00:26 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:32:58 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_sprite_num(t_game *g)
 {
 	g->num_sprites = ft_counter(g) / SPRITE_RATIO;
-	if (!g->num_sprites)
+	if (g->num_sprites == 0)
 		g->num_sprites = 1;
 }
 
@@ -42,6 +42,7 @@ void	mlx_sprite_load(t_game *g)
 		"sprites/mewtwo.xpm", "sprites/raikou.xpm", "sprites/wigglytuff.xpm"};
 
 	get_sprite_num(g);
+
 	i = 0;
 	while (i < g->num_sprites)
 	{

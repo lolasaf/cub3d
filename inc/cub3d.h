@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 21:00:48 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:57:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <string.h>
 # include <unistd.h>
 
-# define SCREEN_HEIGHT 480
-# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 960
+# define SCREEN_WIDTH 1200
 # define MAX_LINES 1000
 # define W_KEY 119
 # define S_KEY 115
@@ -41,7 +41,7 @@
 # define HORIZONTAL 0
 # define MAX_SPRITES 100
 # define SPRITE_LOAD 7
-# define SPRITE_RATIO 15
+# define SPRITE_RATIO 8
 
 typedef struct s_texture		t_texture;
 typedef enum e_tex				t_tex;
@@ -360,5 +360,7 @@ void			general_destroy(t_game *g);
 t_sprite_props	calc_properties(t_game *g, t_sprite *s, double *catch);
 int				fake_random(int seed, int a, int b);
 void			draw_mini_sprite(t_game *game, int px, int py, int scale);
+
+void			ft_destroy_sprite(t_game *game);
 
 #endif

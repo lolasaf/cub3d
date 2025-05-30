@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:18:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:55:51 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,33 +55,42 @@ void	ft_destroy_sprite(t_game *game)
 	}
 }
 
-int	handle_keypress(int kc, t_game *game)
-{
-	double	move_speed;
-	double	rot_speed;
+// int handle_keypress(int kc, t_game *game)
+// {
+// 	if (kc == ESC_KEY)
+// 		exit_game(game);
+// 	if (kc == 32)
+// 		ft_destroy_sprite(game);
+// 	return (0);
+// }
 
-	move_speed = 0.05;
-	rot_speed = 0.05;
-	if (kc == ESC_KEY)
-		exit_game(game);
-	if (kc == W_KEY && game->keys->key_up == true)
-		ft_move_y('+', game, move_speed);
-	if (kc == S_KEY && game->keys->key_down == true)
-		ft_move_y('-', game, move_speed);
-	if (kc == A_KEY && game->keys->key_left == true)
-		ft_move_x('<', game, move_speed);
-	if (kc == D_KEY && game->keys->key_right == true)
-		ft_move_x('>', game, move_speed);
-	if (kc == RIGHT_ARROW && game->keys->rotate_r == true)
-		ft_move_z(')', game, rot_speed);
-	if (kc == LEFT_ARROW && game->keys->rotate_l == true)
-		ft_move_z('(', game, rot_speed);
-	if (kc == 32)
-		ft_destroy_sprite(game);
-	clear_image(game);
-	render_game(game);
-	return (0);
-}
+// int	handle_keypress(int kc, t_game *game)
+// {
+// 	double	move_speed;
+// 	double	rot_speed;
+
+// 	move_speed = 0.05;
+// 	rot_speed = 0.05;
+// 	if (kc == ESC_KEY)
+// 		exit_game(game);
+// 	if (kc == W_KEY && game->keys->key_up == true)
+// 		ft_move_y('+', game, move_speed);
+// 	if (kc == S_KEY && game->keys->key_down == true)
+// 		ft_move_y('-', game, move_speed);
+// 	if (kc == A_KEY && game->keys->key_left == true)
+// 		ft_move_x('<', game, move_speed);
+// 	if (kc == D_KEY && game->keys->key_right == true)
+// 		ft_move_x('>', game, move_speed);
+// 	if (kc == RIGHT_ARROW && game->keys->rotate_r == true)
+// 		ft_move_z(')', game, rot_speed);
+// 	if (kc == LEFT_ARROW && game->keys->rotate_l == true)
+// 		ft_move_z('(', game, rot_speed);
+// 	if (kc == 32)
+// 		ft_destroy_sprite(game);
+// 	clear_image(game);
+// 	render_game(game);
+// 	return (0);
+// }
 
 int	mouse_hook(int kc, int x, int y, t_game *game)
 {
