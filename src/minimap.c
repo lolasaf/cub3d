@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:39:55 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 20:58:58 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	draw_mini_grid(t_game *game, int scale, int x, int y)
 	j = y * scale;
 	while (i <= (x + 1) * scale)
 	{
-		while (j <= (y + 1) * scale)
-			put_pixel_to_img(game, i, j++, color);
+		if (i < SCREEN_WIDTH && j < SCREEN_HEIGHT)
+		{
+			while (j <= (y + 1) * scale)
+				put_pixel_to_img(game, i, j++, color);
+		}
 		i++;
 		j = y * scale;
 	}
@@ -89,6 +92,20 @@ void	draw_mini_sprites_loop(t_game *game, int scale)
 	}
 }
 
+int	get_scale(t_game *game)
+{
+	int	scale;
+	double	scale_w;
+	double	scale_h;
+
+	scale_w = (SCREEN_WIDTH / 5.0) / game->conf->map_width;
+	scale_h = (SCREEN_HEIGHT / 5.0) / game->conf->map_height;
+	scale = (int)fmin(scale_w, scale_h);
+	if (scale < 1)
+		scale = 1;
+	return (scale);
+}
+
 void	draw_minimap(t_game *game)
 {
 	int	x;
@@ -97,7 +114,8 @@ void	draw_minimap(t_game *game)
 
 	x = 0;
 	y = 0;
-	scale = 5;
+	scale = get_scale(game);
+	if (game->conf->map_height)
 	while (y < game->conf->map_height)
 	{
 		while (game->conf->map[y][x])
