@@ -117,6 +117,7 @@ typedef struct s_sprite_drawing
     int start_y;
     int end_x;
     int end_y;
+    int stripe_x;
 } t_sprite_props;
 
 typedef struct s_game
@@ -324,9 +325,18 @@ void mlx_sprite_load(my_game *g);
 void ft_sort(sprite_sort *to_sort, int count);
 void get_vertical_prop(t_sprite_props *prop);
 void get_horizonatal_prop(t_sprite_props *prop);
-void draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop, int stripe_x, int tex_x);
+void    draw_stripe(my_game *game, t_img *sprite_tex, t_sprite_props *prop, int tex_x);
 void single_sprite_render(my_game *g, t_img *sprite_tex, t_sprite_props *prop);
 void render_sprites(sprite_sort *to_sort, my_game *g);
 void handle_sprites(my_game *g);
+int	ft_counter(my_game *g);
+void	ft_check(double *b_x, double *b_y, my_game *g, char c);
+int	    ft_set(double *b_x, double *b_y, my_game *g, int i);
+void	ft_init_sprites(my_game *g);
+void	general_destroy(my_game *g);
+t_sprite_props	calc_properties(my_game *g, t_sprite *s, double *catch);
+
+
+
 
 #endif
