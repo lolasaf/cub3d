@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:26:19 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 00:32:58 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 01:03:59 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	mlx_sprite_load(t_game *g)
 		"sprites/mewtwo.xpm", "sprites/raikou.xpm", "sprites/wigglytuff.xpm"};
 
 	get_sprite_num(g);
-
 	i = 0;
 	while (i < g->num_sprites)
 	{

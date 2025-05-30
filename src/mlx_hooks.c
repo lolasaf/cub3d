@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:17:51 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 01:00:11 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 01:03:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_keys(t_game *game)
 		ft_move_z(')', game, rot_speed);
 }
 
-int game_loop(t_game *game)
+int	game_loop(t_game *game)
 {
 	update_keys(game);
 	clear_image(game);
@@ -45,7 +45,6 @@ void	ft_mlx_hook_loop(t_game *game)
 {
 	mlx_hook(game->win, 3, 2, ft_on_release, game);
 	mlx_hook(game->win, 2, 1, ft_on_press, game);
-	//mlx_key_hook(game->win, handle_keypress, game);
 	mlx_hook(game->win, 17, 0, exit_game, game);
 	mlx_hook(game->win, 4, 1L << 2, mouse_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
