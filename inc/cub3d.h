@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 20:16:46 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 20:28:03 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define HORIZONTAL 0
 # define MAX_SPRITES 100
 # define SPRITE_LOAD 7
+# define SPRITE_RATIO 15
 
 typedef struct s_texture		t_texture;
 typedef enum e_tex				t_tex;
@@ -357,5 +358,6 @@ int				ft_set(double *b_x, double *b_y, t_game *g, int i);
 void			ft_init_sprites(t_game *g);
 void			general_destroy(t_game *g);
 t_sprite_props	calc_properties(t_game *g, t_sprite *s, double *catch);
+int				fake_random(int seed, int a, int b);
 
 #endif

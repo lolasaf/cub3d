@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:50:17 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 17:52:34 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 20:19:28 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	free_textures(t_game *game)
 	int	i;
 
 	i = 3;
-	//free_texture_vars(game->conf);
 	while (i >= 0)
 	{
 		if (game->texture_img[i])
