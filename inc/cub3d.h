@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 00:57:34 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 01:05:56 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,9 @@ void			free_map(t_data *conf);
 void			free_build(t_build *build);
 void			free_sprites(t_game *game);
 int				exit_game(t_game *game);
+void			print_menu(void);
+void			print_menu_err(void);
+
 
 // exit_game_utils.c
 void			free_block(void *block);

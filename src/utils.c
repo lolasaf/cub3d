@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:18:02 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 01:07:08 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	err_msg(const char *msg, void *build, void *data)
 {
+	print_menu_err();
 	free_build((t_build *)build);
 	free_map((t_data *)data);
 	free_texture_vars((t_data *)data);
