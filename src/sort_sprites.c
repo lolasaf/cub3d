@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:53:02 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/30 17:40:03 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 19:25:25 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	mlx_sprite_load(t_game *g)
 	int			w;
 	int			h;
 	int			j;
-	const char	*sprite_paths[6] = {"sprites/charizard.xpm",
-		"sprites/mewtwo.xpm", "sprites/dragonair.xpm", "sprites/eevee.xpm",
-		"sprites/horsea.xpm", "sprites/wigglytuff.xpm"};
+	const char	*sprite_paths[8] = {"sprites/charizard.xpm", "sprites/ditto.xpm",
+		"sprites/dragonair.xpm", "sprites/eevee.xpm", "sprites/horsea.xpm",
+		"sprites/mewtwo.xpm", "sprites/raikou.xpm", "sprites/wigglytuff.xpm"};
 
-	g->num_sprites = ft_counter(g) / 15;
+	g->num_sprites = ft_counter(g) / 4;
 	if (!g->num_sprites)
 		g->num_sprites = 1;
 	i = 0;
@@ -30,11 +30,14 @@ void	mlx_sprite_load(t_game *g)
 	{
 		j = i;
 		if (i > 5)
-			j = i % 6;
+			j = i % 8;
 		g->sprites[i].img = mlx_xpm_file_to_image(g->mlx,
 				(char *)sprite_paths[j], &w, &h);
 		if (!g->sprites[i].img)
+		{
+			g->num_sprites = i + 1;
 			general_destroy(g);
+		}
 		i++;
 	}
 	ft_init_sprites(g);

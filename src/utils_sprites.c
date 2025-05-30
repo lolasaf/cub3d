@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:54:11 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/30 17:30:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 19:10:53 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_init_sprites(t_game *g)
 void	general_destroy(t_game *g)
 {
 	free_textures(g);
+	free_sprites(g);
 	destroy_mlx(g);
 	destroy_buffer(g);
 	err_msg("Failed to load sprites!", g->conf->build, g->conf);
