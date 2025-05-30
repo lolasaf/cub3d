@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:26:19 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 20:27:20 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:00:26 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,24 @@ void	mlx_sprite_load(t_game *g)
 		i++;
 	}
 	ft_init_sprites(g);
+}
+
+void	draw_mini_sprite(t_game *game, int px, int py, int scale)
+{
+	int	i;
+	int	j;
+
+	px = (int)(px * scale);
+	py = (int)(py * scale);
+	j = py - 2;
+	while (j <= py + 2)
+	{
+		i = px - 2;
+		while (i <= px + 2)
+		{
+			put_pixel_to_img(game, i, j, 0xEE4B2B);
+			i++;
+		}
+		j++;
+	}
 }

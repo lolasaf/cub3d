@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 20:58:58 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:01:50 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,6 @@ void	draw_mini_grid(t_game *game, int scale, int x, int y)
 	}
 }
 
-void	draw_mini_sprite(t_game *game, int px, int py, int scale)
-{
-	int	i;
-	int	j;
-
-	px = (int)(px * scale);
-	py = (int)(py * scale);
-	j = py - 2;
-	while (j <= py + 2)
-	{
-		i = px - 2;
-		while (i <= px + 2)
-		{
-			put_pixel_to_img(game, i, j, 0xEE4B2B);
-			i++;
-		}
-		j++;
-	}
-}
-
 void	draw_mini_sprites_loop(t_game *game, int scale)
 {
 	int	i;
@@ -94,7 +74,7 @@ void	draw_mini_sprites_loop(t_game *game, int scale)
 
 int	get_scale(t_game *game)
 {
-	int	scale;
+	int		scale;
 	double	scale_w;
 	double	scale_h;
 
@@ -115,7 +95,6 @@ void	draw_minimap(t_game *game)
 	x = 0;
 	y = 0;
 	scale = get_scale(game);
-	if (game->conf->map_height)
 	while (y < game->conf->map_height)
 	{
 		while (game->conf->map[y][x])
