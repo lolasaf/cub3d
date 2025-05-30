@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:53:02 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/30 17:30:24 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:40:03 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	mlx_sprite_load(t_game *g)
 
 void	ft_sort(t_sprite_sort *to_sort, int count)
 {
-	int			i;
-	int			j;
+	int				i;
+	int				j;
 	t_sprite_sort	temp;
 
 	i = 0;

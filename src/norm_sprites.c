@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 17:30:24 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:39:40 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	render_sprites(t_sprite_sort *to_sort, t_game *g)
 void	handle_sprites(t_game *g)
 {
 	t_sprite_sort	to_sort[MAX_SPRITES];
-	int			i;
+	int				i;
 
 	i = 0;
 	while (i < g->num_sprites)

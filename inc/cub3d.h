@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 17:36:05 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:41:33 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,14 +271,15 @@ void			ft_move_z(char c, t_game *game, double rs);
 void			ft_move_x(char c, t_game *game, double ms);
 
 // parse_color_tok.c
-void			parse_color_tok(char id, char *token, t_data *data, char *frline);
+void			parse_color_tok(char id, char *token, t_data *data,
+					char *frline);
 int				set_ceiling(t_data *data, int values[3]);
 int				set_floor(t_data *data, int values[3]);
 
 // parse_colors.c
 int				parse_color(const char *str, int values[3]);
-const char			*parse_single_value(const char *str, int *value);
-const char			*skip_whitespace(const char *str);
+const char		*parse_single_value(const char *str, int *value);
+const char		*skip_whitespace(const char *str);
 
 // parse_map_utils.c
 int				get_width(char **m_lines, int count);
@@ -293,7 +294,8 @@ char			**init_map(char **lines, int count, t_data *data);
 void			flood_it(char **map, int x, int y, t_data *data);
 
 // parse_tandc.c
-void			ft_colorortext(char *str, char *token, t_data *data, char *frline);
+void			ft_colorortext(char *str, char *token, t_data *data,
+					char *frline);
 void			ft_parse_tandc(const char *line, t_data *data);
 
 // parse_texture_load.c
@@ -342,8 +344,8 @@ void			mlx_sprite_load(t_game *g);
 void			ft_sort(t_sprite_sort *to_sort, int count);
 void			get_vertical_prop(t_sprite_props *prop);
 void			get_horizonatal_prop(t_sprite_props *prop);
-void			draw_stripe(t_game *game, t_img *sprite_tex, t_sprite_props *prop,
-					int tex_x);
+void			draw_stripe(t_game *game, t_img *sprite_tex, 
+					t_sprite_props *prop, int tex_x);
 void			single_sprite_render(t_game *g, t_img *sprite_tex,
 					t_sprite_props *prop);
 void			render_sprites(t_sprite_sort *to_sort, t_game *g);
