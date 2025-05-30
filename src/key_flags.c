@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 00:19:21 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 19:49:49 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:41:30 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 // W A:97 S:115 D:100 LEFT:65361 Right: 65363
 int	ft_on_press(int kc, t_game *g)
 {
-	if (kc == 119)
+	if (kc == W_KEY)
 		g->keys->key_up = true;
-	else if (kc == 115)
+	if (kc == S_KEY)
 		g->keys->key_down = true;
-	else if (kc == 97)
+	if (kc == A_KEY)
 		g->keys->key_left = true;
-	else if (kc == 100)
+	if (kc == D_KEY)
 		g->keys->key_right = true;
-	else if (kc == 65361)
+	if (kc == LEFT_ARROW)
 		g->keys->rotate_l = true;
-	else if (kc == 65363)
+	if (kc == RIGHT_ARROW)
 		g->keys->rotate_r = true;
 	return (0);
 }
@@ -33,17 +33,17 @@ int	ft_on_press(int kc, t_game *g)
 // W A:97 S:115 D:100 LEFT:65361 Right: 65363
 int	ft_on_release(int kc, t_game *g)
 {
-	if (kc == 119)
+	if (kc == W_KEY)
 		g->keys->key_up = false;
-	else if (kc == 115)
+	if (kc == S_KEY)
 		g->keys->key_down = false;
-	else if (kc == 97)
+	if (kc == A_KEY)
 		g->keys->key_left = false;
-	else if (kc == 100)
+	if (kc == D_KEY)
 		g->keys->key_right = false;
-	else if (kc == 65361)
+	if (kc == LEFT_ARROW)
 		g->keys->rotate_l = false;
-	else if (kc == 65363)
+	if (kc == RIGHT_ARROW)
 		g->keys->rotate_r = false;
 	return (0);
 }

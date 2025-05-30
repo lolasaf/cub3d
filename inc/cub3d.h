@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 21:00:48 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:35:58 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <string.h>
 # include <unistd.h>
 
-# define SCREEN_HEIGHT 480
-# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 960
+# define SCREEN_WIDTH 1200
 # define MAX_LINES 1000
 # define W_KEY 119
 # define S_KEY 115

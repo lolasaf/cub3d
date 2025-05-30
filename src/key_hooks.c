@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:18:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:41:48 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ void	ft_destroy_sprite(t_game *game)
 		exit_game(game);
 	}
 }
+
+// int handle_keypress(int kc, t_game *game)
+// {
+// 	if (kc == ESC_KEY)
+// 		exit_game(game);
+// 	if (kc == 32)
+// 		ft_destroy_sprite(game);
+// 	return (0);
+// }
 
 int	handle_keypress(int kc, t_game *game)
 {
