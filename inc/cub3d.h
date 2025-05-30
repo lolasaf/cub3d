@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 00:31:21 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:57:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,5 +360,7 @@ void			general_destroy(t_game *g);
 t_sprite_props	calc_properties(t_game *g, t_sprite *s, double *catch);
 int				fake_random(int seed, int a, int b);
 void			draw_mini_sprite(t_game *game, int px, int py, int scale);
+
+void			ft_destroy_sprite(t_game *game);
 
 #endif

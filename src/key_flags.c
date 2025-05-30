@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 00:19:21 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 21:41:30 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:58:14 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ int	ft_on_release(int kc, t_game *g)
 		g->keys->rotate_l = false;
 	if (kc == RIGHT_ARROW)
 		g->keys->rotate_r = false;
+	if (kc == ESC_KEY)
+		exit_game(g);
+	if (kc == 32)
+		ft_destroy_sprite(g);
 	return (0);
 }
