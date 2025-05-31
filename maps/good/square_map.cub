@@ -1,17 +1,22 @@
-   WE                            textures/west.xpm 
-NO      textures/west.xpm  
+   WE                            textures/west.xpm                                             
 
 
 
-SO textures/west.xpm
 
-F   69, 222, 199
 
-EA textures/west.xpm
+NO      textures/west.xpm                                                        
 
 
 
-C 235, 198, 52
+SO textures/west.xpm                
+
+F   69,     222,      199
+
+EA textures/west.xpm               
+
+
+
+C 235,      198,     52
 
 111111111111111111111111
 100000000000000000000001

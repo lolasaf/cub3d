@@ -6,35 +6,47 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 18:03:32 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:38:54 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int cleanup(char *str)
+int	cleanup(char *str)
 {
-	char *str2;
+	char	*str2;
+	int		i;
+	int		c;
+
 	str2 = ft_strdup(str);
-	int i = 0;
-	while (!ft_isspace(str2[i]))
+	i = 0;
+	while (str2[i] && !ft_isspace(str2[i]))
 		i++;
-	return ft_space(str2[i]);
+	if (!str2[i])
+	{
+		free(str2);
+		return (125);
+	}
+	c = ft_isspace(str2[i]);
+	free(str2);
+	return (c);
 }
 
 int	set_texture(t_data *data, int i, char *path, char *str)
 {
 	int		j;
 	char	*nl;
+	int		c;
 
 	j = 1;
 	nl = ft_strchr(path, '\n');
 	if (nl)
 		*nl = '\0';
-	
-	if (ft_strchr(str, cleanup)) // better is space
+	c = cleanup(str);
+	if (c != 125)
 		ft_trim(str);
-	if (ft_strchr(path, cleanup)) //better is space
+	c = cleanup(path);
+	if (c != 125)
 		ft_trim(path);
 	data->texture[i].identifier = ft_strdup(str);
 	data->texture[i].path = ft_strdup(path);
