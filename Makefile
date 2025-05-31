@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 14:03:23 by wel-safa          #+#    #+#              #
-#    Updated: 2025/05/31 01:07:28 by kforfoli         ###   ########.fr        #
+#    Updated: 2025/05/31 19:33:22 by wel-safa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 #--- DIRECTORIES ---
 SRCDIR := src
 INCDIR := inc

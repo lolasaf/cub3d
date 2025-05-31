@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:47:18 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/26 13:34:42 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:31:20 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	ft_ext_check(const char *path, const char *cub)
 	dot = ft_strrchr(base, '.');
 	if (dot == NULL)
 		err_msg("ERR: Not a valid file extension", NULL, NULL);
-	if (strcmp(dot, cub) != 0)
+	if (ft_strncmp(dot, cub, 4) != 0)
 		err_msg("ERR: Not a valid file extension", NULL, NULL);
 }

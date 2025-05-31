@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:54:11 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/31 00:36:40 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:09:42 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ int	ft_set(double *b_x, double *b_y, t_game *g, int i)
 		g->sprites[i].id = i;
 		*b_x = fake_random(i * 2, 0, g->conf->map_width - 1) + 0.5;
 		*b_y = fake_random(i * 2 + 1, 0, g->conf->map_height - 1) + 0.5;
+		return (0);
+	}
+	else if (ft_counter(g) == 1)
+	{
+		g->sprites[i].x = g->player_x;
+		g->sprites[i].y = g->player_y;
+		g->sprites[i].id = i;
 		return (0);
 	}
 	return (1);
