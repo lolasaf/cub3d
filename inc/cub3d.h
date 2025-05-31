@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 21:44:56 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 23:16:40 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,7 @@ void			process_map(t_build *b, t_data *data);
 char			**pvmap(char **lines, int count, t_data *data, t_build *b);
 char			**init_map(char **lines, int count, t_data *data);
 void			flood_it(char **map, int x, int y, t_data *data);
+void			flood_ing(char **map, t_data *data);
 
 // parse_tandc.c
 void			ft_colorortext(char *str, char *token, t_data *data,

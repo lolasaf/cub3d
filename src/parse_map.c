@@ -6,45 +6,11 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:56:06 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 20:42:16 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 23:15:51 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	flood_ing(char **map, t_data *data)
-{
-	int x = 0;
-	int y = 0;
-
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] != '1' && map[y][x] != 'X')
-				flood_it(map, x, y, data);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	flood_it(char **map, int x, int y, t_data *data)
-{
-	if (x < 0 || y < 0 || map[y] == NULL || map[y][x] == '\0')
-	{
-		ft_free_map(map);
-		err_msg("Map is not properly closed", data->build, (t_data *)data);
-	}
-	if (map[y][x] == '1' || map[y][x] == 'X')
-		return ;
-	map[y][x] = 'X';
-	flood_it(map, x + 1, y, data);
-	flood_it(map, x - 1, y, data);
-	flood_it(map, x, y + 1, data);
-	flood_it(map, x, y - 1, data);
-}
 
 void	pad_map(char **map, char **lines, int rows, int cols)
 {
@@ -109,7 +75,6 @@ char	**pvmap(char **lines, int count, t_data *data, t_build *b)
 		ft_free_map(map);
 		err_msg("Map must contain exactly one player position", b, data);
 	}
-	flood_it(map, data->num[1], data->num[0], data);
 	flood_ing(map, data);
 	return (map);
 }

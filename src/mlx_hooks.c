@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:17:51 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 19:23:03 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/31 23:43:19 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	update_keys(t_game *game)
 	double	rot_speed;
 
 	move_speed = 0.05;
-	rot_speed = 0.03;
+	rot_speed = 0.05;
 	if (game->keys->key_up)
 		ft_move_y('+', game, move_speed);
 	if (game->keys->key_down)

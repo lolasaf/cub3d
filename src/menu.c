@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 01:19:01 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/31 19:10:32 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 23:20:58 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ void	print_menu(void)
 
 void	print_poki(t_game *game)
 {
-	static int collected = 0;
+	static int	collected = 0;
 
 	collected++;
 	printf("\033[35m");
 	printf("++++-+-+-+-+-+-+-+-+-+ +--+ +-+-+-+-+-+ ++ +-+-+-+-+-+ +--++++\n");
-	printf("+++|C|o|l|l|e|c|t|e|d| |%02d| |P|o|k|i|s| || |L|e|f|t|:| |%02d|+++\n", collected, game->num_sprites - collected);
+	printf("+++|C|o|l|l|e|c|t|e|d| |%02d| |P|o|k|i|s| || |L|e|f|t|:| ",
+		collected);
+	printf("|%02d|+++\n", game->num_sprites - collected);
 	printf("++++-+-+-+-+-+-+-+-+-+ +--+ + +-+-+-+-+ ++ +-+-+-+-+-+ +--++++\n");
 	printf("\033[0m");
 }

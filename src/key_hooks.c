@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 22:06:04 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 23:44:52 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	isnot_wall(t_game *game, double x, double y)
 {
-	double x_check;
-	double y_check;
+	double	x_check;
+	double	y_check;
 
-	
 	x_check = game->player_x + ((x - game->player_x) * 2);
 	y_check = game->player_y + ((y - game->player_y) * 2);
 	if (game->conf->map[(int)y][(int)game->player_x] == '1')
 		return ;
 	if (game->conf->map[(int)game->player_y][(int)x] == '1')
-	 	return ;
+		return ;
 	if (game->conf->map[(int)y][(int)x] != '\0'
 		&& game->conf->map[(int)y][(int)x] != '1')
 	{
@@ -32,14 +31,16 @@ void	isnot_wall(t_game *game, double x, double y)
 	}
 }
 
-void	kill_sprite(t_game *game, int id)
+int	kill_sprite(t_game *game, int id, int counter)
 {
 	if (game->sprites[id].img != NULL)
 	{
 		print_poki(game);
+		counter++;
 		mlx_destroy_image(game->mlx, game->sprites[id].img);
 		game->sprites[id].img = NULL;
 	}
+	return (counter);
 }
 
 void	ft_destroy_sprite(t_game *game)
@@ -52,10 +53,7 @@ void	ft_destroy_sprite(t_game *game)
 	{
 		if (fabs(game->player_x - game->sprites[i].x) < 0.5
 			&& fabs(game->player_y - game->sprites[i].y) < 0.5)
-		{
-			kill_sprite(game, i);
-			counter++;
-		}
+			counter = kill_sprite(game, i, counter);
 		i++;
 	}
 	if (counter == game->num_sprites)
@@ -106,14 +104,12 @@ int	mouse_hook(int kc, int x, int y, t_game *game)
 {
 	double	rot_speed;
 
-	rot_speed = 0.05;
+	rot_speed = 0.03;
 	x = y;
 	y = x;
 	if (kc == SCROLL_DOWN)
 		ft_move_z(')', game, rot_speed);
 	else if (kc == SCROLL_UP)
 		ft_move_z('(', game, rot_speed);
-	clear_image(game);
-	render_game(game);
 	return (0);
 }

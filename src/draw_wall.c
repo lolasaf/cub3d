@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 19:09:20 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/31 23:07:30 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	assign_texture(t_ray *ray, t_draw *draw_vars)
 	if (ray->side == HORIZONTAL)
 	{
 		if (ray->dir_y > 0)
-			draw_vars->texture = TEX_NORTH;
-		else
 			draw_vars->texture = TEX_SOUTH;
+		else
+			draw_vars->texture = TEX_NORTH;
 	}
 	else
 	{
 		if (ray->dir_x > 0)
-			draw_vars->texture = TEX_EAST;
-		else
 			draw_vars->texture = TEX_WEST;
+		else
+			draw_vars->texture = TEX_EAST;
 	}
 }
 
