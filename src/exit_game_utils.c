@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:50:17 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 20:19:28 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:28:30 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	free_texture_vars(t_data *conf)
 	i = 0;
 	while (i < 4)
 	{
-		free_block(conf->texture[i].path);
-		free_block(conf->texture[i].identifier);
+		free_block((char *)conf->texture[i].path);
+		free_block((char *)conf->texture[i].identifier);
 		i++;
 	}
 }

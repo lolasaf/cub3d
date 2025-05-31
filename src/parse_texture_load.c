@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture_load.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:15:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:21:42 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 16:57:43 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	load_texture_img(t_game *game)
 			game->conf->texture[3].path, &game->conf->o->width,
 			&game->conf->o->height);
 	game->texture_img[4] = NULL;
+	
 	if (!game->texture_img[0] || !game->texture_img[1] || !game->texture_img[2]
 		|| !game->texture_img[3])
 	{

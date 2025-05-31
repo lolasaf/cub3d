@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:33:16 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x)
 		if (tex_y >= game->conf->o->height)
 			tex_y = game->conf->o->height - 1;
 		txt_addr = game->conf->o->texture_addr[draw_vars->texture];
+		
 		color = txt_addr[tex_y * game->conf->o->texture_ll[draw_vars->texture] 
 			/ 4 + tex_x];
 		put_pixel_to_img(game, draw_vars->col, y, color);
