@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 00:55:51 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:13:21 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	kill_sprite(t_game *game, int id)
 {
 	if (game->sprites[id].img != NULL)
 	{
-		printf("Collected Poki Number %d\n", id);
+		print_poki(game);
 		mlx_destroy_image(game->mlx, game->sprites[id].img);
 		game->sprites[id].img = NULL;
 	}
@@ -50,7 +50,7 @@ void	ft_destroy_sprite(t_game *game)
 	}
 	if (counter == game->num_sprites)
 	{
-		printf("Good job! You collected them all!!\n");
+		print_done();
 		exit_game(game);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:39:16 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 20:27:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:30:58 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ns(t_game *g)
 {
-	if (g->conf->player == 'N')
+	if (g->conf->player == 'S')
 	{
 		g->player_dir_x = 0;
 		g->player_dir_y = 1;
 		g->plane_x = -0.66;
 		g->plane_y = 0.0;
 	}
-	else if (g->conf->player == 'S')
+	else if (g->conf->player == 'N')
 	{
 		g->player_dir_x = 0;
 		g->player_dir_y = -1;
