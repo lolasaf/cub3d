@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 01:05:56 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:21:21 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define ESC_KEY 65307
 # define RIGHT_ARROW 65363
 # define LEFT_ARROW 65361
+# define SPACE_KEY 32
 # define SCROLL_DOWN 5
 # define SCROLL_UP 4
 # define VERTICAL 1
@@ -234,8 +235,9 @@ void			free_build(t_build *build);
 void			free_sprites(t_game *game);
 int				exit_game(t_game *game);
 void			print_menu(void);
+void			print_poki(t_game *game);
+void			print_done(void);
 void			print_menu_err(void);
-
 
 // exit_game_utils.c
 void			free_block(void *block);
@@ -363,7 +365,6 @@ void			general_destroy(t_game *g);
 t_sprite_props	calc_properties(t_game *g, t_sprite *s, double *catch);
 int				fake_random(int seed, int a, int b);
 void			draw_mini_sprite(t_game *game, int px, int py, int scale);
-
 void			ft_destroy_sprite(t_game *game);
 
 #endif

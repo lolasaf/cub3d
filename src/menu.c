@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 01:19:01 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/31 01:19:02 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:10:32 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "cub3d.h"
 
 void	print_menu(void)
 {
+	printf("\033[36m");
 	printf("\n\n");
 	printf(" ██▓███   ▒█████   ██ ▄█▀ ██▓   ▄▄▄█████▓ ██▓ ███▄ ▄███▓▓█████ ");
 	printf("\n");
@@ -34,10 +35,35 @@ void	print_menu(void)
 	printf("             ░ ░  ░  ░    ░               ░         ░      ░  ░");
 	printf("\n");
 	printf("\n\n");
+	printf("\033[0m");
+}
+
+void	print_poki(t_game *game)
+{
+	static int collected = 0;
+
+	collected++;
+	printf("\033[35m");
+	printf("++++-+-+-+-+-+-+-+-+-+ +--+ +-+-+-+-+-+ ++ +-+-+-+-+-+ +--++++\n");
+	printf("+++|C|o|l|l|e|c|t|e|d| |%02d| |P|o|k|i|s| || |L|e|f|t|:| |%02d|+++\n", collected, game->num_sprites - collected);
+	printf("++++-+-+-+-+-+-+-+-+-+ +--+ + +-+-+-+-+ ++ +-+-+-+-+-+ +--++++\n");
+	printf("\033[0m");
+}
+
+void	print_done(void)
+{
+	printf("\033[32m");
+	printf("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	printf(" ┓┏      ┏┓  ┓┓       ┓   ┓        ┏┓┓ ┓ ╻  ┏┓     ┓  ┏┳┏┓┳┓╻\n");
+	printf(" ┗┫┏┓┓┏  ┃ ┏┓┃┃┏┓┏╋┏┓┏┫  ╋┣┓┏┓┏┳┓  ┣┫┃ ┃ ┃  ┃┓┏┓┏┓┏┫   ┃┃┃┣┫┃\n");
+	printf(" ┗┛┗┛┗┻  ┗┛┗┛┗┗┗ ┗┗┗ ┗┻  ┗┛┗┗ ┛┗┗  ┛┗┗┛┗┛•  ┗┛┗┛┗┛┗┻  ┗┛┗┛┻┛•\n");
+	printf("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	printf("\033[0m");
 }
 
 void	print_menu_err(void)
 {
+	printf("\033[31m");
 	printf("\n\n");
 	printf("▓█████  ██▀███   ██▀███   ▒█████   ██▀███  ");
 	printf("\n");
@@ -59,4 +85,5 @@ void	print_menu_err(void)
 	printf("   ░  ░   ░        ░         ░ ░     ░     ");
 	printf("\n");
 	printf("\n");
+	printf("\033[0m");
 }
