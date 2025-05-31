@@ -1,17 +1,21 @@
-   WE                            textures/rick2.xpm 
-NO      textures/rick2.xpm
+
+   WE                            textures/west.xpm                                             
 
 
 
-SO textures/rick2.xpm
-
-F   69, 222, 199
-
-EA textures/rick2.xpm
+NO      textures/west.xpm                                                       
 
 
 
-C 235, 198, 52
+SO textures/west.xpm                
+
+F   69,     222,      199
+
+EA textures/west.xpm               
+
+
+
+C 235,      198,     52
 
 111111111111111111111111
 100000000000000000000001

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:39:16 by wel-safa          #+#    #+#             */
 /*   Updated: 2025/05/31 18:30:58 by wel-safa         ###   ########.fr       */
@@ -16,8 +16,8 @@ void	ns(t_game *g)
 {
 	if (g->conf->player == 'S')
 	{
-		g->player_dir_x = 0;
-		g->player_dir_y = 1;
+		g->player_dir_x = 1;
+		g->player_dir_y = 0;
 		g->plane_x = -0.66;
 		g->plane_y = 0.0;
 	}

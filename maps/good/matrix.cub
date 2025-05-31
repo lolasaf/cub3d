@@ -1,7 +1,7 @@
-NO textures/rick2.xpm
-SO textures/spiral.xpm
-WE textures/spiral2.xpm
-EA textures/randloathing.xpm
+NO textures/grey_stone.xpm
+SO textures/eagle.xpm
+WE textures/color_stone.xpm
+EA textures/blue_stone.xpm
 
 F 0,0,0
 C 0,0,0

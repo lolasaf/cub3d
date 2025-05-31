@@ -3,24 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:11:00 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 20:14:41 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:38:54 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	cleanup(char *str)
+{
+	char	*str2;
+	int		i;
+	int		c;
+
+	str2 = ft_strdup(str);
+	i = 0;
+	while (str2[i] && !ft_isspace(str2[i]))
+		i++;
+	if (!str2[i])
+	{
+		free(str2);
+		return (125);
+	}
+	c = ft_isspace(str2[i]);
+	free(str2);
+	return (c);
+}
+
 int	set_texture(t_data *data, int i, char *path, char *str)
 {
 	int		j;
 	char	*nl;
+	int		c;
 
 	j = 1;
 	nl = ft_strchr(path, '\n');
 	if (nl)
 		*nl = '\0';
+	c = cleanup(str);
+	if (c != 125)
+		ft_trim(str);
+	c = cleanup(path);
+	if (c != 125)
+		ft_trim(path);
 	data->texture[i].identifier = ft_strdup(str);
 	data->texture[i].path = ft_strdup(path);
 	j = j + i;
@@ -67,7 +94,7 @@ void	ft_check_xpm(char *path, const char *xpm, t_data *data)
 	dot = ft_strrchr(base, '.');
 	if (dot == NULL)
 		err_msg("Not a valid texture", data->build, data);
-	if (strcmp(dot, xpm) != 0)
+	if (ft_strncmp(dot, xpm, 4) != 0)
 		err_msg("Not a valid texture", data->build, data);
 }
 
