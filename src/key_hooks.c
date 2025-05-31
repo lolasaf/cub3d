@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 21:33:22 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:06:04 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	isnot_wall(t_game *game, double x, double y)
 {
-	// double x_check = game->player_x + (x - game->player_x);
-	// double y_check = game->player_y + (y - game->player_y);
-	// if (game->conf->map[(int)y][(int)game->player_x] == '1')
-	// 	return ;
-	// if (game->conf->map[(int)game->player_y][(int)x] == '1')
-	// 	return ;
+	double x_check;
+	double y_check;
 
 	
+	x_check = game->player_x + ((x - game->player_x) * 2);
+	y_check = game->player_y + ((y - game->player_y) * 2);
+	if (game->conf->map[(int)y][(int)game->player_x] == '1')
+		return ;
+	if (game->conf->map[(int)game->player_y][(int)x] == '1')
+	 	return ;
 	if (game->conf->map[(int)y][(int)x] != '\0'
 		&& game->conf->map[(int)y][(int)x] != '1')
 	{
