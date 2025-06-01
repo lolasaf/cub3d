@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 18:39:12 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:01:40 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,25 @@ void	draw_stripe(t_game *game, t_img *sprite_tex, t_sprite_props *prop,
 		if (tex_y >= sprite_tex->height)
 			tex_y = sprite_tex->height - 1;
 		color = get_sprite_pixel_color(sprite_tex, tex_x, tex_y);
+		double brightness = 1.0 / (1.0 + prop->dist * 0.1);
+		if (brightness < 0.2)
+		 	brightness = 0.2;
 		if ((color & 0x00FFFFFF) != 0)
+		{
+			color = scale_color(color, brightness);
 			put_pixel_to_img(game, prop->stripe_x, y, color);
+		}
 		y++;
 	}
 }
 
 void	single_sprite_render(t_game *g, t_img *sprite_tex,
-		t_sprite_props *prop)
+		t_sprite_props *prop, double distance)
 {
 	int	tex_x;
 
 	prop->stripe_x = prop->start_x;
+	prop->dist = distance;
 	while (prop->stripe_x < prop->end_x)
 	{
 		if (prop->stripe_x >= 0 && prop->stripe_x < SCREEN_WIDTH
@@ -96,7 +103,7 @@ void	render_sprites(t_sprite_sort *to_sort, t_game *g)
 			i++;
 			continue ;
 		}
-		single_sprite_render(g, sprite_tex, &prop);
+		single_sprite_render(g, sprite_tex, &prop, to_sort[i].dist);
 		i++;
 	}
 }
