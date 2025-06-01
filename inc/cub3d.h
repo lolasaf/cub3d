@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
 /*   Updated: 2025/06/01 23:08:16 by kforfoli         ###   ########.fr       */
@@ -40,7 +40,7 @@
 # define SCROLL_UP 4
 # define VERTICAL 1
 # define HORIZONTAL 0
-# define MAX_SPRITES 10
+# define MAX_SPRITES 100
 # define SPRITE_LOAD 7
 # define SPRITE_RATIO 15
 

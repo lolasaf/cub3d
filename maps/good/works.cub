@@ -1,21 +1,21 @@
-   WE                            textures/dungeon.xpm
-NO      textures/dungeon.xpm
+WE                            textures/magicforest.xpm
+NO      textures/magicforest.xpm
 
 
 
-SO textures/dungeon.xpm
+SO textures/magicforest.xpm
 
-F      17,    38,     64
+F 60, 90, 50
 
-EA textures/dungeon.xpm
+EA textures/magicforest.xpm
 
 
 
-C 218, 234, 235
+C 60, 90, 50
 
 1111111111111111111111111
-10S0110000100000000000001
-1000110000000000111111001
-1000110000000000110001001
+11S1110000110000000000001
+1101110110110110111111001
+1101110110001110110001001
 1000000000100000000001001
 1111111111111111111111111
