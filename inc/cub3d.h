@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 20:57:53 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:06:55 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define SCROLL_UP 4
 # define VERTICAL 1
 # define HORIZONTAL 0
-# define MAX_SPRITES 100
+# define MAX_SPRITES 10
 # define SPRITE_LOAD 7
 # define SPRITE_RATIO 15
 
@@ -134,6 +134,7 @@ typedef struct s_sprite_drawing
 	int		end_x;
 	int		end_y;
 	int		stripe_x;
+	int		dist;
 }	t_sprite_props;
 
 typedef struct s_game
@@ -219,7 +220,7 @@ void			compute_distance(t_game *game, t_ray *ray);
 void			draw_wall(t_game *game, t_ray *ray,
 					t_draw *draw_vars);
 void			draw_wall_column(t_game *game,
-					t_draw *draw_vars, int tex_x);
+					t_draw *draw_vars, int tex_x, t_ray *ray);
 void			assign_texture(t_ray *ray, t_draw *draw_vars);
 void			calculate_wall_x(t_game *game, t_ray *ray,
 					t_draw *draw_vars);
@@ -360,7 +361,7 @@ void			get_horizonatal_prop(t_sprite_props *prop);
 void			draw_stripe(t_game *game, t_img *sprite_tex, 
 					t_sprite_props *prop, int tex_x);
 void			single_sprite_render(t_game *g, t_img *sprite_tex,
-					t_sprite_props *prop);
+					t_sprite_props *prop, double dist);
 void			render_sprites(t_sprite_sort *to_sort, t_game *g);
 void			handle_sprites(t_game *g);
 int				ft_counter(t_game *g);
@@ -372,5 +373,6 @@ t_sprite_props	calc_properties(t_game *g, t_sprite *s, double *catch);
 int				fake_random(int seed, int a, int b);
 void			draw_mini_sprite(t_game *game, int px, int py, int scale);
 void			ft_destroy_sprite(t_game *game);
+int				scale_color(int color, double factor);
 
 #endif

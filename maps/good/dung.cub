@@ -1,10 +1,10 @@
 F 15,10,5
 C 25,17,10
 
-NO textures/atxt3.xpm
+NO textures/dungeon.xpm
 SO textures/dungeon.xpm
 WE textures/dungeon.xpm
-EA textures/.xpm
+EA textures/dungeon.xpm
 
 1111111111111111111
 10S1001001001000001

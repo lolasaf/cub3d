@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 19:53:13 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:49:16 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,22 @@ int	get_tex_x(t_game *game, t_draw *draw_vars)
 	return (tex_x);
 }
 
-void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x)
+int scale_color(int color, double factor)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = (int)(((color >> 16) & 0xFF) * factor);
+	g = (int)(((color >> 8) & 0xFF) * factor);
+	b = (int)((color & 0xFF) * factor);
+	if (r > 255) r = 255;
+	if (g > 255) g = 255;
+	if (b > 255) b = 255;
+	return ((r << 16) | (g << 8) | b);
+}
+
+void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x, t_ray *ray)
 {
 	int				y;
 	int				tex_y;
@@ -76,6 +91,10 @@ void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x)
 		txt_addr = game->conf->o->texture_addr[draw_vars->texture];
 		color = txt_addr[tex_y * game->conf->o->texture_ll[draw_vars->texture] 
 			/ 4 + tex_x];
+		double brightness = 1.0 / (1.0 + ray->perp_distance * 0.2);
+		if (brightness < 0.2)
+		 	brightness = 0.2;
+		color = scale_color(color, brightness);
 		put_pixel_to_img(game, draw_vars->col, y, color);
 		y++;
 	}
@@ -88,5 +107,5 @@ void	draw_wall(t_game *game, t_ray *ray, t_draw *draw_vars)
 	assign_texture(ray, draw_vars);
 	calculate_wall_x(game, ray, draw_vars);
 	tex_x = get_tex_x(game, draw_vars);
-	draw_wall_column(game, draw_vars, tex_x);
+	draw_wall_column(game, draw_vars, tex_x, ray);
 }

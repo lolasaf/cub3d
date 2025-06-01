@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:26:19 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 20:07:46 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:06:32 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	get_sprite_num(t_game *g)
 	g->num_sprites = ft_counter(g) / SPRITE_RATIO;
 	if (g->num_sprites == 0)
 		g->num_sprites = 1;
+	if (g->num_sprites > 4)
+		g->num_sprites = 4;
 }
 
 int	fake_random(int seed, int a, int b)
