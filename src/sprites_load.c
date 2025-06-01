@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_load.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:26:19 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 21:06:32 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:08:39 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,13 @@ void	draw_mini_sprite(t_game *game, int px, int py, int scale)
 		}
 		j++;
 	}
+}
+
+void	get_tex_y(int *d, t_img *sprite_tex, t_sprite_props *prop, int *tex_y)
+{
+	*tex_y = ((*d * sprite_tex->height) / prop->s_h) / 256;
+	if (*tex_y < 0)
+		*tex_y = 0;
+	if (*tex_y >= sprite_tex->height)
+		*tex_y = sprite_tex->height - 1;
 }

@@ -1,13 +1,13 @@
-   WE                            textures/wolfenstein/grey_stone.xpm
-NO      textures/wolfenstein/purple_stone.xpm
+   WE                            textures/dungeon.xpm
+NO      textures/dungeon.xpm
 
 
 
-SO textures/wolfenstein/red_brick.xpm
+SO textures/dungeon.xpm
 
 F      17,    38,     64
 
-EA textures/wolfenstein/wood.xpm
+EA textures/dungeon.xpm
 
 
 
