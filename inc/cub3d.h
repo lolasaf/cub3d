@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 23:08:16 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:13:05 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ typedef struct s_sprite_drawing
 
 typedef struct s_game
 {
-
 	void		*mlx;
 	void		*win;
 	t_imgp		*img;
@@ -215,7 +214,6 @@ void			init_ray(t_game *game, t_ray *ray);
 void			ray_loop(t_game *game, t_ray *ray);
 void			calc_steps(t_game *game, t_ray *ray);
 void			compute_distance(t_game *game, t_ray *ray);
-
 
 // draw_wall.c
 void			draw_wall(t_game *game, t_ray *ray,
@@ -377,6 +375,7 @@ int				fake_random(int seed, int a, int b);
 void			draw_mini_sprite(t_game *game, int px, int py, int scale);
 void			ft_destroy_sprite(t_game *game);
 int				scale_color(int color, double factor);
-void			get_tex_y(int *d, t_img *sprite_tex, t_sprite_props *prop, int *tex_y);
+void			get_tex_y(int *d, t_img *sprite_tex,
+					t_sprite_props *prop, int *tex_y);
 
 #endif
