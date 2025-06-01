@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:50:17 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 15:28:30 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:06:12 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	destroy_buffer(t_game *game)
 
 void	free_texture_vars(t_data *conf)
 {
+	if (!conf)
+		return;
 	int	i;
 
 	i = 0;
