@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:15:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 19:28:37 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:03:34 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	load_texture_img(t_game *game)
 	if (!game->texture_img[0] || !game->texture_img[1] || !game->texture_img[2]
 		|| !game->texture_img[3])
 	{
-		destroy_mlx(game);
 		destroy_buffer(game);
+		free_textures(game);
+		destroy_mlx(game);
 		err_msg("Failed to load textures", game->conf->build, game->conf);
 	}
 }

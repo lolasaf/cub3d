@@ -1,10 +1,10 @@
-NO textures/img.xpm
+NO textures/cloud_dark.xpm
 SO textures/cloud_dark.xpm
-WE textures/img.xpm
-EA textures/img.xpm
+WE textures/crack.xpm
+EA textures/crack.xpm
 
-          F        130,100,       100
-C 153,204,     220
+          F        30,30,       30
+C 30,30,     30
 
 111111111111111111111
 101000001000000000001
