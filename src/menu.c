@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 01:19:01 by kforfoli          #+#    #+#             */
-/*   Updated: 2025/05/31 23:20:58 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:01:18 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,24 @@ void	print_menu_err(void)
 	printf("\n");
 	printf("\n");
 	printf("\033[0m");
+}
+
+void	sprite_switch(int argc, char **argv, t_data *data)
+{
+	if (argc > 3 && argc != 1)
+		err_msg("Only two/three args allowed!", NULL, NULL);
+	if (argc == 3)
+	{
+		if (ft_strlen(argv[2]) != 1)
+			err_msg("Third arguement that was provided should be either 0 or 1",
+				NULL, NULL);
+		if ((ft_atoi(argv[2]) != 1) && (ft_atoi(argv[2]) != 0))
+			err_msg("Third arguement that was provided should be either 0 or 1",
+				NULL, NULL);
+		if (ft_atoi(argv[2]) == 1)
+			data->sprites = 1;
+		else
+			data->sprites = 0;
+	}
+	return ;
 }

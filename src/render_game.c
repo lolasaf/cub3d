@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:50:38 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 01:07:34 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:58:51 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	render_game(t_game *game)
 		ray_dir_y = game->player_dir_y + game->plane_y * camera_x;
 		cast_ray(game, ray_dir_x, ray_dir_y, x);
 	}
-	handle_sprites(game);
+	if (game->conf->sprites == 1)
+		handle_sprites(game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
 }
