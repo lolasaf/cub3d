@@ -1,10 +1,10 @@
-NO textures/atxt4.xpm
+NO textures/atxt.xpm
 SO textures/atxt.xpm
-WE textures/atxt4.xpm
+WE textures/atxt.xpm
 EA ./textures/atxt.xpm
 
-F 164,169,20
-C 153,204,255
+F 120,70,10
+C 15,30,80
 
 11111
 10001
