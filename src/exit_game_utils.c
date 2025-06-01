@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:50:17 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 17:06:12 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:33:58 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	destroy_buffer(t_game *game)
 
 void	free_texture_vars(t_data *conf)
 {
-	if (!conf)
-		return;
 	int	i;
 
+	if (!conf)
+		return ;
 	i = 0;
 	while (i < 4)
 	{

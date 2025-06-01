@@ -3,15 +3,15 @@
 
 
 
-NO      textures/west.xpm                                                       
+NO      textures/north.xpm                                                       
 
 
 
-SO textures/west.xpm                
+SO textures/south.xpm                
 
 F   69,     222,      199
 
-EA textures/west.xpm               
+EA textures/east.xpm               
 
 
 

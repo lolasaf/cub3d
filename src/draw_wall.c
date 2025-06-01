@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:48:34 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 16:52:51 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:33:27 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,14 @@ int	get_tex_x(t_game *game, t_draw *draw_vars)
 {
 	int	tex_x;
 
-	tex_x = (int)(draw_vars->wall_x * game->conf->o->width);
+	tex_x = (int)(draw_vars->wall_x
+			* game->conf->o->tex_width[draw_vars->texture]);
 	if (tex_x < 0)
 		tex_x = 0;
-	if (tex_x >= game->conf->o->width)
-		tex_x = game->conf->o->width - 1;
+	if (tex_x >= game->conf->o->tex_width[draw_vars->texture])
+		tex_x = game->conf->o->tex_width[draw_vars->texture] - 1;
 	return (tex_x);
 }
-
-// void	ft_set_draw_vars(t_ray *ray,t_draw *dv)
-// {
-// 	int	line_height;
-	
-// 	line_height = (int)(SCREEN_HEIGHT / ray->perp_distance);
-// 	dv->draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
-// 	if (dv->draw_start < 0)
-// 		dv->draw_start = 0;
-// 	dv->draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
-// 	if (dv->draw_end >= SCREEN_HEIGHT)
-// 		dv->draw_end = SCREEN_HEIGHT - 1;
-// 	return;
-// }
 
 void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x)
 {
@@ -75,16 +62,17 @@ void	draw_wall_column(t_game *game, t_draw *draw_vars, int tex_x)
 	int				tex_y;
 	unsigned int	*txt_addr;
 	int				color;
-	
+
 	y = draw_vars->draw_start;
 	while (y <= draw_vars->draw_end)
 	{
 		tex_y = ((y - draw_vars->og_draw_start) * 
-				game->conf->o->height) / draw_vars->wall_height;
+				game->conf->o->tex_height[draw_vars->texture])
+			/ draw_vars->wall_height;
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= game->conf->o->height)
-			tex_y = game->conf->o->height - 1;
+		if (tex_y >= game->conf->o->tex_height[draw_vars->texture])
+			tex_y = game->conf->o->tex_height[draw_vars->texture] - 1;
 		txt_addr = game->conf->o->texture_addr[draw_vars->texture];
 		color = txt_addr[tex_y * game->conf->o->texture_ll[draw_vars->texture] 
 			/ 4 + tex_x];
@@ -97,7 +85,6 @@ void	draw_wall(t_game *game, t_ray *ray, t_draw *draw_vars)
 {
 	int	tex_x;
 
-	// ft_set_draw_vars(ray, draw_vars);
 	assign_texture(ray, draw_vars);
 	calculate_wall_x(game, ray, draw_vars);
 	tex_x = get_tex_x(game, draw_vars);

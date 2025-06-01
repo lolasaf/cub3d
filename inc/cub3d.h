@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 23:16:40 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:20:39 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_textureobj
 {
 	int				width;
 	int				height;
+	int				tex_width[4];
+	int				tex_height[4];
 	unsigned int	*texture_addr[4];
 	int				texture_bpp[4];
 	int				texture_ll[4];

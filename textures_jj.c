@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-// void cast_ray(my_game *game, int col)
+// void cast_ray(t_game *game, int col)
 // {
 //     t_ray ray;
 
@@ -142,7 +142,7 @@
 
 #include "cub3d.h"
 
-void cast_ray(my_game *game, int col)
+void cast_ray(t_game *game, int col)
 {
     t_ray ray;
 
@@ -228,9 +228,9 @@ void cast_ray(my_game *game, int col)
         if (ray.side == 1)
         {
             if (ray.step_y == -1)
-                texture_index = 0;
+                texture_index = 0; // north
             else
-                texture_index = 1;
+                texture_index = 1; // south
         }
         else
         {
@@ -278,7 +278,7 @@ void cast_ray(my_game *game, int col)
 }
 
 
-void ft_render_map(my_game *game)
+void ft_render_map(t_game *game)
 {
     for (int x = 0; x < SCREEN_WIDTH; x++)
     {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture_load.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:15:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/31 19:08:49 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:28:37 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	load_texture_img(t_game *game)
 {
 	game->texture_img[0] = mlx_xpm_file_to_image(game->mlx,
-			game->conf->texture[0].path, &game->conf->o->width,
-			&game->conf->o->height);
+			game->conf->texture[0].path, &game->conf->o->tex_width[0],
+			&game->conf->o->tex_height[0]);
 	game->texture_img[1] = mlx_xpm_file_to_image(game->mlx,
-			game->conf->texture[1].path, &game->conf->o->width,
-			&game->conf->o->height);
+			game->conf->texture[1].path, &game->conf->o->tex_width[1],
+			&game->conf->o->tex_height[1]);
 	game->texture_img[2] = mlx_xpm_file_to_image(game->mlx,
-			game->conf->texture[2].path, &game->conf->o->width,
-			&game->conf->o->height);
+			game->conf->texture[2].path, &game->conf->o->tex_width[2],
+			&game->conf->o->tex_height[2]);
 	game->texture_img[3] = mlx_xpm_file_to_image(game->mlx,
-			game->conf->texture[3].path, &game->conf->o->width,
-			&game->conf->o->height);
+			game->conf->texture[3].path, &game->conf->o->tex_width[3],
+			&game->conf->o->tex_height[3]);
 	game->texture_img[4] = NULL;
 	if (!game->texture_img[0] || !game->texture_img[1] || !game->texture_img[2]
 		|| !game->texture_img[3])
