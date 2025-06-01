@@ -14,17 +14,16 @@
 
 void	sprite_switch(int argc, char **argv, t_data *data)
 {
-	if (argc > 3 && argc != 1)
+	if (argc > 3 || argc == 1)
 		err_msg("Only two/three args allowed!", NULL, NULL);
 	if (argc == 3)
 	{
 		if (ft_strlen(argv[2]) != 1)
-			err_msg("Third arguement that was provided should be either 0 or 1",
+			err_msg("Please provide Y or N", NULL, NULL);
+		if (argv[2][0] != 'Y' && argv[2][0] != 'N')
+			err_msg("Third arguement that was provided should be either Y or N",
 				NULL, NULL);
-		if ((ft_atoi(argv[2]) != 1) && (ft_atoi(argv[2]) != 0))
-			err_msg("Third arguement that was provided should be either 0 or 1",
-				NULL, NULL);
-		if (ft_atoi(argv[2]) == 1)
+		if (argv[2][0] == 'Y')
 			data->sprites = 1;
 		else
 			data->sprites = 0;
