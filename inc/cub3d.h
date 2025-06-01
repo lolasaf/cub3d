@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 21:48:40 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:08:16 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ void			ray_loop(t_game *game, t_ray *ray);
 void			calc_steps(t_game *game, t_ray *ray);
 void			compute_distance(t_game *game, t_ray *ray);
 
+
 // draw_wall.c
 void			draw_wall(t_game *game, t_ray *ray,
 					t_draw *draw_vars);
@@ -351,6 +352,8 @@ void			put_pixel_to_img(t_game *game, int x, int y, int color);
 char			*ft_strncpy(char *dest, const char *src, size_t n);
 void			clear_image(t_game *game);
 void			err_msg(const char *msg, void *build, void *conf);
+void			classic_cube(void);
+int				scale_color(int color, double factor);
 
 // sprites
 void			ft_init_sprites(t_game *g);
@@ -374,5 +377,6 @@ int				fake_random(int seed, int a, int b);
 void			draw_mini_sprite(t_game *game, int px, int py, int scale);
 void			ft_destroy_sprite(t_game *game);
 int				scale_color(int color, double factor);
+void			get_tex_y(int *d, t_img *sprite_tex, t_sprite_props *prop, int *tex_y);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:29:43 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 21:01:40 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:07:21 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,29 @@ void	draw_stripe(t_game *game, t_img *sprite_tex, t_sprite_props *prop,
 	int				tex_y;
 	unsigned int	color;
 	int				d;
+	double			brightness;
 
 	y = prop->start_y;
 	while (y < prop->end_y)
 	{
 		d = (y) * 256 - SCREEN_HEIGHT * 128 + prop->s_h * 128;
-		tex_y = ((d * sprite_tex->height) / prop->s_h) / 256;
-		if (tex_y < 0)
-			tex_y = 0;
-		if (tex_y >= sprite_tex->height)
-			tex_y = sprite_tex->height - 1;
+		get_tex_y(&d, sprite_tex, prop, &tex_y);
 		color = get_sprite_pixel_color(sprite_tex, tex_x, tex_y);
-		double brightness = 1.0 / (1.0 + prop->dist * 0.1);
+		brightness = 1.0 / (1.0 + prop->dist * 0.1);
 		if (brightness < 0.2)
-		 	brightness = 0.2;
+			brightness = 0.2;
 		if ((color & 0x00FFFFFF) != 0)
 		{
 			color = scale_color(color, brightness);
 			put_pixel_to_img(game, prop->stripe_x, y, color);
 		}
+		brightness = 0;
 		y++;
 	}
 }
 
-void	single_sprite_render(t_game *g, t_img *sprite_tex,
-		t_sprite_props *prop, double distance)
+void	single_sprite_render(t_game *g, t_img *sprite_tex, t_sprite_props *prop,
+		double distance)
 {
 	int	tex_x;
 
