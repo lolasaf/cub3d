@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 19:20:39 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:57:53 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct s_sprite_drawing
 
 typedef struct s_game
 {
+
 	void		*mlx;
 	void		*win;
 	t_imgp		*img;
@@ -197,6 +198,7 @@ typedef struct s_data
 	int					num[2];
 	char				player;
 	int					is_last;
+	int					sprites;
 }	t_data;
 
 typedef struct s_build
@@ -312,6 +314,7 @@ void			ft_parse_tandc(const char *line, t_data *data);
 void			mlx_texture_load(t_game *game);
 void			set_dets(t_game *game);
 void			load_texture_img(t_game *game);
+void			sprite_switch(int argc, char **argv, t_data *data);
 
 // parse_textures.c
 void			ft_validate_textures(t_data *data);

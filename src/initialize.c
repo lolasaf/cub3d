@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:40:20 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 21:35:01 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:26:17 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	initialize_game(t_game *game, t_data *data)
 	game->player_y = (double)data->num[0] + 0.5;
 	ft_player_orientation(game);
 	mlx_texture_load(game);
-	mlx_sprite_load(game);
+	if (data->sprites == 1)
+		mlx_sprite_load(game);
 }

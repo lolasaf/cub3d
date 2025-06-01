@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:21:01 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/29 23:02:43 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:56:49 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ void	parse(int argc, char **argv, t_data *data)
 	int		fd;
 
 	memset(data, 0, sizeof(t_data));
-	if (argc != 2)
-		err_msg("Only two args allowed!", NULL, NULL);
+	sprite_switch(argc, argv, data);
 	memset(&b, 0, sizeof(t_build));
 	b.count = 0;
 	data->is_last = 0;
@@ -114,3 +113,23 @@ void	parse(int argc, char **argv, t_data *data)
 	free_build(&b);
 	data->build = NULL;
 }
+
+// void	sprite_switch(int argc, char **argv, t_data *data)
+// {
+// 	if (argc > 3 && argc != 1)
+// 		err_msg("Only two/three args allowed!", NULL, NULL);
+// 	if (argc == 3)
+// 	{
+// 		if (ft_strlen(argv[2]) != 1)
+// 			err_msg("Third arguement that was provided should be either 0 or 1",
+// 				NULL, NULL);
+// 		if ((ft_atoi(argv[2]) != 1) && (ft_atoi(argv[2]) != 0))
+// 			err_msg("Third arguement that was provided should be either 0 or 1",
+// 				NULL, NULL);
+// 		if (ft_atoi(argv[2]) == 1)
+// 			data->sprites = 1;
+// 		else
+// 			data->sprites = 0;
+// 	}
+// 	return;
+// }

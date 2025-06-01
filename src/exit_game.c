@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:41:42 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 20:18:02 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:59:43 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	free_sprites(t_game *game)
 	int	i;
 
 	i = 0;
+	if (game->conf->sprites == 0)
+		return ;
 	while (i < game->num_sprites)
 	{
 		if (game->sprites[i].img != NULL)

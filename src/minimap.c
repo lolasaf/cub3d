@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:09:40 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/05/30 21:01:50 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:41:18 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	draw_minimap(t_game *game)
 		x = 0;
 	}
 	draw_mini_player(game, scale);
-	draw_mini_sprites_loop(game, scale);
+	if (game->conf->sprites == 1)
+		draw_mini_sprites_loop(game, scale);
 }
