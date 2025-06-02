@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 00:16:24 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/02 15:57:51 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:44:31 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,19 @@ void	ft_move_z(char c, t_game *game, double rs)
 
 void	ft_move_z_motion(t_game *game, double angle_rad)
 {
-	double old_dir_x;
-    double old_plane_x;
+	double	old_dir_x;
+	double	old_plane_x;
 
-    old_dir_x = game->player_dir_x;
-    game->player_dir_x = game->player_dir_x * cos(angle_rad) - game->player_dir_y * sin(angle_rad);
-    game->player_dir_y = old_dir_x * sin(angle_rad) + game->player_dir_y * cos(angle_rad);
-
-    old_plane_x = game->plane_x;
-    game->plane_x = game->plane_x * cos(angle_rad) - game->plane_y * sin(angle_rad);
-    game->plane_y = old_plane_x * sin(angle_rad) + game->plane_y * cos(angle_rad);
+	old_dir_x = game->player_dir_x;
+	game->player_dir_x = game->player_dir_x * cos(angle_rad)
+		- game->player_dir_y * sin(angle_rad);
+	game->player_dir_y = old_dir_x * sin(angle_rad) + game->player_dir_y
+		* cos(angle_rad);
+	old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(angle_rad) - game->plane_y
+		* sin(angle_rad);
+	game->plane_y = old_plane_x * sin(angle_rad) + game->plane_y
+		* cos(angle_rad);
 }
 
 void	ft_move_y(char c, t_game *game, double ms)

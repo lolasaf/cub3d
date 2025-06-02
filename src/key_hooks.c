@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/02 19:31:31 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:07:26 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,6 @@ void	ft_destroy_sprite(t_game *game)
 // 	return (0);
 // }
 
-
-
-
 int	mouse_hook(int kc, int x, int y, t_game *game)
 {
 	double	rot_speed;
@@ -117,32 +114,27 @@ int	mouse_hook(int kc, int x, int y, t_game *game)
 	return (0);
 }
 
-int mouse_hook_2(int x, int y, t_game *game)
+int	mouse_hook_2(int x, int y, t_game *game)
 {
-	double rot_speed;
-    int delta_x;
+	double	rot_speed;
+	int		delta_x;
+	int		center_x;
 
-    if (game->mouse_init == 0)
-    {
-        game->prev_mouse_x = x;
-        game->mouse_init = 1;
-    }
-
-    rot_speed = 0.005;
-
-    delta_x = x - game->prev_mouse_x;
-
-    if (delta_x != 0)
-        ft_move_z_motion(game, delta_x * rot_speed);
-
-    game->prev_mouse_x = x;
-
-    if (x <= 0 || x >= SCREEN_WIDTH - 1)
-    {
-        int center_x = SCREEN_WIDTH / 2;
-        mlx_mouse_move(game->mlx, game->win, center_x, y);
-        game->prev_mouse_x = center_x;
-    }
-    return (0);
-	
+	if (game->mouse_init == 0)
+	{
+		game->prev_mouse_x = x;
+		game->mouse_init = 1;
+	}
+	rot_speed = 0.003;
+	delta_x = x - game->prev_mouse_x;
+	if (delta_x != 0 && game->prev_mouse_x != SCREEN_WIDTH / 2)
+		ft_move_z_motion(game, delta_x * rot_speed);
+	game->prev_mouse_x = x;
+	if (x <= 50 || x >= SCREEN_WIDTH - 50)
+	{
+		center_x = SCREEN_WIDTH / 2;
+		mlx_mouse_move(game->mlx, game->win, center_x, y);
+		game->prev_mouse_x = center_x;
+	}
+	return (0);
 }
