@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/02 17:37:00 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:26:11 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,7 @@ void			ft_move_y(char c, t_game *game, double ms);
 void			ft_move_z(char c, t_game *game, double rs);
 void			ft_move_x(char c, t_game *game, double ms);
 void			ft_move_z_motion(t_game *game, double angle_rad);
-int 			mouse_hook_2(int kc, int x, int y, t_game *game);
+int 			mouse_hook_2(int x, int y, t_game *game);
 int				game_loop(t_game *game);
 
 // parse_color_tok.c

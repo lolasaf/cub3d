@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 23:40:29 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/02 19:17:49 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:31:31 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,10 @@ int	mouse_hook(int kc, int x, int y, t_game *game)
 	return (0);
 }
 
-int mouse_hook_2(int kc, int x, int y, t_game *game)
+int mouse_hook_2(int x, int y, t_game *game)
 {
-	(void) kc;
 	double rot_speed;
     int delta_x;
-	x = y;
-	y = x;
 
     if (game->mouse_init == 0)
     {

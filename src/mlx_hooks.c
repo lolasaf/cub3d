@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:17:51 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/02 17:36:04 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:34:37 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	game_loop(t_game *game)
 	return (0);
 }
 
-// void	ft_mlx_hook_loop(t_game *game)
-// {
-// 	mlx_hook(game->win, 3, 2, ft_on_release, game);
-// 	mlx_hook(game->win, 2, 1, ft_on_press, game);
-// 	mlx_hook(game->win, 17, 0, exit_game, game);
-// 	mlx_hook(game->win, 6, 1L << 6, mouse_hook_2, game);
-// 	// mlx_hook(game->win, 4, 1L << 2, mouse_hook, game);
-// 	mlx_loop_hook(game->mlx, game_loop, game);
-// 	// mlx_loop(game->mlx);
-// }
+void	ft_mlx_hook_loop(t_game *game)
+{
+	mlx_hook(game->win, 3, 2, ft_on_release, game);
+	mlx_hook(game->win, 2, 1, ft_on_press, game);
+	mlx_hook(game->win, 17, 0, exit_game, game);
+	mlx_hook(game->win, 6, 1L << 6, mouse_hook_2, game);
+	mlx_hook(game->win, 4, 1L << 2, mouse_hook, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_loop(game->mlx);
+}
