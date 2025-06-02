@@ -6,7 +6,7 @@
 /*   By: kforfoli <kforfoli@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:40:20 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 20:26:17 by kforfoli         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:17:07 by kforfoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	initialize_game(t_game *game, t_data *data)
 		err_msg("Failed to get address", NULL, (t_data *)data);
 	game->player_x = (double)data->num[1] + 0.5;
 	game->player_y = (double)data->num[0] + 0.5;
+	game->mouse_init = 0;
 	ft_player_orientation(game);
 	mlx_texture_load(game);
 	if (data->sprites == 1)
