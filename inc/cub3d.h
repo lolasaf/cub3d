@@ -6,7 +6,7 @@
 /*   By: wel-safa <wel-safa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 00:50:41 by wel-safa          #+#    #+#             */
-/*   Updated: 2025/06/01 23:13:05 by wel-safa         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:40:53 by wel-safa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define SPACE_KEY 32
 # define SCROLL_DOWN 5
 # define SCROLL_UP 4
+# define MOUSE_MOTION_EVENT 6
 # define VERTICAL 1
 # define HORIZONTAL 0
 # define MAX_SPRITES 100
@@ -153,6 +154,8 @@ typedef struct s_game
 	double		plane_y;
 	t_sprite	sprites[MAX_SPRITES];
 	int			num_sprites;
+	int			prev_mouse_x;
+	int			mouse_init;
 	double		*z_buffer;
 }	t_game;
 
@@ -280,6 +283,9 @@ void			draw_mini_player(t_game *game, int scale);
 void			ft_move_y(char c, t_game *game, double ms);
 void			ft_move_z(char c, t_game *game, double rs);
 void			ft_move_x(char c, t_game *game, double ms);
+void			ft_move_z_motion(t_game *game, double angle_rad);
+int				mouse_hook_2(int x, int y, t_game *game);
+int				game_loop(t_game *game);
 
 // parse_color_tok.c
 void			parse_color_tok(char id, char *token, t_data *data,
